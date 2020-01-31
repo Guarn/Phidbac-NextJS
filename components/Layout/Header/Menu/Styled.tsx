@@ -4,6 +4,10 @@ export const Conteneur = styled.div`
   display: flex;
   justify-content: space-between;
   z-index: 100;
+
+  a {
+    color: ${props => props.theme.main};
+  }
 `;
 Conteneur.displayName = `Conteneur`;
 

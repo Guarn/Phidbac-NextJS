@@ -1,6 +1,7 @@
 import React from "react";
 import NextApp from "next/app";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import "antd/dist/antd.css";
 
 const GlobalStyle = createGlobalStyle`
   html,body, #__next {
@@ -32,6 +33,16 @@ const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+
+  .Pop-LienWeb > .ant-popover-content > .ant-popover-inner {
+    background-color: #5e5e5e;
+    padding: 0px;
+  }
+
+  .Pop-LienWeb > .ant-popover-content > .ant-popover-arrow {
+    border-right-color: #5e5e5e;
+    border-bottom-color: #5e5e5e;
   }
 
   @font-face {
@@ -85,6 +96,7 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-weight: 400;
 }
+
 `;
 
 const theme = {

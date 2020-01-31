@@ -1,11 +1,8 @@
 import * as S from "./Styled";
 import routes from "../../../../routes";
-import { useRouter } from "next/router";
 const { Link } = routes;
 
 const Menu = () => {
-  const location = useRouter();
-
   return (
     <S.Conteneur>
       <S.BoutonHome>

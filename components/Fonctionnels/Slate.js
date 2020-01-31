@@ -1,7 +1,10 @@
-import React, { useCallback, useMemo, useState, FC } from "react";
+import React, { useCallback, useMemo, useState, FC, useEffect } from "react";
 import { Editable, withReact, Slate } from "slate-react";
 import { createEditor } from "slate";
 import { Popover, Modal } from "antd";
+import EditeurCours, { initialValueCours } from "./EditeurCours";
+import * as S from "./Styled";
+import fetch from "isomorphic-unfetch";
 
 const SlateJs = ({ index, value, readOnly }) => {
   const renderElement = useCallback(props => <Element {...props} />, []);
@@ -24,185 +27,60 @@ const Element = ({ attributes, children, element }) => {
   switch (element.type) {
     case "citation":
       return (
-        <div
-          style={{
-            textAlign: element.align,
-            marginLeft: element.marginLeft,
-            marginTop: "0px",
-            marginBottom: "0px"
-          }}
-          {...attributes}
-        >
+        <S.BlocSimple element={element} {...attributes}>
           {children}
-        </div>
+        </S.BlocSimple>
       );
     case "bulleted-list":
       return <ul {...attributes}>{children}</ul>;
     case "h1":
       return (
-        <h1
-          style={{
-            textAlign: element.align,
-            marginLeft: element.marginLeft,
-            marginTop: "0px",
-            marginBottom: "0px"
-          }}
-          {...attributes}
-        >
+        <S.H1 element={element} {...attributes}>
           {children}
-        </h1>
+        </S.H1>
       );
     case "h2":
       return (
-        <h2
-          style={{
-            textAlign: element.align,
-            marginLeft: element.marginLeft,
-            marginTop: "0px",
-            marginBottom: "0px",
-            fontSize: "20px"
-          }}
-          {...attributes}
-        >
+        <S.H2 element={element} {...attributes}>
           {children}
-        </h2>
+        </S.H2>
       );
     case "h3":
       return (
-        <h3
-          style={{
-            textAlign: element.align,
-            marginLeft: element.marginLeft,
-            marginTop: "0px",
-            marginBottom: "0px",
-            fontSize: "16px"
-          }}
-          {...attributes}
-        >
+        <S.H3 element={element} {...attributes}>
           {children}
-        </h3>
+        </S.H3>
       );
     case "list-item":
       return (
-        <li
-          style={{
-            textAlign: element.align,
-            marginLeft: element.marginLeft,
-            marginTop: "0px",
-            marginBottom: "0px",
-            fontSize: "16px"
-          }}
-          {...attributes}
-        >
+        <S.Li element={element} {...attributes}>
           {children}
-        </li>
+        </S.Li>
       );
     case "numbered-list":
       return (
-        <ol
-          style={{
-            textAlign: element.align,
-            marginLeft: element.marginLeft,
-            marginTop: "0px",
-            marginBottom: "0px",
-            fontSize: "16px"
-          }}
-          {...attributes}
-        >
+        <S.Ol element={element} {...attributes}>
           {children}
-        </ol>
+        </S.Ol>
       );
     case "link":
       switch (element.select) {
         case "web":
-          switch (element.ouverture) {
-            case "same":
-              return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        WEB
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.value}
-                      </div>
-                    </div>
-                  }
-                >
-                  <a
-                    target="_self"
-                    rel="noopener noreferrer"
-                    href={element.value}
-                    {...attributes}
-                  >
-                    {children}
-                  </a>
-                </Popover>
-              );
-            default:
-              return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        WEB
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.value}
-                      </div>
-                    </div>
-                  }
-                >
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={element.value}
-                    {...attributes}
-                  >
-                    {children}
-                  </a>
-                </Popover>
-              );
-          }
+          return (
+            <Popover
+              overlayClassName="Pop-LienWeb"
+              content={<BlocLien type="WEB" value={element.value} />}
+            >
+              <a
+                target="_self"
+                rel="noopener noreferrer"
+                href={element.value}
+                {...attributes}
+              >
+                {children}
+              </a>
+            </Popover>
+          );
 
         case "index":
           switch (element.ouverture) {
@@ -210,34 +88,7 @@ const Element = ({ attributes, children, element }) => {
               return (
                 <Popover
                   overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        INDEX
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.nom}
-                      </div>
-                    </div>
-                  }
+                  content={<BlocLien type="INDEX" value={element.nom} />}
                 >
                   <a
                     target="_self"
@@ -253,34 +104,7 @@ const Element = ({ attributes, children, element }) => {
               return (
                 <Popover
                   overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        INDEX
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.nom}
-                      </div>
-                    </div>
-                  }
+                  content={<BlocLien type="INDEX" value={element.nom} />}
                 >
                   <a
                     target="_blank"
@@ -295,12 +119,12 @@ const Element = ({ attributes, children, element }) => {
             default:
               return (
                 <span>
-                  {/*<OpenModal
-                  type="index"
-                  element={element}
-                  attributes={attributes}
-                  children={children}
-                />*/}
+                  <OpenModal
+                    type="index"
+                    element={element}
+                    attributes={attributes}
+                    children={children}
+                  />
                 </span>
               );
           }
@@ -311,34 +135,7 @@ const Element = ({ attributes, children, element }) => {
               return (
                 <Popover
                   overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        COURS
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.nom}
-                      </div>
-                    </div>
-                  }
+                  content={<BlocLien type="COURS" value={element.nom} />}
                 >
                   <a
                     target="_self"
@@ -354,34 +151,7 @@ const Element = ({ attributes, children, element }) => {
               return (
                 <Popover
                   overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        COURS
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.nom}
-                      </div>
-                    </div>
-                  }
+                  content={<BlocLien type="COURS" value={element.nom} />}
                 >
                   <a
                     target="_blank"
@@ -396,12 +166,12 @@ const Element = ({ attributes, children, element }) => {
             default:
               return (
                 <span>
-                  {/*<OpenModal
-                type="cours"
-                element={element}
-                attributes={attributes}
-                children={children}
-              />*/}
+                  <OpenModal
+                    type="cours"
+                    element={element}
+                    attributes={attributes}
+                    children={children}
+                  />
                 </span>
               );
           }
@@ -411,34 +181,7 @@ const Element = ({ attributes, children, element }) => {
               return (
                 <Popover
                   overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        EXERCICES
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.nom}
-                      </div>
-                    </div>
-                  }
+                  content={<BlocLien type="EXERCICES" value={element.nom} />}
                 >
                   <a
                     target="_self"
@@ -454,34 +197,7 @@ const Element = ({ attributes, children, element }) => {
               return (
                 <Popover
                   overlayClassName="Pop-LienWeb"
-                  content={
-                    <div style={{ display: "flex" }}>
-                      <div
-                        style={{
-                          color: "orange",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        EXERCICES
-                      </div>
-                      <div
-                        style={{
-                          color: "white",
-                          marginLeft: "5px",
-                          marginRight: "5px"
-                        }}
-                      >
-                        |
-                      </div>
-                      <div
-                        style={{
-                          color: "white"
-                        }}
-                      >
-                        {element.nom}
-                      </div>
-                    </div>
-                  }
+                  content={<BlocLien type="EXERCICES" value={element.nom} />}
                 >
                   <a
                     target="_blank"
@@ -509,17 +225,9 @@ const Element = ({ attributes, children, element }) => {
 
     default:
       return (
-        <p
-          style={{
-            textAlign: element.align,
-            marginLeft: element.marginLeft,
-            marginTop: "0px",
-            marginBottom: "0px"
-          }}
-          {...attributes}
-        >
+        <S.BlocSimple element={element} {...attributes}>
           {children}
-        </p>
+        </S.BlocSimple>
       );
   }
 };
@@ -566,49 +274,35 @@ const Leaf = ({ attributes, children, leaf }) => {
 };
 
 export default SlateJs;
-/*
+
 const OpenModal = ({ type, attributes, children, element }) => {
   const [modalShow, setModalShow] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [cours, setCours] = useState();
+  const fetchData = async element => {
+    const res = await fetch(
+      `https://www.phidbac.fr:4000/${type === "cours" ? type : "indexes"}/${
+        element.value
+      }`
+    );
+    const data = await res.json();
+    await setCours({
+      Contenu: type === "cours" ? JSON.parse(data.Contenu) : data.description
+    });
+    await setModalShow(true);
+  };
 
   return (
     <Popover
       visible={showTooltip}
       overlayClassName="Pop-LienWeb"
-      content={
-        <div style={{ display: "flex" }}>
-          <div
-            style={{
-              color: "orange",
-              fontWeight: "bold"
-            }}
-          >
-            {type.toUpperCase()}
-          </div>
-          <div
-            style={{
-              color: "white",
-              marginLeft: "5px",
-              marginRight: "5px"
-            }}
-          >
-            |
-          </div>
-          <div
-            style={{
-              color: "white"
-            }}
-          >
-            {element.nom}
-          </div>
-        </div>
-      }
+      content={<BlocLien type={type.toUpperCase()} value={element.nom} />}
     >
       <a
         {...attributes}
         onMouseOver={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        onMouseDown={() => setModalShow(true)}
+        onClick={() => fetchData(element)}
       >
         {children}
       </a>
@@ -627,20 +321,36 @@ const OpenModal = ({ type, attributes, children, element }) => {
             paddingRight: "20px"
           }}
         >
-          {type === "index" && <DescriptionIndex id={element.value} />}
+          {type === "index" && (
+            <EditeurCours id={element.value} cours={cours} />
+          )}
           {type === "cours" && (
-            <Programme
+            <EditeurCours
               id={element.value}
               paragraphe={element.paragraphe}
               tableMatiereShow={false}
+              cours={cours}
             />
           )}
           {type === "exercices" && (
-            <Programme id={element.value} tableMatiereShow={false} />
+            <EditeurCours
+              id={element.value}
+              tableMatiereShow={false}
+              cours={cours}
+            />
           )}
         </div>
       </Modal>
     </Popover>
   );
 };
-*/
+
+const BlocLien = ({ type, value }) => {
+  return (
+    <S.ConteneurLienPopover>
+      <S.TypeLien>{type}</S.TypeLien>
+      <S.Separateur>|</S.Separateur>
+      <S.ContenuLien>{value}</S.ContenuLien>
+    </S.ConteneurLienPopover>
+  );
+};

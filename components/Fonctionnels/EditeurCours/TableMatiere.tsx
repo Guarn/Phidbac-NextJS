@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import styled from "styled-components";
 import { CoursI } from ".";
 
 export interface TableMatiere {

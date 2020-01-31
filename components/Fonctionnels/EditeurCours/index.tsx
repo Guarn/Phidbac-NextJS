@@ -6,7 +6,7 @@ import TableMatiere from "./TableMatiere";
 export interface Props {
   paragraphe?: number;
   tableMatiereShow?: boolean;
-  cours?: CoursI;
+  cours: CoursI;
 }
 
 export interface ContenuCoursI {
@@ -51,7 +51,7 @@ export interface CoursI {
   type: "Cours" | "Exercice" | "PageUnique";
 }
 
-const initialValueCours: CoursI = {
+export const initialValueCours: CoursI = {
   Contenu: [{ value: [], type: "" }],
   Titre: "",
   Description: "",
