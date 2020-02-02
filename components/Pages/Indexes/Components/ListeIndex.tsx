@@ -1,7 +1,6 @@
 import * as S from "./Styled";
 import alphabet from "../alphabet";
-import routes from "../../../../routes";
-const { Link } = routes;
+import Link from "next/link";
 
 const ListeIndex = ({ listeIndex, id }: any) => {
   return (
@@ -19,7 +18,7 @@ const ListeIndex = ({ listeIndex, id }: any) => {
                     <Link
                       key={element.id}
                       prefetch={false}
-                      route={`/Liste-des-index/${
+                      href={`/Liste-des-index/${
                         element.id
                       }-${element.nom
                         .replace(/\u202f/g, "-")

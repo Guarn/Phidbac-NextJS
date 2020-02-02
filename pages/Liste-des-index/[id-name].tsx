@@ -28,9 +28,8 @@ const Indexes = ({ listeIndex, cours, id }: any) => {
 
 export default Indexes;
 
-Indexes.getInitialProps = async ({ req }: any) => {
-  let id = req.url;
-  id = id.split("/")[2].split("-")[0];
+Indexes.getInitialProps = async ({ query }: any) => {
+  const id = query["id-name"].split("-")[0];
 
   const res = await fetch("https://www.phidbac.fr:4000/Indexes");
   const data = await res.json();
