@@ -17,12 +17,7 @@ const ListeIndex = ({ listeIndex, id }: any) => {
                   return (
                     <Link
                       key={element.id}
-                      prefetch={false}
-                      href={`/Liste-des-index/${
-                        element.id
-                      }-${element.nom
-                        .replace(/\u202f/g, "-")
-                        .replace(/\//g, "-")}`}
+                      href={`/Liste-des-index/[id-name]`}
                       as={`/Liste-des-index/${element.id}-${element.nom
                         .replace(/\u202f/g, "-")
                         .replace(/\//g, "-")}`}

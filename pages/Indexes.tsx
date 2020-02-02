@@ -30,8 +30,6 @@ const Indexes = ({ listeIndex, cours, id }: any) => {
 export default Indexes;
 
 Indexes.getInitialProps = async ({ req }: any) => {
-  console.log(req);
-
   const res = await fetch("https://www.phidbac.fr:4000/Indexes");
   const data = await res.json();
   const res1 = await fetch("https://www.phidbac.fr:4000/Indexes/50");
