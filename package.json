@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@next/bundle-analyzer": "^9.2.1",
+    "@types/react-scroll": "^1.5.4",
     "@types/react-transition-group": "^4.2.3",
     "@types/slate": "^0.47.5",
     "@types/styled-components": "^4.4.2",
@@ -25,6 +26,7 @@
     "null-loader": "^3.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-scroll": "^1.7.16",
     "react-transition-group": "^4.3.0",
     "slate": "^0.53.0",
     "slate-react": "^0.53.0",

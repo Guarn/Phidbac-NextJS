@@ -17,14 +17,16 @@ export const Conteneur = styled.div`
 Conteneur.displayName = `Conteneur`;
 
 export type WidthProps = {
-  width: number;
+  width?: number;
+  affichage: string;
 };
 export const ConteneurCours = styled.div<WidthProps>`
-  width: ${props => props.width + "px"};
+  width: ${props => props.affichage !== "Index" && "847px"};
+
   overflow: auto;
-  padding-right: 30px;
+  padding-right: 10px;
   position: relative;
-  padding-left: 10%;
+  padding-left: ${props => props.affichage !== "Index" && "10%"};
   height: 100%;
   @media (max-width: 1023px) {
     padding-right: 5px;
@@ -108,10 +110,7 @@ export const TailleImage = styled.div<ConteneurSlateI>`
 `;
 Conteneur.displayName = `TailleImage`;
 
-export const BlocImage = styled.img.attrs<ConteneurSlateI>({
-  src: (props: ConteneurSlateI) => props.imageOptions?.src,
-  alt: (props: ConteneurSlateI) => props.imageOptions?.legende
-})`
+export const BlocImage = styled.img<ConteneurSlateI>`
   height: inherit;
   width: inherit;
   padding-bottom: 10px;
@@ -134,3 +133,60 @@ export const BarreCitation = styled.div`
   margin-right: 30px;
 `;
 Conteneur.displayName = `BarreCitation`;
+
+export const ConteneurTableMatiere = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-top: 50px;
+  font-size: 14px;
+  font-family: "Century Gothic";
+  @media (max-width: 1024px) {
+    padding: 10px;
+    margin-left: 10px;
+
+    margin-top: 10px;
+    bottom: 10px;
+    right: 10px;
+    position: fixed;
+    background-color: white;
+  }
+`;
+ConteneurTableMatiere.displayName = `ConteneurTableMatiere`;
+
+export const Titre = styled.h2`
+  text-align: center;
+  cursor: arrow;
+`;
+Titre.displayName = `Titre`;
+
+export const ElBase = styled.div`
+  &:hover {
+    font-weight: bold;
+  }
+`;
+
+export const El0 = styled(ElBase)`
+  margin-left: 0px;
+`;
+El0.displayName = `El0`;
+
+export const El1 = styled(ElBase)`
+  margin-left: 15px;
+`;
+El1.displayName = `El1`;
+
+export const El2 = styled(ElBase)`
+  margin-left: 30px;
+`;
+El2.displayName = `El2`;
+
+export const El3 = styled(ElBase)`
+  margin-left: 45px;
+`;
+El3.displayName = `El3`;
+
+export const El4 = styled(ElBase)`
+  margin-left: 60px;
+`;
+El4.displayName = `El4`;

@@ -4,9 +4,11 @@ import EditeurCours from "../../Fonctionnels/EditeurCours";
 const Programme = (props: any) => {
   return (
     <S.Conteneur>
-      {props.cours && (
-        <EditeurCours tableMatiereShow={false} cours={props.cours} />
-      )}
+      <EditeurCours
+        affichage="PageUnique"
+        tableMatiereShow={true}
+        cours={props.cours}
+      />
     </S.Conteneur>
   );
 };

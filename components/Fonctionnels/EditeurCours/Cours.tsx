@@ -5,13 +5,24 @@ import Slate from "../../Fonctionnels/Slate";
 
 export interface Props {
   paragraphe: number;
-  cours: CoursI;
+  cours: any;
+  affichage: "PageUnique" | "Index" | "Cours";
 }
 
-const Cours: FC<Props> = ({ paragraphe = 0, cours }) => {
+const Cours: FC<Props> = ({ paragraphe = 0, cours, affichage }) => {
+  let Contenu;
+  if (
+    cours.type === "Cours" ||
+    cours.type === "Exercice" ||
+    cours.type === "PageUnique"
+  ) {
+    Contenu = cours.Contenu;
+  } else {
+    Contenu = cours.description;
+  }
   return (
-    <S.ConteneurCours width={847}>
-      {cours.Contenu.map((element, index: number) => {
+    <S.ConteneurCours affichage={affichage}>
+      {Contenu.map((element: any, index: number) => {
         return (
           <S.ConteneurSlate
             options={element.options}
@@ -24,7 +35,11 @@ const Cours: FC<Props> = ({ paragraphe = 0, cours }) => {
             element.image && (
               <S.ConteneurImage imageOptions={element.imageOptions}>
                 <S.TailleImage imageOptions={element.imageOptions}>
-                  <S.BlocImage imageOptions={element.imageOptions} />
+                  <S.BlocImage
+                    imageOptions={element.imageOptions}
+                    src={element.imageOptions.src}
+                    alt={element.imageOptions.legende}
+                  />
                 </S.TailleImage>
               </S.ConteneurImage>
             )}

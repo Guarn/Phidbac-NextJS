@@ -1,10 +1,9 @@
 import Head from "next/head";
-import Programme from "../components/Pages/Programme";
-import { NextPage } from "next";
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
+import PageIndex from "../../components/Pages/Indexes";
 import fetch from "isomorphic-unfetch";
 
-const ProgrammeEpreuve: NextPage = (props: any) => {
+const Indexes = ({ listeIndex, cours, id }: any) => {
   return (
     <>
       <Head>
@@ -21,24 +20,26 @@ const ProgrammeEpreuve: NextPage = (props: any) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Layout>
-        <Programme cours={props.cours} />
+        <PageIndex listeIndex={listeIndex} id={id} cours={cours} />
       </Layout>
     </>
   );
 };
 
-ProgrammeEpreuve.getInitialProps = async () => {
-  const res = await fetch("https://www.phidbac.fr:4000/Cours/1");
+export default Indexes;
+
+Indexes.getInitialProps = async ({ req }: any) => {
+  let id = req.url;
+  id = id.split("/")[2].split("-")[0];
+
+  const res = await fetch("https://www.phidbac.fr:4000/Indexes");
   const data = await res.json();
+  const res1 = await fetch(`https://www.phidbac.fr:4000/Indexes/${id}`);
+  const data1 = await res1.json();
 
   return {
-    cours: {
-      Titre: data.Titre,
-      Description: data.Description,
-      Contenu: JSON.parse(data.Contenu),
-      type: data.type
-    }
+    listeIndex: data,
+    cours: data1,
+    id: id
   };
 };
-
-export default ProgrammeEpreuve;

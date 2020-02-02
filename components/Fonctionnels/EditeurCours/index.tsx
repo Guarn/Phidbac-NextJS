@@ -7,6 +7,7 @@ export interface Props {
   paragraphe?: number;
   tableMatiereShow?: boolean;
   cours: CoursI;
+  affichage: "PageUnique" | "Index" | "Cours";
 }
 
 export interface ContenuCoursI {
@@ -58,10 +59,19 @@ export const initialValueCours: CoursI = {
   type: "Cours"
 };
 
-const index: FC<Props> = ({ paragraphe = 0, tableMatiereShow, cours }) => {
+const index: FC<Props> = ({
+  paragraphe = 0,
+  tableMatiereShow,
+  affichage,
+  cours
+}) => {
   return (
     <S.Conteneur>
-      <Cours paragraphe={paragraphe} cours={cours ?? initialValueCours} />
+      <Cours
+        paragraphe={paragraphe}
+        affichage={affichage}
+        cours={cours ?? initialValueCours}
+      />
       {tableMatiereShow && <TableMatiere cours={cours ?? initialValueCours} />}
     </S.Conteneur>
   );

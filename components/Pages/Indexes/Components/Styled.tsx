@@ -1,0 +1,104 @@
+import styled from "styled-components";
+
+export const ConteneurLettres = styled.div`
+  display: flex;
+`;
+
+export const LettresG = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const LettresD = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+`;
+
+export const Lettre = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border: 1px solid #707070;
+  color: #707070;
+  font-size: 24px;
+  margin-bottom: 2px;
+  margin-right: 2px;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    background-color: grey;
+    color: white;
+  }
+`;
+
+export const ConteneurDescription = styled.div`
+  width: 500px;
+  margin-left: 40px;
+  overflow: auto;
+  height: 100%;
+  padding-right: 10px;
+  @media (max-width: 1024px) {
+    width: 400px;
+    margin-left: 20px;
+  }
+`;
+
+//SECTION ListeIndex
+
+export const ConteneurListe = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  height: 90%;
+  overflow: auto;
+  padding-right: 10px;
+  @media (max-width: 1024px) {
+    margin-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 767px) {
+    margin-top: 60px;
+    margin-left: 0px;
+    height: initial;
+    overflow: initial;
+    padding-right: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+interface elementProps {
+  selected: boolean;
+}
+
+export const ElementListe = styled.div<elementProps>`
+  cursor: pointer;
+  font-weight: ${props => (props.selected ? "bold" : null)};
+  &:hover {
+    font-weight: bold;
+  }
+`;
+ElementListe.displayName = `ElementListe`;
+
+export const BlocLettre = styled.div`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  a {
+    color: ${props => props.theme.main};
+  }
+`;
+BlocLettre.displayName = `BlocLettre`;
+
+export const LettreTitre = styled.div`
+  font-size: 24px;
+  color: orange;
+`;
+Lettre.displayName = `Lettre`;
+
+//!SECTION
