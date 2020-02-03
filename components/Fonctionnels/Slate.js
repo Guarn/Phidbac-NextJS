@@ -322,20 +322,20 @@ const OpenModal = ({ type, attributes, children, element }) => {
           }}
         >
           {type === "index" && (
-            <EditeurCours id={element.value} cours={cours} />
+            <EditeurCours id={element.value} affichage="Index" cours={cours} />
           )}
           {type === "cours" && (
             <EditeurCours
-              id={element.value}
               paragraphe={element.paragraphe}
               tableMatiereShow={false}
               cours={cours}
+              affichage="Cours"
             />
           )}
           {type === "exercices" && (
             <EditeurCours
-              id={element.value}
               tableMatiereShow={false}
+              affichage="Cours"
               cours={cours}
             />
           )}

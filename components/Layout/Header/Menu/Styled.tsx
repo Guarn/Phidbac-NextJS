@@ -4,10 +4,6 @@ export const Conteneur = styled.div`
   display: flex;
   justify-content: space-between;
   z-index: 100;
-
-  a {
-    color: ${props => props.theme.main};
-  }
 `;
 Conteneur.displayName = `Conteneur`;
 
@@ -35,13 +31,18 @@ export const BoutonHome = styled.a`
 `;
 BoutonHome.displayName = `BoutonHome`;
 
-export const BoutonLien = styled.a`
+export type BoutonLienT = {
+  selected: boolean;
+};
+
+export const BoutonLien = styled.a<BoutonLienT>`
   margin-right: 60px;
   font-size: 16px;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
+  color: ${props => (props.selected ? "orange" : props.theme.main)};
   &:hover {
     color: ${props => props.theme.texteSecondaryColor};
   }

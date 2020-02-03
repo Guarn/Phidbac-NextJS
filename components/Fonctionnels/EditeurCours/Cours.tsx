@@ -10,19 +10,9 @@ export interface Props {
 }
 
 const Cours: FC<Props> = ({ paragraphe = 0, cours, affichage }) => {
-  let Contenu;
-  if (
-    cours.type === "Cours" ||
-    cours.type === "Exercice" ||
-    cours.type === "PageUnique"
-  ) {
-    Contenu = cours.Contenu;
-  } else {
-    Contenu = cours.description;
-  }
   return (
     <S.ConteneurCours affichage={affichage}>
-      {Contenu.map((element: any, index: number) => {
+      {cours.Contenu.map((element: any, index: number) => {
         return (
           <S.ConteneurSlate
             options={element.options}

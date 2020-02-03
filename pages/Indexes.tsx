@@ -2,21 +2,38 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import PageIndex from "../components/Pages/Indexes";
 import fetch from "isomorphic-unfetch";
-import { useState } from "react";
+import { ContenuCoursI } from "../components/Fonctionnels/EditeurCours";
 
-const Indexes = ({ listeIndex, cours, id }: any) => {
+export interface IndexI {
+  nom: string;
+  id: number;
+  type: "auteur" | "notion" | "terme";
+  lettre: string;
+  description?: ContenuCoursI;
+}
+
+export interface Props {
+  listeIndex: IndexI[];
+  cours: IndexI;
+  id: number;
+}
+
+const Indexes = ({ listeIndex, cours, id }: Props) => {
   return (
     <>
       <Head>
-        <title>Présentation du programme et des épreuves</title>
+        <title>{`${cours.type?.toUpperCase()} : ${cours.nom}`}</title>
         <meta charSet="utf-8" />
         <meta
           name="description"
-          content={`Présentation du programme et des épreuves du bac de philosophie, et fonctionnement de Phidbac.`}
+          content={`Définition de l'index ${cours.nom}.`}
         />
         <link
           rel="canonical"
-          href={`https://www.phidbac.fr/Presentation-du-programme-et-des-epreuves`}
+          href={`https://www.phidbac.fr/Liste-des-index/${cours.id}-${cours.nom
+            ?.trim()
+            .replace(" ", "-")
+            .replace("/", "-")}`}
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
@@ -29,7 +46,7 @@ const Indexes = ({ listeIndex, cours, id }: any) => {
 
 export default Indexes;
 
-Indexes.getInitialProps = async ({ req }: any) => {
+Indexes.getInitialProps = async () => {
   const res = await fetch("https://www.phidbac.fr:4000/Indexes");
   const data = await res.json();
   const res1 = await fetch("https://www.phidbac.fr:4000/Indexes/50");
@@ -37,7 +54,7 @@ Indexes.getInitialProps = async ({ req }: any) => {
 
   return {
     listeIndex: data,
-    cours: data1,
+    cours: { ...data1, Contenu: [...data1.description] },
     id: 50
   };
 };

@@ -1,8 +1,11 @@
 import * as S from "./Styled";
 import routes from "../../../../routes";
+import { useRouter } from "next/router";
 const { Link } = routes;
 
 const Menu = () => {
+  const router = useRouter();
+
   return (
     <S.Conteneur>
       <S.BoutonHome>
@@ -15,15 +18,19 @@ const Menu = () => {
           route="/Presentation-du-programme-et-des-epreuves"
           as="/Presentation-du-programme-et-des-epreuves"
         >
-          <S.BoutonLien>Programme / Epreuves</S.BoutonLien>
+          <S.BoutonLien selected={router.route === "/Programme"}>
+            Programme / Epreuves
+          </S.BoutonLien>
         </Link>
-        <S.BoutonLien>Sujets</S.BoutonLien>
-        <S.BoutonLien>Cours</S.BoutonLien>
-        <S.BoutonLien>Exercices</S.BoutonLien>
+        <S.BoutonLien selected={false}>Sujets</S.BoutonLien>
+        <S.BoutonLien selected={false}>Cours</S.BoutonLien>
+        <S.BoutonLien selected={false}>Exercices</S.BoutonLien>
         <Link route="/Liste-des-index">
-          <S.BoutonLien>Index</S.BoutonLien>
+          <S.BoutonLien selected={router.asPath.includes("Liste-des-index")}>
+            Index
+          </S.BoutonLien>
         </Link>
-        <S.BoutonLien>Se connecter</S.BoutonLien>
+        <S.BoutonLien selected={false}>Se connecter</S.BoutonLien>
       </S.ConteneurPartieDroite>
     </S.Conteneur>
   );
