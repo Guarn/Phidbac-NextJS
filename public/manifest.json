@@ -1,0 +1,16 @@
+{
+  "name": "Phidbac - Préparation à l'épreuve de philosophie du baccalauréat",
+  "short_name": "Phidbac",
+  "start_url": "/?home=true",
+  "icons": [
+    {
+      "src": "/favicon.jpg",
+      "sizes": "50x50",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#FFFFFF",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
