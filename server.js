@@ -2,11 +2,11 @@ const next = require("next");
 const routes = require("./routes");
 const app = next({ dev: process.env.NODE_ENV !== "production" });
 const handler = routes.getRequestHandler(app);
-const http2 = require("http2");
+const https = require("https");
 const fs = require("fs");
 
-http2
-  .createSecureServer(
+https
+  .createServer(
     {
       key: fs.readFileSync("/etc/letsencrypt/live/phidbac.fr/privkey.pem"),
       cert: fs.readFileSync("/etc/letsencrypt/live/phidbac.fr/cert.pem"),
@@ -15,6 +15,7 @@ http2
     handler
   )
   .listen(7000);
+
 // Without express
 /*
 const { createServer } = require("http2");
