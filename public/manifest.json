@@ -1,7 +1,7 @@
 {
   "name": "Phidbac - Préparation à l'épreuve de philosophie du baccalauréat",
   "short_name": "Phidbac",
-  "start_url": "/?home=true",
+  "start_url": "/",
   "icons": [
     {
       "src": "/favicon.jpg",
