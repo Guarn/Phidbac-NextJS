@@ -27,7 +27,8 @@ export const ConteneurCours = styled.div<WidthProps>`
   padding-right: 10px;
   position: relative;
   padding-left: ${props => props.affichage !== "Index" && "10%"};
-  height: 100%;
+  height: ${props =>
+    props.affichage === "Cours" ? "calc(100% - 42px)" : "100%"};
   @media (max-width: 1023px) {
     padding-right: 5px;
     padding-left: 5px;

@@ -1,13 +1,17 @@
 import * as S from "./Styled";
-import EditeurCours from "../../Fonctionnels/EditeurCours";
+import EditeurCours, { CoursI } from "../../Fonctionnels/EditeurCours";
 
-const Programme = (props: any) => {
+interface Props {
+  cours: CoursI;
+}
+
+const Programme: React.FC<Props> = ({ cours }) => {
   return (
     <S.Conteneur>
       <EditeurCours
         affichage="PageUnique"
         tableMatiereShow={true}
-        cours={props.cours}
+        cours={cours}
       />
     </S.Conteneur>
   );

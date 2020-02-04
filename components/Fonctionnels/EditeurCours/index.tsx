@@ -50,6 +50,8 @@ export interface CoursI {
   Titre: string;
   Description: string;
   type: "Cours" | "Exercice" | "PageUnique";
+  id?: number;
+  position?: number;
 }
 
 export const initialValueCours: CoursI = {
