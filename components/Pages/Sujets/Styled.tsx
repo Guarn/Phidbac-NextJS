@@ -228,7 +228,39 @@ export const Notions = styled.div`
   text-align: right;
 `;
 
-export const CorpsSujet = styled.div``;
+export const CorpsSujet = styled.div`
+  padding: 10px;
+
+  p {
+    margin: 0;
+    padding: 0;
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8
+      list-9;
+  }
+
+  .ql-align-justify {
+    text-align: justify;
+  }
+
+  .ql-align-right {
+    text-align: right;
+  }
+  .ql-align-left {
+    text-align: left;
+  }
+  .ql-align-center {
+    text-align: center;
+  }
+  .ql-indent-1 {
+    padding-left: 3em;
+  }
+  .ql-indent-2 {
+    padding-left: 6em;
+  }
+  .ql-indent-3 {
+    padding-left: 9em;
+  }
+`;
 export const Details = styled.div`
   display: flex;
   flex-direction: row;

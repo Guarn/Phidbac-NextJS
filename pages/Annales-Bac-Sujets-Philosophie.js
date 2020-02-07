@@ -18,17 +18,11 @@ import {
   Select,
   Slider
 } from "antd";
-import "react-quill/dist/quill.snow.css";
 import { Transition } from "react-transition-group";
 import {
   sujetReducer,
-  initialState,
-  StateI,
-  Action,
-  SujetI,
-  EnonceI
+  initialState
 } from "../components/Pages/Sujets/reducers";
-import { RadioChangeEvent } from "antd/lib/radio";
 import Axios from "../components/Fonctionnels/Axios";
 import Layout from "../components/Layout";
 
@@ -206,6 +200,8 @@ const AffichageSujet = () => {
 
 const Enonce = ({ numSujet, texte, notions, filtres, actif }) => {
   const refQuill = useRef();
+
+  //TODO Reprogrammer surlignage des mots lors de la recherche
   /*
   useEffect(() => {
     if (typeof window !== "undefined" && filtres.recherche !== "" && actif) {
