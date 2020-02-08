@@ -10,7 +10,7 @@ import {
 } from "antd";
 import * as S from "./Styled";
 import Axios from "../../Fonctionnels/Axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 const { Option } = Select;
@@ -96,19 +96,26 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
     }).then(rep => {
       setListeSujet(rep.data);
 
-      router.push(
-        "/Annales-Bac-Sujets-Philosophie/[id-name]",
-        `/Annales-Bac-Sujets-Philosophie/${rep.data.rows[0].id}`
-      );
+      if (rep.data.count > 0) {
+        router.push(
+          "/Annales-Bac-Sujets-Philosophie/[id-name]",
+          `/Annales-Bac-Sujets-Philosophie/${rep.data.rows[0].id}`
+        );
+      }
     });
   };
-  const rechercheExpression = (e, cat) => {
-    /*
-    setState({
-      type: "ChangeFiltres",
-      value: e,
-      cat
-    });*/
+  const rechercheExpression = () => {
+    Axios.post("/resultatsAdmin", {
+      elementsCoches: state
+    }).then(rep => {
+      setListeSujet(rep.data);
+      if (rep.data.count > 0) {
+        router.push(
+          "/Annales-Bac-Sujets-Philosophie/[id-name]",
+          `/Annales-Bac-Sujets-Philosophie/${rep.data.rows[0].id}`
+        );
+      }
+    });
   };
   return (
     <div
@@ -237,7 +244,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
 
             <Divider style={{ marginTop: "40px" }} />
             <Button
-              onMouseDown={() => {
+              onClick={() => {
                 Axios.get("/sujets/sujetscount").then(rep => {
                   setListeSujet(rep.data);
                   setState(initialFiltresState);
@@ -261,121 +268,107 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
           </Tabs.TabPane>
           {
             // NOTE FILTRES EXPRESSION
-            /*
-          <Tabs.TabPane
-            tab={
-              <span>
-                <Icon type="search" />
-                EXPRESSION
-              </span>
-            }
-            key="2"
-          >
-            <div style={{ fontWeight: "bold" }}>Recherche :</div>
-            <Input
-              value={menu.recherche}
-              style={{
-                backgroundColor: "rgba(255,255,255,0.1)",
-                borderColor: "rgba(0,0,0,0.3)",
-                marginTop: "10px",
-                marginBottom: "10px"
-              }}
-              onChange={val => {
-                rechercheExpression(val.target.value, "recherche");
-              }}
-              placeholder="un ou plusieurs mots, expression"
-            ></Input>
-            <Radio.Group
-              onChange={val => {
-                rechercheExpression(val.target.value, "typeRecherche");
-              }}
-              value={menu.typeRecherche}
-            >
-              <Radio value="exacte">
-                Expression exacte
-                <Icon
-                  type="question-circle"
-                  style={{
-                    color: "grey",
-                    marginLeft: "5px"
-                  }}
-                />
-              </Radio>
-              <Radio value="tousLesMots">
-                Tous les mots
-                <Icon
-                  type="question-circle"
-                  style={{
-                    color: "grey",
-                    marginLeft: "5px"
-                  }}
-                />
-              </Radio>
-              <Radio value="unDesMots">
-                Un des mots
-                <Icon
-                  type="question-circle"
-                  style={{
-                    color: "grey",
-                    marginLeft: "5px"
-                  }}
-                />
-              </Radio>
-            </Radio.Group>
-            <Divider style={{ marginTop: "40px" }} />
-            <Button
-              onMouseDown={() => {
-                Axios.get("/sujets/sujetscount").then(rep => {
-                  setState({
-                    type: "FetchSujet",
-                    value: rep.data.rows,
-                    count: rep.data.count
-                  });
-                  setState({
-                    type: "ChangementID",
-                    value: 1
-                  });
-                });
-              }}
-              size="small"
-              style={{
-                marginBottom: "10px",
-                backgroundColor: "#e2e0d8",
-                borderColor: "#919191"
-              }}
-              block
-            >
-              Réinitialiser les filtres
-              <Icon type="reload" />
-            </Button>
-            <Button
-              onMouseDown={() => {
-                setState({
-                  type: "Loading",
-                  value: true
-                });
 
-                Axios.post("/resultatsadmin", {
-                  elementsCoches: filtres
-                }).then(rep => {
-                  setState({
-                    type: "Recherche",
-                    sujets: rep.data.rows,
-                    nbSujets: rep.data.count
-                  });
-                });
-              }}
-              size="large"
-              style={{
-                backgroundColor: "rgba(255,255,255,0.1)",
-                borderColor: "rgba(0,0,0,0.3)"
-              }}
-              block
+            <Tabs.TabPane
+              tab={
+                <span>
+                  <Icon type="search" />
+                  EXPRESSION
+                </span>
+              }
+              key="2"
             >
-              <Icon type="search" />
-              Recherche
-            </Button>
-          </Tabs.TabPane>*/
+              <div style={{ fontWeight: "bold" }}>Recherche :</div>
+              <Input
+                value={state.recherche}
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  borderColor: "rgba(0,0,0,0.3)",
+                  marginTop: "10px",
+                  marginBottom: "10px"
+                }}
+                onChange={val => {
+                  setState({ ...state, recherche: val.target.value });
+                }}
+                placeholder="un ou plusieurs mots, expression"
+              ></Input>
+              <Radio.Group
+                onChange={val => {
+                  setState({ ...state, typeRecherche: val.target.value });
+                }}
+                value={state.typeRecherche}
+              >
+                <Radio value="exacte">
+                  Expression exacte
+                  <Icon
+                    type="question-circle"
+                    style={{
+                      color: "grey",
+                      marginLeft: "5px"
+                    }}
+                  />
+                </Radio>
+                <Radio value="tousLesMots">
+                  Tous les mots
+                  <Icon
+                    type="question-circle"
+                    style={{
+                      color: "grey",
+                      marginLeft: "5px"
+                    }}
+                  />
+                </Radio>
+                <Radio value="unDesMots">
+                  Un des mots
+                  <Icon
+                    type="question-circle"
+                    style={{
+                      color: "grey",
+                      marginLeft: "5px"
+                    }}
+                  />
+                </Radio>
+              </Radio.Group>
+              <Divider style={{ marginTop: "40px" }} />
+              <Button
+                onClick={() => {
+                  Axios.get("/sujets/sujetscount").then(rep => {
+                    setListeSujet(rep.data);
+                    setState(initialFiltresState);
+                    if (rep.data.count > 0) {
+                      router.push(
+                        "/Annales-Bac-Sujets-Philosophie/[id-name]",
+                        `/Annales-Bac-Sujets-Philosophie/${rep.data.rows[0].id}`
+                      );
+                    }
+                  });
+                }}
+                size="small"
+                style={{
+                  marginBottom: "10px",
+                  backgroundColor: "#e2e0d8",
+                  borderColor: "#919191"
+                }}
+                block
+              >
+                Réinitialiser les filtres
+                <Icon type="reload" />
+              </Button>
+              <Button
+                onClick={() => {
+                  rechercheExpression();
+                }}
+                size="large"
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  borderColor: "rgba(0,0,0,0.3)"
+                }}
+                block
+              >
+                <Icon type="search" />
+                Recherche
+              </Button>
+            </Tabs.TabPane>
           }
         </Tabs>
       </S.ConteneurFiltres>

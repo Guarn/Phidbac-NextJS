@@ -19,7 +19,7 @@ const Menu = () => {
             Programme / Epreuves
           </S.BoutonLien>
         </Link>
-        <Link route="/Annales-Bac-Sujets-Philosophie">
+        <Link route="/Annales-Bac-Sujets-Philosophie/1">
           <S.BoutonLien
             selected={router.asPath.includes("Annales-Bac-Sujets-Philosophie")}
           >

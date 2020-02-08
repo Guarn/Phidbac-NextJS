@@ -37,35 +37,52 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
 
   return (
     <S.ConteneurSuivPrec>
-      <Link
-        href={`/Annales-Bac-Sujets-Philosophie/[id-name]`}
-        as={`/Annales-Bac-Sujets-Philosophie/${
-          listeSujet.rows[getPreviousId()].id
-        }`}
-      >
-        <a>
-          <S.BoutonLeft onClick={() => setSujetVisible(getPreviousId())}>
+      {listeSujet.count > 0 && (
+        <>
+          <Link
+            href={`/Annales-Bac-Sujets-Philosophie/[id-name]`}
+            as={`/Annales-Bac-Sujets-Philosophie/${
+              listeSujet.rows[getPreviousId()].id
+            }`}
+          >
+            <a>
+              <S.BoutonLeft onClick={() => setSujetVisible(getPreviousId())}>
+                <Icon type="arrow-left" />
+                Sujet précédent
+              </S.BoutonLeft>
+            </a>
+          </Link>
+          <S.NombreSujets>{`${sujetVisible + 1} / ${
+            listeSujet.count
+          }`}</S.NombreSujets>
+          <Link
+            href={`/Annales-Bac-Sujets-Philosophie/[id-name]`}
+            as={`/Annales-Bac-Sujets-Philosophie/${
+              listeSujet.rows[getNextId()].id
+            }`}
+          >
+            <a>
+              <S.BoutonRight onClick={() => setSujetVisible(getNextId())}>
+                Sujet suivant
+                <Icon type="arrow-right" />
+              </S.BoutonRight>
+            </a>
+          </Link>
+        </>
+      )}
+      {listeSujet.count === 0 && (
+        <>
+          <S.BoutonLeft disabled>
             <Icon type="arrow-left" />
             Sujet précédent
           </S.BoutonLeft>
-        </a>
-      </Link>
-      <S.NombreSujets>{`${sujetVisible + 1} / ${
-        listeSujet.count
-      }`}</S.NombreSujets>
-      <Link
-        href={`/Annales-Bac-Sujets-Philosophie/[id-name]`}
-        as={`/Annales-Bac-Sujets-Philosophie/${
-          listeSujet.rows[getNextId()].id
-        }`}
-      >
-        <a>
-          <S.BoutonRight onClick={() => setSujetVisible(getNextId())}>
+          <S.NombreSujets>{"0 / 0"}</S.NombreSujets>
+          <S.BoutonRight disabled>
             Sujet suivant
             <Icon type="arrow-right" />
           </S.BoutonRight>
-        </a>
-      </Link>
+        </>
+      )}
     </S.ConteneurSuivPrec>
   );
 };

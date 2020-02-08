@@ -2,6 +2,7 @@ import * as S from "./Styled";
 import { NextPage } from "next";
 
 export interface SujetI {
+  noResult: boolean;
   sujet: {
     id: number;
     Serie: string;
@@ -23,25 +24,35 @@ export interface SujetI {
   };
 }
 
-const AffichageSujet: NextPage<SujetI> = ({ sujet }) => {
+const AffichageSujet: NextPage<SujetI> = ({ sujet, noResult }) => {
   const { id, Annee, Serie, Destination, Session, Code } = sujet;
-  return (
-    <S.ConteneurSujet>
-      <Enonce numSujet={1} sujet={sujet} />
-      <Enonce numSujet={2} sujet={sujet} />
-      <Enonce numSujet={3} sujet={sujet} />
-      <S.Details>
-        <S.PartieGauche>
-          <S.Etiquette>{id}</S.Etiquette>
-          <S.Etiquette>{Annee}</S.Etiquette>
-          <S.Etiquette>{Serie}</S.Etiquette>
-          <S.Etiquette>{Destination}</S.Etiquette>
-          <S.Etiquette>{Session}</S.Etiquette>
-          <S.Etiquette>{Code}</S.Etiquette>
-        </S.PartieGauche>
-      </S.Details>
-    </S.ConteneurSujet>
-  );
+
+  switch (noResult) {
+    case false:
+      return (
+        <S.ConteneurSujet>
+          <Enonce numSujet={1} sujet={sujet} />
+          <Enonce numSujet={2} sujet={sujet} />
+          <Enonce numSujet={3} sujet={sujet} />
+          <S.Details>
+            <S.PartieGauche>
+              <S.Etiquette>{id}</S.Etiquette>
+              <S.Etiquette>{Annee}</S.Etiquette>
+              <S.Etiquette>{Serie}</S.Etiquette>
+              <S.Etiquette>{Destination}</S.Etiquette>
+              <S.Etiquette>{Session}</S.Etiquette>
+              <S.Etiquette>{Code}</S.Etiquette>
+            </S.PartieGauche>
+          </S.Details>
+        </S.ConteneurSujet>
+      );
+    case true:
+      return (
+        <S.ConteneurSujet style={{ textAlign: "center" }}>
+          Aucun sujet ne correspond à ces critères.
+        </S.ConteneurSujet>
+      );
+  }
 };
 export default AffichageSujet;
 
