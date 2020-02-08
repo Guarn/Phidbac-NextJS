@@ -9,6 +9,10 @@ export const Conteneur = styled.div`
     justify-content: flex-start;
     min-height: 100vh;
   }
+  @media (max-width: 767px) {
+    margin-top: 65px;
+    flex-direction: column-reverse;
+  }
 `;
 Conteneur.displayName = `Conteneur`;
 
@@ -25,7 +29,8 @@ export const ConteneurPartieTexte = styled.div`
 
   @media (max-width: 767px) {
     height: initial;
-    margin-top: 60px;
+    width: calc(100% - 10px);
+    margin-left: 5px;
   }
 `;
 ConteneurPartieTexte.displayName = `ConteneurPartieTexte`;
@@ -45,6 +50,9 @@ export const TexteTitre = styled.div`
   z-index: 100;
   position: relative;
   line-height: initial;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 TexteTitre.displayName = `TexteTitre`;
 
@@ -91,11 +99,17 @@ export const Cercle = styled.div`
   border-radius: 50% /50%;
   z-index: 0;
   opacity: 0.5;
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 Cercle.displayName = `Cercle`;
 
 export const BlocSousTitre = styled.div`
   display: flex;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 BlocSousTitre.displayName = `BlocSousTitre`;
 
@@ -105,6 +119,9 @@ export const BarreVerticale = styled.div`
   margin-right: 10px;
   z-index: 100;
   position: relative;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 BarreVerticale.displayName = `BarreVerticale`;
 
@@ -118,6 +135,9 @@ export const ConteneurCat = styled.div`
   height: 160px;
   z-index: 100;
   position: relative;
+  @media (max-width: 1023px) {
+    display: none;
+  }
 
   .titres-enter {
     transform: translateX(-400px);

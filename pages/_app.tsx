@@ -20,6 +20,9 @@ const GlobalStyle = createGlobalStyle`
     -ms-user-select: none;
     user-select: none;
     line-height:24px;
+    @media (max-width:767px) {
+      overflow: initial;
+    }
   }
   ::-webkit-scrollbar {
     width: 6px;

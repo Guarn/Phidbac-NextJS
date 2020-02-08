@@ -152,6 +152,9 @@ export const ConteneurTableMatiere = styled.div`
     position: fixed;
     background-color: white;
   }
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 ConteneurTableMatiere.displayName = `ConteneurTableMatiere`;
 

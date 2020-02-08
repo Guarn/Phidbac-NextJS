@@ -4,6 +4,14 @@ export const Conteneur = styled.div`
   display: flex;
   justify-content: space-between;
   z-index: 100;
+  @media (max-width: 767px) {
+    position: fixed;
+    height: 50px;
+    top: 0px;
+    width: 100%;
+    background-color: ${props => props.theme.background};
+    box-shadow: 0 3px 3px lightgrey;
+  }
 `;
 Conteneur.displayName = `Conteneur`;
 
@@ -46,6 +54,12 @@ export const BoutonLien = styled.div<BoutonLienT>`
   color: ${props => (props.selected ? "orange" : props.theme.main)};
   &:hover {
     color: ${props => props.theme.texteSecondaryColor};
+  }
+  @media (max-width: 1023px) {
+    height: 30px;
+    margin-right: 0px;
+    text-align: left;
+    justify-content: start;
   }
 `;
 BoutonLien.displayName = `BoutonLien`;

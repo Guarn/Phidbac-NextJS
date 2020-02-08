@@ -2,7 +2,21 @@ import Head from "next/head";
 import Layout from "../../components/Layout";
 import PageIndex from "../../components/Pages/Indexes";
 import fetch from "isomorphic-unfetch";
-import { Props } from "../Liste-des-index";
+import { ContenuCoursI } from "../../components/Fonctionnels/EditeurCours";
+
+export interface IndexI {
+  nom: string;
+  id: number;
+  type: "auteur" | "notion" | "terme";
+  lettre: string;
+  description?: ContenuCoursI;
+}
+
+export interface Props {
+  listeIndex: IndexI[];
+  cours: IndexI;
+  id: number;
+}
 
 const Indexes = ({ listeIndex, cours, id }: Props) => {
   return (

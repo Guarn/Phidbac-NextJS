@@ -90,7 +90,7 @@ const BlocPresentationDescription = () => {
         <S.Phi>φ</S.Phi>d<S.Phi>'</S.Phi>
         bac
         <S.Phi>'</S.Phi>! (désormais, ce sera φ’ tout court) propose de A à Z
-        une préparation à l’épreuve de philosophie du nouveau bac (juin 2021) :
+        une préparation à l’épreuve de philosophie du nouveau bac (juin 2021).
       </S.TexteContenu>
 
       <S.ConteneurCat>
