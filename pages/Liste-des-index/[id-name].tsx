@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from "../../components/Layout";
 import PageIndex from "../../components/Pages/Indexes";
 import fetch from "isomorphic-unfetch";
-import { Props } from "../Indexes";
+import { Props } from "../Liste-des-index";
 
 const Indexes = ({ listeIndex, cours, id }: Props) => {
   return (

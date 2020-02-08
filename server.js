@@ -15,23 +15,3 @@ https
     handler
   )
   .listen(7000);
-
-// Without express
-/*
-const { createServer } = require("http2");
-app.prepare().then(() => {
-  createServer(handler).listen(7000);
-});
-
-app.prepare().then(() => {
-  devcert
-    .certificateFor("www.phidbac.fr", { installCertutil: true })
-    .then(ssl => {
-      https.createServer(ssl, handler).listen(7000, err => {
-        if (err) throw err;
-        // eslint-disable-next-line
-        console.log(`> Ready on https://www.mysitelocal.com:${port}`);
-      });
-    });
-});
-*/

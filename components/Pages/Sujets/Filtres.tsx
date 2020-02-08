@@ -159,6 +159,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
 
             <Select
               mode="multiple"
+              value={state.series}
               style={{ width: "100%" }}
               placeholder="Toutes les séries"
               onChange={e => rechercheInstantanee(e, "series")}
@@ -171,6 +172,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             <Divider style={{ marginBottom: "5px" }}>Destinations</Divider>
             <Select
               mode="multiple"
+              value={state.destinations}
               style={{ width: "100%" }}
               placeholder="Toutes les destinations"
               onChange={e => rechercheInstantanee(e, "destinations")}
@@ -184,6 +186,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             <Divider style={{ marginBottom: "5px" }}>Auteurs</Divider>
             <Select
               mode="multiple"
+              value={state.auteurs}
               style={{ width: "100%" }}
               placeholder="Tous les auteurs"
               onChange={e => rechercheInstantanee(e, "auteurs")}
@@ -200,7 +203,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             <Divider style={{ marginBottom: "5px" }}>Sessions</Divider>
             <Radio.Group
               size="small"
-              defaultValue="TOUTES"
+              value={state.sessions.length === 4 ? "TOUTES" : state.sessions}
               onChange={e => {
                 if (e.target.value === "TOUTES") {
                   rechercheInstantanee(

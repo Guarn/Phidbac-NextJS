@@ -2,12 +2,9 @@ import { NextPage } from "next";
 import Layout from "../../components/Layout";
 import fetch from "isomorphic-unfetch";
 import * as S from "../../components/Pages/Sujets/Styled";
-import AffichageSujet, {
-  SujetI
-} from "../../components/Pages/Sujets/AffichageSujet";
+import AffichageSujet from "../../components/Pages/Sujets/AffichageSujet";
 import SuivPrec from "../../components/Pages/Sujets/SuivPrec";
-import "react-quill/dist/quill.snow.css";
-import Filtres, { MenuI } from "../../components/Pages/Sujets/Filtres";
+import Filtres from "../../components/Pages/Sujets/Filtres";
 import { useState } from "react";
 import Head from "next/head";
 
@@ -17,7 +14,7 @@ export interface SujetCountI {
   menu: any;
 }
 
-const A: NextPage<SujetCountI> = ({ sujet, count, menu }) => {
+const A: NextPage<any> = ({ sujet, count, menu }) => {
   const [listeSujet, setListeSujet] = useState(count);
 
   return (

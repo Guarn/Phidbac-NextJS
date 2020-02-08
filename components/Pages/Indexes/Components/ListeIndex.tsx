@@ -1,14 +1,17 @@
 import * as S from "./Styled";
 import alphabet from "../alphabet";
 import Link from "next/link";
+import * as Scroll from "react-scroll";
 
 const ListeIndex = ({ listeIndex, id }: any) => {
   return (
-    <S.ConteneurListe>
+    <S.ConteneurListe id="scrollContainer">
       {alphabet.map(item => {
         return (
           <div key={`Bloclettre-${item}`}>
-            <S.LettreTitre>{item}</S.LettreTitre>
+            <Scroll.Element name={`lettre-${item}`} className="element">
+              <S.LettreTitre>{item}</S.LettreTitre>
+            </Scroll.Element>
 
             <S.BlocLettre>
               {listeIndex

@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState, FC, useEffect } from "react";
 import { Editable, withReact, Slate } from "slate-react";
 import { createEditor } from "slate";
 import { Popover, Modal } from "antd";
-import EditeurCours, { initialValueCours } from "./EditeurCours";
+import EditeurCours from "./EditeurCours";
 import * as S from "./Styled";
 import fetch from "isomorphic-unfetch";
 

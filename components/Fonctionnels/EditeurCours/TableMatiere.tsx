@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { CoursI } from ".";
 import * as S from "./Styled";
+import * as Scroll from "react-scroll";
 
 export interface TableMatiere {
   cours: CoursI;
@@ -70,6 +71,17 @@ type GlobalLinkT = {
   index: Number;
 };
 
-const GlobalLink: React.FC<GlobalLinkT> = ({ children }) => {
-  return <div>{children}</div>;
+const GlobalLink: React.FC<GlobalLinkT> = ({ index, children }) => {
+  return (
+    <Scroll.Link
+      activeClass="active"
+      to={`element-${index}`}
+      spy={true}
+      smooth={true}
+      duration={350}
+      containerId="scrollContainer2"
+    >
+      {children}
+    </Scroll.Link>
+  );
 };

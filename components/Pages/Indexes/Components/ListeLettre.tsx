@@ -1,5 +1,6 @@
 import alphabet from "../alphabet";
 import * as S from "./Styled";
+import * as Scroll from "react-scroll";
 
 export const ListeLettre = () => {
   return (
@@ -8,9 +9,19 @@ export const ListeLettre = () => {
         {alphabet.map((item, index) => {
           if (index % 2 === 0) {
             return (
-              <LienScroll key={`Lettre-${item}`} item={item} index={index}>
-                <S.Lettre>{item}</S.Lettre>
-              </LienScroll>
+              <Scroll.Link
+                activeClass="active"
+                to={`lettre-${item}`}
+                containerId="scrollContainer"
+                spy={true}
+                smooth={true}
+                duration={500}
+                key={`Lettre-${item}`}
+              >
+                <LienScroll item={item} index={index}>
+                  <S.Lettre>{item}</S.Lettre>
+                </LienScroll>
+              </Scroll.Link>
             );
           }
           return null;
@@ -20,9 +31,19 @@ export const ListeLettre = () => {
         {alphabet.map((item, index) => {
           if (index % 2) {
             return (
-              <LienScroll key={`Lettre-${item}`} item={item} index={index}>
-                <S.Lettre>{item}</S.Lettre>
-              </LienScroll>
+              <Scroll.Link
+                activeClass="active"
+                to={`lettre-${item}`}
+                containerId="scrollContainer"
+                spy={true}
+                smooth={true}
+                duration={500}
+                key={`Lettre-${item}`}
+              >
+                <LienScroll item={item} index={index}>
+                  <S.Lettre>{item}</S.Lettre>
+                </LienScroll>
+              </Scroll.Link>
             );
           }
           return null;

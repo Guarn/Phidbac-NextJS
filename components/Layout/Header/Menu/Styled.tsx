@@ -18,7 +18,7 @@ export const ConteneurPartieDroite = styled.div`
 `;
 ConteneurPartieDroite.displayName = `ConteneurPartieDroite`;
 
-export const BoutonHome = styled.a`
+export const BoutonHome = styled.div`
   height: 80px;
   width: 80px;
   display: flex;
@@ -35,9 +35,10 @@ export type BoutonLienT = {
   selected: boolean;
 };
 
-export const BoutonLien = styled.a<BoutonLienT>`
+export const BoutonLien = styled.div<BoutonLienT>`
   margin-right: 60px;
   font-size: 16px;
+  height: 80px;
   display: flex;
   text-align: center;
   justify-content: center;

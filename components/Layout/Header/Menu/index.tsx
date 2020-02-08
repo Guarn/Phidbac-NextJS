@@ -1,7 +1,6 @@
 import * as S from "./Styled";
-import routes from "../../../../routes";
+import Link from "next/link";
 import { useRouter } from "next/router";
-const { Link } = routes;
 
 const Menu = () => {
   const router = useRouter();
@@ -9,39 +8,57 @@ const Menu = () => {
   return (
     <S.Conteneur>
       <S.BoutonHome>
-        <Link route="/">
-          <S.BtnHomeLogo src="/Logo.jpg" />
+        <Link href="/">
+          <a>
+            <S.BtnHomeLogo src="/Logo.jpg" />
+          </a>
         </Link>
       </S.BoutonHome>
       <S.ConteneurPartieDroite>
-        <Link route="/Presentation-du-programme-et-des-epreuves">
-          <S.BoutonLien selected={router.route === "/Programme"}>
-            Programme / Epreuves
-          </S.BoutonLien>
+        <Link href="/Presentation-du-programme-et-des-epreuves">
+          <a>
+            <S.BoutonLien
+              selected={
+                router.route === "/Presentation-du-programme-et-des-epreuves"
+              }
+            >
+              Programme / Epreuves
+            </S.BoutonLien>
+          </a>
         </Link>
-        <Link route="/Annales-Bac-Sujets-Philosophie/1">
-          <S.BoutonLien
-            selected={router.asPath.includes("Annales-Bac-Sujets-Philosophie")}
-          >
-            Annales
-          </S.BoutonLien>
+        <Link prefetch={false} href="/Annales-Bac-Sujets-Philosophie/1">
+          <a>
+            <S.BoutonLien
+              selected={router.asPath.includes(
+                "Annales-Bac-Sujets-Philosophie"
+              )}
+            >
+              Annales
+            </S.BoutonLien>
+          </a>
         </Link>
-        <Link route="/Liste-des-cours">
-          <S.BoutonLien selected={router.asPath.includes("Liste-des-cours")}>
-            Cours
-          </S.BoutonLien>
+        <Link href="/Liste-des-cours">
+          <a>
+            <S.BoutonLien selected={router.asPath.includes("Liste-des-cours")}>
+              Cours
+            </S.BoutonLien>
+          </a>
         </Link>
-        <Link route="/Liste-des-exercices">
-          <S.BoutonLien
-            selected={router.asPath.includes("Liste-des-exercices")}
-          >
-            Exercices
-          </S.BoutonLien>
+        <Link href="/Liste-des-exercices">
+          <a>
+            <S.BoutonLien
+              selected={router.asPath.includes("Liste-des-exercices")}
+            >
+              Exercices
+            </S.BoutonLien>
+          </a>
         </Link>
-        <Link route="/Liste-des-index">
-          <S.BoutonLien selected={router.asPath.includes("Liste-des-index")}>
-            Index
-          </S.BoutonLien>
+        <Link href="/Liste-des-index">
+          <a>
+            <S.BoutonLien selected={router.asPath.includes("Liste-des-index")}>
+              Index
+            </S.BoutonLien>
+          </a>
         </Link>
         <S.BoutonLien selected={false}>Se connecter</S.BoutonLien>
       </S.ConteneurPartieDroite>
