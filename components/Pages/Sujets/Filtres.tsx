@@ -10,6 +10,8 @@ import {
 } from "antd";
 import * as S from "./Styled";
 import Axios from "../../Fonctionnels/Axios";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const { Option } = Select;
 
@@ -45,6 +47,7 @@ export type SessionT = {
 };
 
 export interface MenuI {
+  setListeSujet: (val: any) => void;
   menu: {
     annees: AnneeT[];
     auteurs: AuteurT[];
@@ -55,26 +58,49 @@ export interface MenuI {
   };
 }
 
-const PartieFiltres: React.FC<MenuI> = ({ menu }) => {
+export interface ElementsCochesI {
+  notions: string[];
+  series: string[];
+  annees: number[];
+  destinations: string[];
+  auteurs: string[];
+  sessions: string[];
+  recherche: string;
+  typeRecherche: string;
+}
+
+const initialFiltresState = {
+  notions: [],
+  series: [],
+  annees: [1996, 2018],
+  destinations: [],
+  auteurs: [],
+  sessions: ["NORMALE", "REMPLACEMENT", "SECOURS", "NONDEFINI"],
+  recherche: "",
+  typeRecherche: "exacte"
+};
+
+const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
+  const router = useRouter();
+  const [state, setState] = useState(initialFiltresState);
   const rechercheInstantanee = async (e, cat) => {
-    /*
     setState({
-      type: "ChangeFiltres",
-      value: e,
-      cat
+      ...state,
+      [cat]: e
     });
     Axios.post("/resultatsAdmin", {
       elementsCoches: {
-        ...state.menu.filtres,
+        ...state,
         [cat]: e
       }
     }).then(rep => {
-      setState({
-        type: "Recherche",
-        sujets: rep.data.rows,
-        nbSujets: rep.data.count
-      });
-    });*/
+      setListeSujet(rep.data);
+
+      router.push(
+        "/Annales-Bac-Sujets-Philosophie/[id-name]",
+        `/Annales-Bac-Sujets-Philosophie/${rep.data.rows[0].id}`
+      );
+    });
   };
   const rechercheExpression = (e, cat) => {
     /*
@@ -111,6 +137,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu }) => {
             </Divider>
             <Select
               mode="multiple"
+              value={state.notions}
               style={{ width: "100%" }}
               placeholder="Toutes les notions"
               onChange={e => {
@@ -166,6 +193,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu }) => {
             <Divider style={{ marginBottom: "5px" }}>Sessions</Divider>
             <Radio.Group
               size="small"
+              defaultValue="TOUTES"
               onChange={e => {
                 if (e.target.value === "TOUTES") {
                   rechercheInstantanee(
@@ -192,18 +220,10 @@ const PartieFiltres: React.FC<MenuI> = ({ menu }) => {
               }}
               max={2018}
               min={1996}
-              value={[
-                menu.annees[0].Annee,
-
-                menu.annees[menu.annees.length - 1].Annee
-              ]}
+              value={[state.annees[0], state.annees[1]]}
               marks={{
-                [menu.annees[0].Annee.toString()]: menu.annees[0].Annee.toString(),
-                [menu.annees[
-                  menu.annees.length - 1
-                ].Annee.toString()]: menu.annees[
-                  menu.annees.length - 1
-                ].Annee.toString()
+                [state.annees[0].toString()]: state.annees[0].toString(),
+                [state.annees[1].toString()]: state.annees[1].toString()
               }}
               step={1}
               tooltipVisible={false}
@@ -218,17 +238,14 @@ const PartieFiltres: React.FC<MenuI> = ({ menu }) => {
             <Divider style={{ marginTop: "40px" }} />
             <Button
               onMouseDown={() => {
-                /*Axios.get("/sujets/sujetscount").then(rep => {
-                  setState({
-                    type: "FetchSujet",
-                    value: rep.data.rows,
-                    count: rep.data.count
-                  });
-                  setState({
-                    type: "ChangementID",
-                    value: 1
-                  });
-                });*/
+                Axios.get("/sujets/sujetscount").then(rep => {
+                  setListeSujet(rep.data);
+                  setState(initialFiltresState);
+                  router.push(
+                    "/Annales-Bac-Sujets-Philosophie/[id-name]",
+                    `/Annales-Bac-Sujets-Philosophie/${rep.data.rows[0].id}`
+                  );
+                });
               }}
               size="small"
               style={{

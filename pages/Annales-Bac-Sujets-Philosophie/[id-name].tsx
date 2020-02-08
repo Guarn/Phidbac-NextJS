@@ -8,15 +8,16 @@ import AffichageSujet, {
 import SuivPrec from "../../components/Pages/Sujets/SuivPrec";
 import "react-quill/dist/quill.snow.css";
 import Filtres, { MenuI } from "../../components/Pages/Sujets/Filtres";
+import { useState } from "react";
 
 export interface SujetCountI {
   sujet: any;
-  count: number;
-  id: string;
+  count: any;
   menu: any;
 }
 
-const A: NextPage<SujetCountI> = ({ sujet, count, id, menu }) => {
+const A: NextPage<SujetCountI> = ({ sujet, count, menu }) => {
+  const [listeSujet, setListeSujet] = useState(count);
   return (
     <>
       <Layout>
@@ -25,13 +26,8 @@ const A: NextPage<SujetCountI> = ({ sujet, count, id, menu }) => {
             <S.Carre />
             <S.Cercle />
             <S.PartieD>
-              <Filtres menu={menu} />
-              <SuivPrec
-                numSujet={id}
-                nombreTotalSujets={count}
-                lienPrec={`/Annales-Bac-Sujets-Philosophie/${parseInt(id) - 1}`}
-                lienSuiv={`/Annales-Bac-Sujets-Philosophie/${parseInt(id) + 1}`}
-              />
+              <Filtres menu={menu} setListeSujet={val => setListeSujet(val)} />
+              <SuivPrec listeSujet={listeSujet} />
               <AffichageSujet sujet={sujet} />
             </S.PartieD>
           </S.Conteneur>
@@ -43,16 +39,17 @@ const A: NextPage<SujetCountI> = ({ sujet, count, id, menu }) => {
 
 A.getInitialProps = async ({ query }: any) => {
   const id = query["id-name"].split("-")[0];
-  const res = await fetch(`https://www.phidbac.fr:4000/sujets/${id}`);
-  const data = await res.json();
+  const res2 = await fetch(`https://www.phidbac.fr:4000/sujets/${id}`);
+  const data = await res2.json();
   const res1 = await fetch(`https://www.phidbac.fr:4000/menu`);
   const data1 = await res1.json();
+  const res3 = await fetch(`https://www.phidbac.fr:4000/sujets/sujetscount`);
+  const data3 = await res3.json();
 
   return {
     sujet: data.Sujet,
-    count: data.Count,
-    menu: data1,
-    id: id
+    count: data3,
+    menu: data1
   };
 };
 
