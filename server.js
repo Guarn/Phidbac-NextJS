@@ -2,7 +2,7 @@ const next = require("next");
 const routes = require("./routes");
 const app = next({
   dev: process.env.NODE_ENV !== "production",
-  compress: false
+  conf: { compress: false }
 });
 const handler = routes.getRequestHandler(app);
 const https = require("https");
