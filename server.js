@@ -1,6 +1,9 @@
 const next = require("next");
 const routes = require("./routes");
-const app = next({ dev: process.env.NODE_ENV !== "production" });
+const app = next({
+  dev: process.env.NODE_ENV !== "production",
+  compress: false
+});
 const handler = routes.getRequestHandler(app);
 const https = require("https");
 const fs = require("fs");
