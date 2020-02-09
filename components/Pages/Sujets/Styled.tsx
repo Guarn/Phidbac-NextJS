@@ -115,6 +115,9 @@ export const ConteneurFiltres = styled.div`
   overflow: auto;
   z-index: 200;
   max-height: 80vh;
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 export const ConteneurSuivPrec = styled.div`
@@ -128,11 +131,11 @@ export const ConteneurSuivPrec = styled.div`
     flex-direction: row;
     width: 100%;
     margin: 0px;
-    margin-top: 0px;
+    margin-top: 10px;
     justify-content: space-evenly;
   }
   @media (max-width: 767px) {
-    margin-top: 50px;
+    margin-top: 60px;
   }
 `;
 export const ConteneurSujet = styled.div`
@@ -187,7 +190,7 @@ export const Cercle = styled.div`
   background-color: #e9e7e1;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 50% /50%;
-  z-index: 1;
+  z-index: 10;
   overflow: hidden;
   @media (max-width: 767px) {
     display: none;
@@ -267,9 +270,13 @@ export const Details = styled.div`
   justify-content: space-between;
   margin-left: 20px;
   align-items: flex-start;
+  @media (max-width: 767px) {
+    margin-left: 10px;
+  }
 `;
 export const PartieGauche = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 export const Etiquette = styled.div`
   text-align: center;
@@ -281,6 +288,9 @@ export const Etiquette = styled.div`
   border-top: none;
   border-radius: 0 0 5px 5px;
   background-color: #eeeeee;
+  @media (max-width: 767px) {
+    margin-right: 0px;
+  }
 `;
 
 export const radioStyle = {
@@ -325,3 +335,11 @@ export const BoutonRight = styled(Button)`
     width: auto;
   }
 `;
+
+export const NoMobileDisplay = styled.div`
+  display: inline;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+NoMobileDisplay.displayName = `NoMobileDisplay`;

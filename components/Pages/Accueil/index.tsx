@@ -85,13 +85,13 @@ const BlocPresentationDescription = () => {
   const [showDescription, setShowDescription] = React.useState(false);
   const [numDescription, setnumDescription] = React.useState(0);
   return (
-    <div style={{ marginTop: "60px" }}>
-      <S.TexteContenu mb="20px">
+    <S.TexteContenuResp mt="60px">
+      <S.TexteContenuResp mb="20px">
         <S.Phi>φ</S.Phi>d<S.Phi>'</S.Phi>
         bac
         <S.Phi>'</S.Phi>! (désormais, ce sera φ’ tout court) propose de A à Z
         une préparation à l’épreuve de philosophie du nouveau bac (juin 2021).
-      </S.TexteContenu>
+      </S.TexteContenuResp>
 
       <S.ConteneurCat>
         <TransitionGroup component={null}>
@@ -135,7 +135,7 @@ const BlocPresentationDescription = () => {
           )}
         </TransitionGroup>
       </S.ConteneurCat>
-    </div>
+    </S.TexteContenuResp>
   );
 };
 

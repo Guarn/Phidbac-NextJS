@@ -48,7 +48,7 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
             <a>
               <S.BoutonLeft onClick={() => setSujetVisible(getPreviousId())}>
                 <Icon type="arrow-left" />
-                Sujet précédent
+                <S.NoMobileDisplay> Sujet précédent</S.NoMobileDisplay>
               </S.BoutonLeft>
             </a>
           </Link>
@@ -63,7 +63,7 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
           >
             <a>
               <S.BoutonRight onClick={() => setSujetVisible(getNextId())}>
-                Sujet suivant
+                <S.NoMobileDisplay>Sujet suivant </S.NoMobileDisplay>
                 <Icon type="arrow-right" />
               </S.BoutonRight>
             </a>

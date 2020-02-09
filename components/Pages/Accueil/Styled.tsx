@@ -4,13 +4,15 @@ export const Conteneur = styled.div`
   display: flex;
   justify-content: center;
   background-color: ${props => props.theme.background};
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
     position: relative;
-    justify-content: flex-start;
-    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
   }
   @media (max-width: 767px) {
     margin-top: 65px;
+    min-height: 100vh;
+    justify-content: flex-end;
     flex-direction: column-reverse;
   }
 `;
@@ -29,8 +31,11 @@ export const ConteneurPartieTexte = styled.div`
 
   @media (max-width: 767px) {
     height: initial;
-    width: calc(100% - 10px);
-    margin-left: 5px;
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 20px;
+    flex: initial;
   }
 `;
 ConteneurPartieTexte.displayName = `ConteneurPartieTexte`;
@@ -41,6 +46,10 @@ export const ConteneurPartieImage = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
+  @media (max-width: 767px) {
+    width: 90%;
+    flex: initial;
+  }
 `;
 ConteneurPartieImage.displayName = `ConteneurPartieImage`;
 
@@ -69,6 +78,18 @@ export const TexteContenu = styled.div<TexteContenuT>`
   margin-bottom: ${props => props.mb ?? 0};
 `;
 TexteContenu.displayName = `TexteContenu`;
+
+export const TexteContenuResp = styled.div<TexteContenuT>`
+  text-align: justify;
+  z-index: 100;
+  position: relative;
+  margin-top: ${props => props.mt ?? 0};
+  margin-bottom: ${props => props.mb ?? 0};
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`;
+TexteContenuResp.displayName = `TexteContenuResp`;
 
 export const Phi = styled.span`
   color: ${props => props.theme.texteSecondaryColor};

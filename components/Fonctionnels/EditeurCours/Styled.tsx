@@ -30,11 +30,16 @@ export const ConteneurCours = styled.div<WidthProps>`
   height: ${props =>
     props.affichage === "Cours" ? "calc(100% - 42px)" : "100%"};
   @media (max-width: 1023px) {
+    width: 90%;
+    max-width: 847px;
     padding-right: 5px;
     padding-left: 5px;
-    width: initial;
+  }
+  @media (max-width: 767px) {
+    padding-right: 5px;
+    padding-left: 5px;
     height: initial;
-    min-height: 100vh;
+    min-height: calc(100vh - 90px);
   }
 `;
 Conteneur.displayName = `ConteneurCours`;
@@ -143,16 +148,6 @@ export const ConteneurTableMatiere = styled.div`
   font-size: 14px;
   font-family: "Century Gothic";
   @media (max-width: 1024px) {
-    padding: 10px;
-    margin-left: 10px;
-
-    margin-top: 10px;
-    bottom: 10px;
-    right: 10px;
-    position: fixed;
-    background-color: white;
-  }
-  @media (max-width: 767px) {
     display: none;
   }
 `;

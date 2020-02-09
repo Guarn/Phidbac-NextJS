@@ -34,7 +34,11 @@ const AffichageCours = ({ cours }: Props) => {
           <S.ConteneurBouton>
             <Link href="/Liste-des-cours">
               <a>
-                <S.BoutonRetour>Revenir à la liste de cours</S.BoutonRetour>
+                <S.BoutonRetour>
+                  <S.NoDisplayTabletMobile>
+                    Revenir à la liste de cours
+                  </S.NoDisplayTabletMobile>
+                </S.BoutonRetour>
               </a>
             </Link>
           </S.ConteneurBouton>

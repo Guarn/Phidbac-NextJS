@@ -1,18 +1,6 @@
 import styled from "styled-components";
 
-export const Conteneur = styled.div`
-  display: flex;
-  justify-content: space-between;
-  z-index: 100;
-  @media (max-width: 767px) {
-    position: fixed;
-    height: 50px;
-    top: 0px;
-    width: 100%;
-    background-color: ${props => props.theme.background};
-    box-shadow: 0 3px 3px lightgrey;
-  }
-`;
+export const Conteneur = styled.div``;
 Conteneur.displayName = `Conteneur`;
 
 export const ConteneurPartieDroite = styled.div`
@@ -23,6 +11,7 @@ export const ConteneurPartieDroite = styled.div`
   user-select: none;
   font-weight: bold;
   cursor: pointer;
+  z-index: 1000;
 `;
 ConteneurPartieDroite.displayName = `ConteneurPartieDroite`;
 
@@ -74,3 +63,29 @@ export const BtnHomeLogo = styled.img.attrs({
   width: 50px;
 `;
 BtnHomeLogo.displayName = `BtnHomeLogo`;
+
+export const AffichageTabletMobile = styled.div`
+  display: flex;
+  justify-content: space-between;
+  z-index: 10000;
+  position: fixed;
+  height: 50px;
+  top: 0px;
+  width: 100%;
+  background-color: ${props => props.theme.background};
+  box-shadow: 0 3px 3px lightgrey;
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+AffichageTabletMobile.displayName = `AffichageTabletMobile`;
+
+export const AffichageDesktop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  z-index: 10000;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`;
+AffichageDesktop.displayName = `AffichageDesktop`;

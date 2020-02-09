@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const ConteneurLettres = styled.div`
   display: flex;
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 export const LettresG = styled.div`
@@ -35,14 +38,20 @@ export const Lettre = styled.div`
 `;
 
 export const ConteneurDescription = styled.div`
-  width: 500px;
+  max-width: 600px;
+
   margin-left: 40px;
   overflow: auto;
   height: 100%;
   padding-right: 10px;
-  @media (max-width: 1024px) {
-    width: 400px;
-    margin-left: 20px;
+  @media (max-width: 1023px) {
+    margin-left: 0px;
+    padding-right: 0px;
+    overflow: initial;
+    flex: 2;
+  }
+  @media (max-width: 767px) {
+    display: none;
   }
 `;
 
@@ -56,11 +65,10 @@ export const ConteneurListe = styled.div`
   height: 90%;
   overflow: auto;
   padding-right: 10px;
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
     margin-left: 10px;
     padding-right: 10px;
-    justify-content: center;
-    align-items: center;
+    flex: 1;
   }
   @media (max-width: 767px) {
     margin-top: 60px;
@@ -83,6 +91,9 @@ export const ElementListe = styled.div<elementProps>`
   &:hover {
     font-weight: bold;
   }
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 `;
 ElementListe.displayName = `ElementListe`;
 
@@ -98,6 +109,9 @@ BlocLettre.displayName = `BlocLettre`;
 export const LettreTitre = styled.div`
   font-size: 24px;
   color: orange;
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 `;
 Lettre.displayName = `Lettre`;
 

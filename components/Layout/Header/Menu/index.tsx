@@ -1,8 +1,7 @@
 import * as S from "./Styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { Desktop, TabletMobile } from "../../../Fonctionnels/responsive";
+import { useState } from "react";
 import { Drawer, Icon } from "antd";
 import styled from "styled-components";
 
@@ -37,7 +36,7 @@ const Menu = () => {
 
   return (
     <S.Conteneur>
-      <Desktop>
+      <S.AffichageDesktop>
         <S.BoutonHome>
           <Link href="/">
             <a>
@@ -57,7 +56,11 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link prefetch={false} href="/Annales-Bac-Sujets-Philosophie/1">
+          <Link
+            prefetch={false}
+            href="/Annales-Bac-Sujets-Philosophie/[id-name]"
+            as="/Annales-Bac-Sujets-Philosophie/1"
+          >
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes(
@@ -86,7 +89,7 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Liste-des-index/50">
+          <Link href="/Liste-des-index/[id-name]" as="/Liste-des-index/50">
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes("Liste-des-index")}
@@ -97,8 +100,8 @@ const Menu = () => {
           </Link>
           <S.BoutonLien selected={false}>Se connecter</S.BoutonLien>
         </S.ConteneurPartieDroite>
-      </Desktop>
-      <TabletMobile>
+      </S.AffichageDesktop>
+      <S.AffichageTabletMobile>
         <Drawer
           placement="left"
           visible={menu}
@@ -171,7 +174,7 @@ const Menu = () => {
           bac
           <Phi>'</Phi>!
         </TexteTitre>
-      </TabletMobile>
+      </S.AffichageTabletMobile>
     </S.Conteneur>
   );
 };
