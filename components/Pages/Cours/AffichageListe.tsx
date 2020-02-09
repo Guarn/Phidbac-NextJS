@@ -1,6 +1,7 @@
 import * as S from "./Styled";
 import { CoursI } from "../../Fonctionnels/EditeurCours";
-import { Tooltip, Timeline, Icon } from "antd";
+import { Timeline } from "antd";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import Link from "next/link";
 
 interface Props {
@@ -86,9 +87,7 @@ const SelIcone: React.FC<any> = ({ tab, idCours }) => {
       }
       if (newTab[0].progression === 100) {
         return (
-          <Icon
-            type="check-circle"
-            theme="twoTone"
+          <CheckCircleTwoTone
             twoToneColor="#85E27B"
             style={{ fontSize: "16px" }}
           />

@@ -1,5 +1,5 @@
 import * as S from "./Styled";
-import { Icon } from "antd";
+import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -47,7 +47,7 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
           >
             <a>
               <S.BoutonLeft onClick={() => setSujetVisible(getPreviousId())}>
-                <Icon type="arrow-left" />
+                <ArrowLeftOutlined />
                 <S.NoMobileDisplay> Sujet précédent</S.NoMobileDisplay>
               </S.BoutonLeft>
             </a>
@@ -64,7 +64,7 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
             <a>
               <S.BoutonRight onClick={() => setSujetVisible(getNextId())}>
                 <S.NoMobileDisplay>Sujet suivant </S.NoMobileDisplay>
-                <Icon type="arrow-right" />
+                <ArrowRightOutlined />
               </S.BoutonRight>
             </a>
           </Link>
@@ -73,13 +73,13 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
       {listeSujet.count === 0 && (
         <>
           <S.BoutonLeft disabled>
-            <Icon type="arrow-left" />
+            <ArrowLeftOutlined />
             Sujet précédent
           </S.BoutonLeft>
           <S.NombreSujets>{"0 / 0"}</S.NombreSujets>
           <S.BoutonRight disabled>
             Sujet suivant
-            <Icon type="arrow-right" />
+            <ArrowRightOutlined />
           </S.BoutonRight>
         </>
       )}

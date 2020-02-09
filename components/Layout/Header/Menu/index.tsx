@@ -2,7 +2,7 @@ import * as S from "./Styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Drawer, Icon } from "antd";
+import { Drawer } from "antd";
 import styled from "styled-components";
 
 const BoutonMenu = styled.div`
@@ -38,14 +38,17 @@ const Menu = () => {
     <S.Conteneur>
       <S.AffichageDesktop>
         <S.BoutonHome>
-          <Link href="/">
+          <Link prefetch={false} href="/">
             <a>
               <S.BtnHomeLogo src="/Logo.jpg" />
             </a>
           </Link>
         </S.BoutonHome>
         <S.ConteneurPartieDroite>
-          <Link href="/Presentation-du-programme-et-des-epreuves">
+          <Link
+            prefetch={false}
+            href="/Presentation-du-programme-et-des-epreuves"
+          >
             <a>
               <S.BoutonLien
                 selected={
@@ -71,7 +74,7 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Liste-des-cours">
+          <Link prefetch={false} href="/Liste-des-cours">
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes("Liste-des-cours")}
@@ -80,7 +83,7 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Liste-des-exercices">
+          <Link prefetch={false} href="/Liste-des-exercices">
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes("Liste-des-exercices")}
@@ -89,7 +92,11 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Liste-des-index/[id-name]" as="/Liste-des-index/50">
+          <Link
+            prefetch={false}
+            href="/Liste-des-index/[id-name]"
+            as="/Liste-des-index/50"
+          >
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes("Liste-des-index")}
@@ -101,6 +108,7 @@ const Menu = () => {
           <S.BoutonLien selected={false}>Se connecter</S.BoutonLien>
         </S.ConteneurPartieDroite>
       </S.AffichageDesktop>
+      {/*
       <S.AffichageTabletMobile>
         <Drawer
           placement="left"
@@ -108,14 +116,17 @@ const Menu = () => {
           onClose={() => setMenu(false)}
           title="PHIDBAC"
         >
-          <Link href="/">
+          <Link prefetch={false} href="/">
             <a>
               <S.BoutonLien selected={router.route === "/"}>
                 Accueil
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Presentation-du-programme-et-des-epreuves">
+          <Link
+            prefetch={false}
+            href="/Presentation-du-programme-et-des-epreuves"
+          >
             <a>
               <S.BoutonLien
                 selected={
@@ -137,7 +148,7 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Liste-des-cours">
+          <Link prefetch={false} href="/Liste-des-cours">
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes("Liste-des-cours")}
@@ -146,7 +157,7 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Liste-des-exercices">
+          <Link prefetch={false} href="/Liste-des-exercices">
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes("Liste-des-exercices")}
@@ -155,7 +166,7 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <Link href="/Liste-des-index/50">
+          <Link prefetch={false} href="/Liste-des-index/50">
             <a>
               <S.BoutonLien
                 selected={router.asPath.includes("Liste-des-index")}
@@ -175,6 +186,7 @@ const Menu = () => {
           <Phi>'</Phi>!
         </TexteTitre>
       </S.AffichageTabletMobile>
+                */}
     </S.Conteneur>
   );
 };

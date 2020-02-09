@@ -33,10 +33,7 @@ export const ConteneurBouton = styled.div`
 `;
 ConteneurBouton.displayName = `ConteneurBouton`;
 
-export const BoutonRetour = styled(Button).attrs(props => ({
-  type: "ghost",
-  icon: "arrow-left"
-}))`
+export const BoutonRetour = styled(Button)`
   margin-left: calc(50vw - (690px / 2) - 10vw);
   margin-bottom: 10px;
   box-shadow: 0px 0px 3px 3px lightgrey;

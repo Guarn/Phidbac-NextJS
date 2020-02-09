@@ -1,13 +1,23 @@
 const next = require("next");
-const routes = require("./routes");
 const app = next({
-  dev: process.env.NODE_ENV !== "production",
-  conf: { compress: false }
+  dev: process.env.NODE_ENV !== "production"
 });
-const handler = routes.getRequestHandler(app);
-const https = require("https");
-const fs = require("fs");
-const http2 = require("http2");
+const express = require("express");
+const handler = app.getRequestHandler();
+
+app.prepare().then(() => {
+  const server = express();
+  server.all("*", (req, res) => {
+    console.log("hum");
+
+    return handler(req, res);
+  });
+
+  server.listen(7000, err => {
+    if (err) throw err;
+    console.log("> Ready on http://localhost:3000");
+  });
+});
 /*
 https
   .createServer(
@@ -19,7 +29,7 @@ https
     handler
   )
   .listen(7000);
-*/
+
 
 http2
   .createSecureServer(
@@ -31,3 +41,4 @@ http2
     handler
   )
   .listen(7000);
+*/

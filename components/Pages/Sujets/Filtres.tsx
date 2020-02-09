@@ -1,14 +1,11 @@
-import {
-  Tabs,
-  Select,
-  Icon,
-  Divider,
-  Radio,
-  Slider,
-  Button,
-  Input
-} from "antd";
+import { Tabs, Select, Divider, Radio, Slider, Button, Input } from "antd";
 import * as S from "./Styled";
+import {
+  FilterOutlined,
+  ReloadOutlined,
+  SearchOutlined,
+  QuestionCircleOutlined
+} from "@ant-design/icons";
 import Axios from "../../Fonctionnels/Axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -128,7 +125,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
           <Tabs.TabPane
             tab={
               <span>
-                <Icon type="filter" />
+                <FilterOutlined />
                 FILTRES
               </span>
             }
@@ -152,7 +149,11 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               }}
             >
               {menu.notions.map((el, index) => {
-                return <Option key={el["Notion"]}>{el["Notion"]}</Option>;
+                return (
+                  <Option key={el["Notion"]} value={el["Notion"]}>
+                    {el["Notion"]}
+                  </Option>
+                );
               })}
             </Select>
             <Divider style={{ marginBottom: "5px" }}>Séries</Divider>
@@ -165,7 +166,11 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               onChange={e => rechercheInstantanee(e, "series")}
             >
               {menu.series.map((el, index) => {
-                return <Option key={el["Serie"]}>{el["Serie"]}</Option>;
+                return (
+                  <Option key={el["Serie"]} value={el["Serie"]}>
+                    {el["Serie"]}
+                  </Option>
+                );
               })}
             </Select>
 
@@ -179,7 +184,9 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             >
               {menu.destinations.map((el, index) => {
                 return (
-                  <Option key={el["Destination"]}>{el["Destination"]}</Option>
+                  <Option key={el["Destination"]} value={el["Destination"]}>
+                    {el["Destination"]}
+                  </Option>
                 );
               })}
             </Select>
@@ -193,7 +200,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             >
               {menu.auteurs.map(el => {
                 return (
-                  <Option key={el["Auteur"]}>
+                  <Option key={el["Auteur"]} value={el["Auteur"]}>
                     {el["Auteur"] + " (" + el["NbSujets"] + ")"}
                   </Option>
                 );
@@ -266,7 +273,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               block
             >
               Réinitialiser les filtres
-              <Icon type="reload" />
+              <ReloadOutlined />
             </Button>
           </Tabs.TabPane>
           {
@@ -275,7 +282,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             <Tabs.TabPane
               tab={
                 <span>
-                  <Icon type="search" />
+                  <SearchOutlined />
                   EXPRESSION
                 </span>
               }
@@ -303,8 +310,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               >
                 <Radio value="exacte">
                   Expression exacte
-                  <Icon
-                    type="question-circle"
+                  <QuestionCircleOutlined
                     style={{
                       color: "grey",
                       marginLeft: "5px"
@@ -313,8 +319,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                 </Radio>
                 <Radio value="tousLesMots">
                   Tous les mots
-                  <Icon
-                    type="question-circle"
+                  <QuestionCircleOutlined
                     style={{
                       color: "grey",
                       marginLeft: "5px"
@@ -323,8 +328,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                 </Radio>
                 <Radio value="unDesMots">
                   Un des mots
-                  <Icon
-                    type="question-circle"
+                  <QuestionCircleOutlined
                     style={{
                       color: "grey",
                       marginLeft: "5px"
@@ -355,7 +359,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                 block
               >
                 Réinitialiser les filtres
-                <Icon type="reload" />
+                <ReloadOutlined />
               </Button>
               <Button
                 onClick={() => {
@@ -368,7 +372,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                 }}
                 block
               >
-                <Icon type="search" />
+                <SearchOutlined />
                 Recherche
               </Button>
             </Tabs.TabPane>
