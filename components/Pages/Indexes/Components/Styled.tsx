@@ -39,7 +39,7 @@ export const Lettre = styled.div`
 
 export const ConteneurDescription = styled.div`
   max-width: 600px;
-
+  width: 600px;
   margin-left: 40px;
   overflow: auto;
   height: 100%;
@@ -49,9 +49,27 @@ export const ConteneurDescription = styled.div`
     padding-right: 0px;
     overflow: initial;
     flex: 2;
+    width: initial;
   }
   @media (max-width: 767px) {
-    display: none;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-right: 0px;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    flex: 3;
+    height: initial;
+    width: initial;
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
+
+    #scrollContainer2 {
+      ::-webkit-scrollbar {
+        width: 0px;
+      }
+    }
   }
 `;
 
@@ -71,13 +89,15 @@ export const ConteneurListe = styled.div`
     flex: 1;
   }
   @media (max-width: 767px) {
-    margin-top: 60px;
+    margin-top: 0px;
     margin-left: 0px;
-    height: initial;
-    overflow: initial;
     padding-right: 0px;
-    justify-content: center;
     align-items: center;
+    overflow: auto;
+    flex: 1;
+    height: initial;
+
+    background-color: rgba(0, 0, 0, 0.02);
   }
 `;
 

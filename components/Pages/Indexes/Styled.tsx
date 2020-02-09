@@ -9,7 +9,9 @@ export const Conteneur = styled.div`
   justify-content: center;
   margin-top: 5%;
   @media (max-width: 767px) {
-    height: initial;
+    flex-direction: column;
+    height: calc(100vh - 65px);
+    margin-top: 65px;
   }
 `;
 
@@ -37,10 +39,11 @@ export const ConteneurListeIndex = styled.div`
   margin-top: 10px;
   position: relative;
   @media (max-width: 767px) {
+    position: fixed;
     text-align: center;
-    height: initial;
+    height: 200px;
     width: 100%;
-    overflow: initial;
+    overflow: auto;
     padding-right: 0px;
     justify-content: center;
     align-items: center;

@@ -2,8 +2,10 @@ import * as S from "./Styled";
 import alphabet from "../alphabet";
 import Link from "next/link";
 import * as Scroll from "react-scroll";
+import { useState } from "react";
 
 const ListeIndex = ({ listeIndex, id }: any) => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <S.ConteneurListe id="scrollContainer">
       {alphabet.map(item => {

@@ -11,7 +11,7 @@ export const Conteneur = styled.div`
   }
   @media (max-width: 767px) {
     margin-top: 65px;
-    min-height: 100vh;
+    min-height: calc(100vh - 90px);
     justify-content: flex-end;
     flex-direction: column-reverse;
   }
@@ -34,7 +34,6 @@ export const ConteneurPartieTexte = styled.div`
     width: calc(100% - 20px);
     margin-left: 10px;
     margin-right: 10px;
-    padding-bottom: 20px;
     flex: initial;
   }
 `;
@@ -128,6 +127,9 @@ Cercle.displayName = `Cercle`;
 
 export const BlocSousTitre = styled.div`
   display: flex;
+  @media (max-width: 1023px) {
+    margin-bottom: 20px;
+  }
   @media (max-width: 767px) {
     display: none;
   }

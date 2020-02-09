@@ -67,7 +67,7 @@ BtnHomeLogo.displayName = `BtnHomeLogo`;
 export const AffichageTabletMobile = styled.div`
   display: flex;
   justify-content: space-between;
-  z-index: 10000;
+  z-index: 1000;
   position: fixed;
   height: 50px;
   top: 0px;
@@ -83,7 +83,7 @@ AffichageTabletMobile.displayName = `AffichageTabletMobile`;
 export const AffichageDesktop = styled.div`
   display: flex;
   justify-content: space-between;
-  z-index: 10000;
+  z-index: 1000;
   @media (max-width: 1023px) {
     display: none;
   }
