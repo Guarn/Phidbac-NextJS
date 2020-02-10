@@ -16,7 +16,7 @@ const options = {
 };
 
 app.prepare().then(() => {
-  createSecureServer(options, (req, res) => {
+  createServer(options, (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
 
