@@ -20,9 +20,8 @@ app.prepare().then(() => {
 
     // handle GET request to /service-worker.js
     if (pathname === "/service-worker.js") {
-      console.log("SERVICE WORKER");
-
       const filePath = join(__dirname, ".next", pathname);
+      console.log(filePath);
 
       app.serveStatic(req, res, filePath);
     } else {
