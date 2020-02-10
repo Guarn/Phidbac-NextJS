@@ -32,7 +32,7 @@ app.prepare().then(() => {
     } else {
       handle(req, res, parsedUrl);
     }
-  }).listen(3000, () => {
+  }).listen(7000, () => {
     console.log(`> Ready on http://localhost:${7000}`);
   });
 });
