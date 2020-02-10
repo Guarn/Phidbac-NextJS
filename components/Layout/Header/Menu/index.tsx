@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Drawer } from "antd";
 import styled from "styled-components";
+import { MenuOutlined } from "@ant-design/icons";
 
 const BoutonMenu = styled.div`
   font-size: 20px;
@@ -108,7 +109,7 @@ const Menu = () => {
           <S.BoutonLien selected={false}>Se connecter</S.BoutonLien>
         </S.ConteneurPartieDroite>
       </S.AffichageDesktop>
-      {/*
+
       <S.AffichageTabletMobile>
         <Drawer
           placement="left"
@@ -178,7 +179,7 @@ const Menu = () => {
         </Drawer>
         <BoutonMenu onClick={() => setMenu(true)}>
           MENU
-          <Icon style={{ marginLeft: "5px" }} type="menu" />
+          <MenuOutlined style={{ marginLeft: "5px" }} />
         </BoutonMenu>
         <TexteTitre>
           <Phi>φ</Phi>d<Phi>'</Phi>
@@ -186,7 +187,6 @@ const Menu = () => {
           <Phi>'</Phi>!
         </TexteTitre>
       </S.AffichageTabletMobile>
-                */}
     </S.Conteneur>
   );
 };

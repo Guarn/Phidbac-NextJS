@@ -21,15 +21,12 @@ app.prepare().then(() => {
     // handle GET request to /service-worker.js
     if (pathname === "/service-worker.js") {
       const filePath = join(__dirname, ".next", pathname);
-      console.log(filePath);
 
       app.serveStatic(req, res, filePath);
     } else {
       handle(req, res, parsedUrl);
     }
-  }).listen(7000, () => {
-    console.log(`> Ready on http://localhost:${7000}`);
-  });
+  }).listen(443, () => {});
 });
 /*
 app.prepare().then(() => {
