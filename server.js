@@ -20,7 +20,7 @@ const options = {
 };
 
 app.prepare().then(() => {
-  createServer((req, res) => {
+  createServer(options, (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
 
