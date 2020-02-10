@@ -5,13 +5,19 @@ const app = next({
 const express = require("express");
 const handler = app.getRequestHandler();
 
-const { createServer } = require("http");
+const { createServer } = require("https");
 const { join } = require("path");
 const { parse } = require("url");
 const next = require("next");
 
 const app = next({ dev: process.env.NODE_ENV !== "production" });
 const handle = app.getRequestHandler();
+
+const options = {
+  key: fs.readFileSync("/etc/letsencrypt/live/phidbac.fr/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/phidbac.fr/cert.pem"),
+  ca: fs.readFileSync("/etc/letsencrypt/live/phidbac.fr/chain.pem")
+};
 
 app.prepare().then(() => {
   createServer((req, res) => {
