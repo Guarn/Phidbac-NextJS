@@ -4,28 +4,7 @@ const withCss = require("@zeit/next-css");
 const path = require("path");
 const withOffline = require("next-offline");
 
-module.exports = withOffline({
-  workboxOpts: {
-    runtimeCaching: [
-      {
-        urlPattern: /.png$/,
-        handler: "CacheFirst"
-      },
-      {
-        urlPattern: /api/,
-        handler: "NetworkFirst",
-        options: {
-          cacheableResponse: {
-            statuses: [0, 200],
-            headers: {
-              "x-test": "true"
-            }
-          }
-        }
-      }
-    ]
-  }
-});
+module.exports = withOffline({});
 /*
 module.exports = withCss({
   webpack: (config, { isServer }) => {
