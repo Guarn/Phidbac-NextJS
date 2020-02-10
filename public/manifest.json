@@ -1,6 +1,7 @@
 {
   "name": "Phidbac - Préparation à l'épreuve de philosophie du baccalauréat",
   "short_name": "Phidbac",
+  "description": "Préparation complète à l'épreuve de philosophie du baccalauréat.",
   "start_url": "/",
   "icons": [
     {
@@ -21,6 +22,5 @@
   ],
   "theme_color": "#5e5e5e",
   "background_color": "#e2e0d8",
-  "display": "standalone",
-  "orientation": "portrait"
+  "display": "standalone"
 }
