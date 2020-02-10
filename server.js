@@ -3,6 +3,7 @@ const fs = require("fs");
 const { createServer } = require("https");
 const { join } = require("path");
 const { parse } = require("url");
+const http = require("http");
 
 const app = next({ dev: process.env.NODE_ENV !== "production" });
 const handle = app.getRequestHandler();
@@ -27,6 +28,15 @@ app.prepare().then(() => {
       handle(req, res, parsedUrl);
     }
   }).listen(443, () => {});
+
+  http
+    .createServer(function(req, res) {
+      res.writeHead(301, {
+        Location: "https://" + req.headers["host"] + req.url
+      });
+      res.end();
+    })
+    .listen(80);
 });
 /*
 app.prepare().then(() => {
