@@ -1,14 +1,8 @@
 const next = require("next");
-const app = next({
-  dev: process.env.NODE_ENV !== "production"
-});
-const express = require("express");
-const handler = app.getRequestHandler();
 
 const { createServer } = require("https");
 const { join } = require("path");
 const { parse } = require("url");
-const next = require("next");
 
 const app = next({ dev: process.env.NODE_ENV !== "production" });
 const handle = app.getRequestHandler();
