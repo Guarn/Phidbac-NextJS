@@ -4,6 +4,7 @@ const { createServer } = require("https");
 const { join } = require("path");
 const { parse } = require("url");
 const http = require("http");
+const { createSecureServer } = require("http2");
 
 const app = next({ dev: process.env.NODE_ENV !== "production" });
 const handle = app.getRequestHandler();
@@ -15,7 +16,7 @@ const options = {
 };
 
 app.prepare().then(() => {
-  createServer(options, (req, res) => {
+  createSecureServer(options, (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
 
