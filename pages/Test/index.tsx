@@ -7,7 +7,7 @@ import { useState } from "react";
 import Tooltip from "../../components/UI/Tooltip/";
 
 const index = () => {
-  const displayEvent = event => {
+  const displayEvent = (event: any) => {
     console.log(event);
     console.log(event.target);
   };
