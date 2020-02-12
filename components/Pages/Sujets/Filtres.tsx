@@ -7,8 +7,9 @@ import {
   QuestionCircleOutlined
 } from "@ant-design/icons";
 import Axios from "../../Fonctionnels/Axios";
-import { useState } from "react";
+import { useState, SyntheticEvent } from "react";
 import { useRouter } from "next/router";
+import { SliderValue } from "antd/lib/slider";
 
 const { Option } = Select;
 
@@ -80,7 +81,7 @@ const initialFiltresState = {
 const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
   const router = useRouter();
   const [state, setState] = useState(initialFiltresState);
-  const rechercheInstantanee = async (e, cat) => {
+  const rechercheInstantanee = async (e: any[], cat: string) => {
     setState({
       ...state,
       [cat]: e
@@ -201,7 +202,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               {menu.auteurs.map(el => {
                 return (
                   <Option key={el["Auteur"]} value={el["Auteur"]}>
-                    {el["Auteur"] + " (" + el["NbSujets"] + ")"}
+                    {el["Auteur"] + " (" + el["nbSujets"] + ")"}
                   </Option>
                 );
               })}
@@ -244,7 +245,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               }}
               step={1}
               tooltipVisible={false}
-              onChange={e => {
+              onChange={(e: any) => {
                 let valeurBasse = e[0];
                 let valeurHaute = e[1];
 

@@ -2,29 +2,30 @@ import * as S from "./Styled";
 import { NextPage } from "next";
 
 export interface SujetI {
+  id: number;
+  Serie: string;
+  Destination: string[];
+  Session: string;
+  Code: string;
+  Sujet1: string;
+  Notions1: string[];
+  Sujet2: string;
+  Notions2: string[];
+  Sujet3: string;
+  Notions3: string[];
+  Problemes: boolean;
+  Auteur: string;
+  Annee: number;
+  Sujet1Naked: string;
+  Sujet2Naked: string;
+  Sujet3Naked: string;
+}
+export interface RespSujetI {
   noResult: boolean;
-  sujet: {
-    id: number;
-    Serie: string;
-    Destination: string[];
-    Session: string;
-    Code: string;
-    Sujet1: string;
-    Notions1: string[];
-    Sujet2: string;
-    Notions2: string[];
-    Sujet3: string;
-    Notions3: string[];
-    Problemes: boolean;
-    Auteur: string;
-    Annee: number;
-    Sujet1Naked: string;
-    Sujet2Naked: string;
-    Sujet3Naked: string;
-  };
+  sujet: SujetI;
 }
 
-const AffichageSujet: NextPage<SujetI> = ({ sujet, noResult }) => {
+const AffichageSujet: NextPage<RespSujetI> = ({ sujet, noResult }) => {
   const { id, Annee, Serie, Destination, Session, Code } = sujet;
 
   switch (noResult) {
@@ -56,9 +57,27 @@ const AffichageSujet: NextPage<SujetI> = ({ sujet, noResult }) => {
 };
 export default AffichageSujet;
 
-const Enonce = ({ numSujet, sujet }) => {
-  const notions = sujet[`Notions${numSujet}`];
-  const texte = sujet[`Sujet${numSujet}`];
+export type EnonceT = {
+  numSujet: number;
+  sujet: SujetI;
+};
+
+const Enonce: React.FC<EnonceT> = ({ numSujet, sujet }) => {
+  let notions, texte;
+  switch (numSujet) {
+    case 1:
+      notions = sujet.Notions1;
+      texte = sujet.Sujet1;
+      break;
+    case 2:
+      notions = sujet.Notions2;
+      texte = sujet.Sujet2;
+      break;
+    case 3:
+      notions = sujet.Notions3;
+      texte = sujet.Sujet3;
+      break;
+  }
 
   //TODO Reprogrammer surlignage des mots lors de la recherche
 
@@ -66,9 +85,9 @@ const Enonce = ({ numSujet, sujet }) => {
     <S.Sujet>
       <S.TitreNotions>
         <S.Titre>{numSujet}</S.Titre>
-        <S.Notions>{notions.join(" ")}</S.Notions>
+        <S.Notions>{notions?.join(" ")}</S.Notions>
       </S.TitreNotions>
-      <S.CorpsSujet dangerouslySetInnerHTML={{ __html: texte }} />
+      <S.CorpsSujet dangerouslySetInnerHTML={{ __html: texte ?? "" }} />
     </S.Sujet>
   );
 };

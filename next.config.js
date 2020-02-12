@@ -3,8 +3,10 @@
 const withCss = require("@zeit/next-css");
 const path = require("path");
 const withOffline = require("next-offline");
+const withBundleAnalyzer = require("@next/bundle-analyzer");
 
 module.exports = withOffline({});
+//module.exports = withBundleAnalyzer(withOffline({}));
 /*
 module.exports = withCss({
   webpack: (config, { isServer }) => {

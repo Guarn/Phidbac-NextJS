@@ -66,21 +66,40 @@ const Element = ({ attributes, children, element }) => {
     case "link":
       switch (element.select) {
         case "web":
-          return (
-            <Popover
-              overlayClassName="Pop-LienWeb"
-              content={<BlocLien type="WEB" value={element.value} />}
-            >
-              <a
-                target="_self"
-                rel="noopener noreferrer"
-                href={element.value}
-                {...attributes}
-              >
-                {children}
-              </a>
-            </Popover>
-          );
+          switch (element.ouverture) {
+            case "same":
+              return (
+                <Popover
+                  overlayClassName="Pop-LienWeb"
+                  content={<BlocLien type="WEB" value={element.value} />}
+                >
+                  <a
+                    target="_self"
+                    rel="noopener noreferrer"
+                    href={element.value}
+                    {...attributes}
+                  >
+                    {children}
+                  </a>
+                </Popover>
+              );
+            default:
+              return (
+                <Popover
+                  overlayClassName="Pop-LienWeb"
+                  content={<BlocLien type="WEB" value={element.value} />}
+                >
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={element.value}
+                    {...attributes}
+                  >
+                    {children}
+                  </a>
+                </Popover>
+              );
+          }
 
         case "index":
           switch (element.ouverture) {

@@ -3,6 +3,7 @@
   "short_name": "Phidbac",
   "description": "Préparation complète à l'épreuve de philosophie du baccalauréat.",
   "start_url": "/",
+  "Scope": "/",
   "icons": [
     {
       "src": "/favicon.jpg",
