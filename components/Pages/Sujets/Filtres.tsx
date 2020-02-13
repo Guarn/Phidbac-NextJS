@@ -7,9 +7,8 @@ import {
   QuestionCircleOutlined
 } from "@ant-design/icons";
 import Axios from "../../Fonctionnels/Axios";
-import { useState, SyntheticEvent } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { SliderValue } from "antd/lib/slider";
 
 const { Option } = Select;
 
