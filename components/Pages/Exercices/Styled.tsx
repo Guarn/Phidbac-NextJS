@@ -71,7 +71,7 @@ export const ConteneurCours = styled.div`
   cursor: pointer;
   transition: color 0.2s;
   &:hover {
-    color: orange;
+    color: ${props => props.theme.texteSecondaryColor};
   }
 `;
 

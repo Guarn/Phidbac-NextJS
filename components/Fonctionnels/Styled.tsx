@@ -55,7 +55,7 @@ export const ConteneurLienPopover = styled.div`
 ConteneurLienPopover.displayName = `ConteneurLienPopover`;
 
 export const TypeLien = styled.div`
-  color: ${props => props.theme.texteSecondaryColor};
+  color: orange;
   font-weight: bold;
 `;
 TypeLien.displayName = `TypeLien`;

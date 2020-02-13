@@ -347,17 +347,3 @@ export const ArrowSvg = styled.svg`
   height: 1em;
 `;
 ArrowSvg.displayName = `ArrowSvg`;
-/*
-interface IconeT extends IconProps {
-  rotationicone?: string;
-  type: string;
-}
-export const Icone2 = styled(Icon)<IconeT>`
-  color: orange;
-  line-height: 24px;
-  margin-right: 10px;
-  transform: ${props =>
-    Boolean(props.rotationicone) ? "rotate(180deg)" : "rotate(0deg)"};
-`;
-Icone.displayName = `Icone`;
-*/

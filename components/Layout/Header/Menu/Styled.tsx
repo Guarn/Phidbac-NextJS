@@ -40,7 +40,8 @@ export const BoutonLien = styled.div<BoutonLienT>`
   text-align: center;
   justify-content: center;
   align-items: center;
-  color: ${props => (props.selected ? "orange" : props.theme.main)};
+  color: ${props =>
+    props.selected ? props.theme.texteSecondaryColor : props.theme.main};
   &:hover {
     color: ${props => props.theme.texteSecondaryColor};
   }

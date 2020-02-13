@@ -128,7 +128,7 @@ BlocLettre.displayName = `BlocLettre`;
 
 export const LettreTitre = styled.div`
   font-size: 24px;
-  color: orange;
+  color: ${props => props.theme.texteSecondaryColor};
   @media (max-width: 767px) {
     text-align: center;
   }

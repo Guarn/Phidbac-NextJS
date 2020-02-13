@@ -29,7 +29,7 @@ export const BlocLettre = styled.div`
 
 export const Lettre2 = styled.div`
   font-size: 24px;
-  color: orange;
+  color: ${props => props.theme.texteSecondaryColor};
 `;
 
 export const ConteneurListeIndex = styled.div`

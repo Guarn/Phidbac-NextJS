@@ -17,12 +17,12 @@ const BoutonMenu = styled.div`
   margin-top: 16px;
   font-family: "century-gothic";
   &:hover {
-    color: orange;
+    color: ${props => props.theme.texteSecondaryColor};
   }
 `;
 
 const Phi = styled.span`
-  color: orange;
+  color: ${props => props.theme.texteSecondaryColor};
   font-family: "Century Gothic";
 `;
 

@@ -104,7 +104,7 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   main: "#5e5e5e",
-  texteSecondaryColor: "orange",
+  texteSecondaryColor: "#be5454",
   background: "#e2e0d8"
 };
 
