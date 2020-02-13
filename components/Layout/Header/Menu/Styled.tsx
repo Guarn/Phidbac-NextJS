@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const Conteneur = styled.div``;
-Conteneur.displayName = `Conteneur`;
+export const Menu = styled.div``;
 
 export const ConteneurPartieDroite = styled.div`
   height: 80px;

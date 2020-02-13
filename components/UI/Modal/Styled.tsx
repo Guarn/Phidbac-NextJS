@@ -16,8 +16,20 @@ export const Modal = styled.div<ConteneurT>`
   justify-content: center;
   align-items: center;
   z-index: 9000;
-  display: ${props => (props.showModal ? "flex" : "none")};
+  transition: opacity 200ms;
 
+  display: ${props => (props.showModal ? "flex" : "none")};
+  opacity: ${props => (props.shouldClose ? 0 : 1)};
+  animation: modalOpacity 200ms;
+
+  @keyframes modalOpacity {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   @keyframes appearModal {
     0% {
       transform: scale(0);

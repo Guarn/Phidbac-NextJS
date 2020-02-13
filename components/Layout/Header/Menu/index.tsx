@@ -2,9 +2,9 @@ import * as S from "./Styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Drawer } from "antd";
 import styled from "styled-components";
 import { MenuOutlined } from "@ant-design/icons";
+import Drawer from "../../../UI/Drawer";
 
 const BoutonMenu = styled.div`
   font-size: 20px;
@@ -36,7 +36,7 @@ const Menu = () => {
   const [menu, setMenu] = useState(false);
 
   return (
-    <S.Conteneur>
+    <S.Menu>
       <S.AffichageDesktop>
         <S.BoutonHome>
           <Link prefetch={false} href="/">
@@ -111,12 +111,7 @@ const Menu = () => {
       </S.AffichageDesktop>
 
       <S.AffichageTabletMobile>
-        <Drawer
-          placement="left"
-          visible={menu}
-          onClose={() => setMenu(false)}
-          title="PHIDBAC"
-        >
+        <Drawer show={menu} close={() => setMenu(false)}>
           <Link prefetch={false} href="/">
             <a>
               <S.BoutonLien selected={router.route === "/"}>
@@ -187,7 +182,7 @@ const Menu = () => {
           <Phi>'</Phi>!
         </TexteTitre>
       </S.AffichageTabletMobile>
-    </S.Conteneur>
+    </S.Menu>
   );
 };
 

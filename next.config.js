@@ -1,5 +1,8 @@
 /* eslint-disable */
-
+const withTypescript = require("@zeit/next-typescript");
+const withSass = require("@zeit/next-sass");
+const withLess = require("@zeit/next-less");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const withCss = require("@zeit/next-css");
 const path = require("path");
 const withOffline = require("next-offline");
@@ -7,32 +10,50 @@ const withBundleAnalyzer = require("@next/bundle-analyzer");
 
 module.exports = withOffline({});
 //module.exports = withBundleAnalyzer(withOffline({}));
-/*
-module.exports = withCss({
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      const antStyles = /antd\/.*?\/style\/css.*?/;
-      const origExternals = [...config.externals];
-      config.externals = [
-        (context, request, callback) => {
-          if (request.match(antStyles)) return callback();
-          if (typeof origExternals[0] === "function") {
-            origExternals[0](context, request, callback);
-          } else {
-            callback();
-          }
-        },
-        ...(typeof origExternals[0] === "function" ? [] : origExternals)
-      ];
 
-      config.module.rules.unshift({
-        test: antStyles,
-        use: "null-loader"
-      });
+/*module.exports = withCss(
+  withLess({
+    dir: ".",
+    distDir: "./build",
+    cssLoaderOptions: {
+      importLoaders: 1,
+      localIdentName: "[folder]_[local]___[hash:base64:5]"
+    },
+    lessLoaderOptions: {
+      javascriptEnabled: true
+    },
+    webpack(config, options) {
+      if (options.isServer) {
+        config.plugins.push(
+          new ForkTsCheckerWebpackPlugin({
+            tsconfig: "./tsconfig.json"
+          })
+        );
+
+        const antStyles = /antd\/.*?\/style.*?/;
+        const origExternals = [...config.externals];
+        config.externals = [
+          (context, request, callback) => {
+            if (request.match(antStyles)) return callback();
+            if (typeof origExternals[0] === "function") {
+              origExternals[0](context, request, callback);
+            } else {
+              callback();
+            }
+          },
+          ...(typeof origExternals[0] === "function" ? [] : origExternals)
+        ];
+
+        config.module.rules.unshift({
+          test: antStyles,
+          use: "null-loader"
+        });
+      }
+
+      return config;
     }
-    return config;
-  }
-});
+  })
+);
 /*
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: true

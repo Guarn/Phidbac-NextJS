@@ -6,6 +6,7 @@ import Modal from "../../components/UI/Modal";
 import { useState } from "react";
 import Tooltip from "../../components/UI/Tooltip/";
 import Icon from "../../components/UI/Icons";
+import Drawer from "../../components/UI/Drawer";
 
 const index = () => {
   const displayEvent = (event: any) => {
@@ -13,6 +14,7 @@ const index = () => {
     console.log(event.target);
   };
   const [showModal, setShowModal] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(false);
   return (
     <Layout>
       <div
@@ -26,23 +28,7 @@ const index = () => {
           marginLeft: "500px"
         }}
       >
-        <Button
-          size="small"
-          icon="LeftArrow"
-          onClick={() => setShowModal(true)}
-        >
-          Sujet précédent
-        </Button>
-        <Button size="normal" onClick={e => displayEvent(e)} icon="RightArrow">
-          Sujet suivant
-        </Button>
-        <SelectMultiple
-          listeEntrees={init}
-          onChange={val => console.log(val)}
-        />
-        <Divider align="center" text="HAHA" />
-        <Divider align="left" text="HAHA" />
-        <Divider align="right" text="HAHA" />
+        <Divider text="Modal" align="center" />
         <Modal
           showModal={showModal}
           closeModal={() => {
@@ -51,24 +37,47 @@ const index = () => {
         >
           Test
         </Modal>
+        <Button
+          size="small"
+          icon="LeftArrow"
+          onClick={() => setShowModal(true)}
+        >
+          Sujet précédent
+        </Button>
+        <Divider text="Buttons" align="center" />
+
+        <Button size="normal" onClick={e => displayEvent(e)} icon="RightArrow">
+          Sujet suivant
+        </Button>
+        <Divider text="SelectMultiple" align="center" />
+
+        <SelectMultiple
+          listeEntrees={init}
+          onChange={val => console.log(val)}
+        />
+        <Divider align="center" text="Tooltip" />
+
         <Tooltip content={<div>HAHA</div>}>Test tooltip</Tooltip>
-        <Tooltip content="Hum">Test tooltip</Tooltip>
-        <span>
-          ❝ l’enseignement de la philosophie a pour but de former le jugement
-          critique des élèves et de les instruire par l’acquisition d’une
-          culture philosophique
-          <Tooltip content="Petite vérification d'un usage non">
-            initiale
-          </Tooltip>
-          . Ces deux objectifs sont étroitement liés : le jugement s’exerce avec
-          discernement quand il s’appuie sur des connaissances maîtrisées ; une
-          culture philosophique initiale est nécessaire pour poser, formuler et
-          tenter de résoudre des problèmes philosophiques. ❞
-        </span>
 
         <Tooltip content="fsdfds">
           <Icon type="LeftArrow" />
         </Tooltip>
+        <Divider text="Drawer" align="center" />
+        <Drawer
+          position="right"
+          show={showDrawer}
+          close={() => {
+            setShowDrawer(false);
+          }}
+        >
+          Test dsqdsq d sqds qd qdsqd sqdqs
+        </Drawer>
+        <Button
+          size="small"
+          icon="Check"
+          onClick={() => setShowDrawer(true)}
+        ></Button>
+        <Divider text="Tabs" align="center" />
       </div>
     </Layout>
   );
