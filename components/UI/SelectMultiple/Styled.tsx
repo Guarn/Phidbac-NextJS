@@ -20,16 +20,16 @@ export const Input = styled.input`
 
 export interface ConteneurListeI {
   showListe: boolean;
-  position: number;
 }
 
 export const ConteneurListe = styled.div<ConteneurListeI>`
   position: absolute;
-  top: ${props => props.position.toString() + "px"};
+  top: 100%;
   background-color: white;
   border: ${props => (props.showListe ? "1" : "0")}px solid black;
   overflow: auto;
   width: 100%;
+  z-index: 9000;
   height: ${props => (props.showListe ? "" : "0vh")};
   max-height: ${props => (props.showListe ? "25vh" : "0vh")};
 

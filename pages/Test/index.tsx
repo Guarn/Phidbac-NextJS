@@ -5,6 +5,7 @@ import Divider from "../../components/UI/Divider";
 import Modal from "../../components/UI/Modal";
 import { useState } from "react";
 import Tooltip from "../../components/UI/Tooltip/";
+import Icon from "../../components/UI/Icons";
 
 const index = () => {
   const displayEvent = (event: any) => {
@@ -21,7 +22,7 @@ const index = () => {
           justifyContent: "flex-start",
           alignItems: "center",
           border: "1px solid white",
-          width: "200px",
+          width: "400px",
           marginLeft: "500px"
         }}
       >
@@ -50,7 +51,24 @@ const index = () => {
         >
           Test
         </Modal>
-        <Tooltip title="Joli !!">Test tooltip</Tooltip>
+        <Tooltip content={<div>HAHA</div>}>Test tooltip</Tooltip>
+        <Tooltip content="Hum">Test tooltip</Tooltip>
+        <span>
+          ❝ l’enseignement de la philosophie a pour but de former le jugement
+          critique des élèves et de les instruire par l’acquisition d’une
+          culture philosophique
+          <Tooltip content="Petite vérification d'un usage non">
+            initiale
+          </Tooltip>
+          . Ces deux objectifs sont étroitement liés : le jugement s’exerce avec
+          discernement quand il s’appuie sur des connaissances maîtrisées ; une
+          culture philosophique initiale est nécessaire pour poser, formuler et
+          tenter de résoudre des problèmes philosophiques. ❞
+        </span>
+
+        <Tooltip content="fsdfds">
+          <Icon type="LeftArrow" />
+        </Tooltip>
       </div>
     </Layout>
   );

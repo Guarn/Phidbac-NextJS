@@ -36,7 +36,7 @@ const index: React.FC<indexI> = ({ listeEntrees, onChange }) => {
       }}
     >
       {selected.map((el, index) => {
-        return <Badge nom={el} remove={handleSelect} />;
+        return <Badge key={`Badge-${el}`} nom={el} remove={handleSelect} />;
       })}
       <span
         style={{
@@ -58,11 +58,6 @@ const index: React.FC<indexI> = ({ listeEntrees, onChange }) => {
         recherche={valChamp}
         selected={selected}
         setSelected={handleSelect}
-        position={
-          refGlobalConteneur && refGlobalConteneur.current
-            ? refGlobalConteneur.current.getBoundingClientRect()
-            : 0
-        }
       />
     </S.SelectMultiple>
   );
@@ -75,7 +70,6 @@ export interface ListeI {
   recherche: string;
   setSelected: (val: string) => void;
   selected: string[];
-  position: any;
 }
 
 const Liste: React.FC<ListeI> = ({
@@ -83,11 +77,10 @@ const Liste: React.FC<ListeI> = ({
   listeEntrees,
   recherche,
   setSelected,
-  selected,
-  position
+  selected
 }) => {
   return (
-    <S.ConteneurListe showListe={showListe} position={position.height || 0}>
+    <S.ConteneurListe showListe={showListe}>
       {listeEntrees
         .filter(element => {
           if (!recherche) return true;
@@ -123,7 +116,7 @@ export interface BadgeI {
 
 const Badge: React.FC<BadgeI> = ({ nom, remove }) => {
   return (
-    <S.ConteneurBadge key={`Badge-${nom}`}>
+    <S.ConteneurBadge>
       {nom.toUpperCase()}
       <S.IconBadge onMouseDown={() => remove(nom)} />
     </S.ConteneurBadge>

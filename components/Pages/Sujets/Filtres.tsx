@@ -21,7 +21,7 @@ export type AnneeT = {
 export type AuteurT = {
   Auteur: number;
   Menu: boolean;
-  nbSujets: number;
+  NbSujets: number;
 };
 
 export type DestinationT = {
@@ -202,7 +202,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               {menu.auteurs.map(el => {
                 return (
                   <Option key={el["Auteur"]} value={el["Auteur"]}>
-                    {el["Auteur"] + " (" + el["nbSujets"] + ")"}
+                    {el["Auteur"] + " (" + el["NbSujets"] + ")"}
                   </Option>
                 );
               })}

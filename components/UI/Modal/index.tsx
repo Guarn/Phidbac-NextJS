@@ -16,6 +16,7 @@ const index: React.FC<indexI> = ({
   ...rest
 }) => {
   const [shouldClose, setShouldClose] = useState(false);
+  useEffect(() => {}, []);
   return (
     <S.Modal
       showModal={showModal}
@@ -30,7 +31,7 @@ const index: React.FC<indexI> = ({
       {...rest}
     >
       <Card
-        className={shouldClose ? "shouldClose" : "shouldAppear"}
+        className={shouldClose ? "shouldCloseModal" : "shouldAppearModal"}
         onClick={e => {
           e.stopPropagation();
         }}

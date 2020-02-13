@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Icon from "../Icons";
 
 export type ConteneurT = {
   showModal: boolean;
@@ -19,7 +18,7 @@ export const Modal = styled.div<ConteneurT>`
   z-index: 9000;
   display: ${props => (props.showModal ? "flex" : "none")};
 
-  @keyframes appear {
+  @keyframes appearModal {
     0% {
       transform: scale(0);
       opacity: 0;
@@ -29,7 +28,7 @@ export const Modal = styled.div<ConteneurT>`
       opacity: 1;
     }
   }
-  @keyframes close {
+  @keyframes closeModal {
     0% {
       transform: scale(1);
       opacity: 1;
@@ -39,25 +38,13 @@ export const Modal = styled.div<ConteneurT>`
       opacity: 0;
     }
   }
-  .shouldClose {
-    animation: close 200ms forwards;
+  .shouldCloseModal {
+    animation: closeModal 200ms forwards;
   }
-  .shouldAppear {
-    animation: appear 200ms;
+  .shouldAppearModal {
+    animation: appearModal 200ms;
   }
 `;
-
-export const ConteneurClose = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  transform: scale(1.2);
-`;
-
-export const BoutonClose = styled(Icon).attrs(props => ({
-  type: "Close",
-  bg: "lightgrey"
-}))``;
 
 export const Title = styled.h2`
   border-bottom: 2px solid grey;
