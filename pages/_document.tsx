@@ -36,6 +36,13 @@ export default class Document extends NextDocument {
           <link rel="shortcut icon" href="/favicon.jpg" />
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#e2e0d8" />
+          <link
+            rel="preload"
+            href="https://use.typekit.net/af/471ad1/00000000000000003b9b1f20/27/l?subset_id=2&fvd=n7&v=3"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
           <link rel="apple-touch-icon" href="/APPLETOUCH.png"></link>
         </Head>
         <body>
