@@ -1,12 +1,6 @@
 /* eslint-disable */
-const withTypescript = require("@zeit/next-typescript");
-const withSass = require("@zeit/next-sass");
-const withLess = require("@zeit/next-less");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const withCss = require("@zeit/next-css");
-const path = require("path");
+
 const withOffline = require("next-offline");
-const withBundleAnalyzer = require("@next/bundle-analyzer");
 
 module.exports = withOffline({});
 //module.exports = withBundleAnalyzer(withOffline({}));
