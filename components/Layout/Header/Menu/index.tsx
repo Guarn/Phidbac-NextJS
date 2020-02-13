@@ -41,7 +41,7 @@ const Menu = () => {
         <S.BoutonHome>
           <Link prefetch={false} href="/">
             <a>
-              <S.BtnHomeLogo src="/Logo.jpg" />
+              <S.BtnHomeLogo src="/favicon.jpg" />
             </a>
           </Link>
         </S.BoutonHome>
