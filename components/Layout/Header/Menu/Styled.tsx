@@ -34,7 +34,6 @@ export type BoutonLienT = {
 
 export const BoutonLien = styled.div<BoutonLienT>`
   margin-right: 60px;
-  font-size: 16px;
   height: 80px;
   display: flex;
   text-align: center;
