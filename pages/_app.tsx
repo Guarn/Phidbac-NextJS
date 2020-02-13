@@ -1,7 +1,7 @@
 import React from "react";
 import NextApp from "next/app";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 const GlobalStyle = createGlobalStyle`
   html,body, #__next {
