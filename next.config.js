@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const withOffline = require("next-offline");
-
+const withBundleAnalyzer = require("@next/bundle-analyzer");
 module.exports = withOffline({});
 //module.exports = withBundleAnalyzer(withOffline({}));
 

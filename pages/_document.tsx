@@ -54,6 +54,8 @@ export default class Document extends NextDocument {
         </Head>
         <body>
           <Main />
+          <div id="tooltip" />
+          <div id="modal" />
           <NextScript />
         </body>
       </Html>

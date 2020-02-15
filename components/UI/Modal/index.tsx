@@ -1,6 +1,7 @@
 import * as S from "./Styled";
 import Card from "../Card";
 import { useState, useEffect } from "react";
+import ClientOnlyPortal from "../../Fonctionnels/ClientOnlyPortal";
 
 export interface indexI extends React.HTMLAttributes<HTMLDivElement> {
   showModal: boolean;
@@ -18,28 +19,35 @@ const index: React.FC<indexI> = ({
   const [shouldClose, setShouldClose] = useState(false);
   useEffect(() => {}, []);
   return (
-    <S.Modal
-      showModal={showModal}
-      shouldClose={shouldClose}
-      onClick={() => {
-        setShouldClose(true);
-        setTimeout(() => {
-          closeModal();
-          setShouldClose(false);
-        }, 200);
-      }}
-      {...rest}
-    >
-      <Card
-        className={shouldClose ? "shouldCloseModal" : "shouldAppearModal"}
-        onClick={e => {
-          e.stopPropagation();
-        }}
-      >
-        {titre && <S.Title>{titre}</S.Title>}
-        {children}
-      </Card>
-    </S.Modal>
+    <>
+      {showModal && (
+        <ClientOnlyPortal selector="#modal">
+          <S.Modal
+            showModal={showModal}
+            shouldClose={shouldClose}
+            onClick={() => {
+              setShouldClose(true);
+              setTimeout(() => {
+                closeModal();
+                setShouldClose(false);
+              }, 200);
+            }}
+            {...rest}
+          >
+            <Card
+              modal
+              className={shouldClose ? "shouldCloseModal" : "shouldAppearModal"}
+              onClick={e => {
+                e.stopPropagation();
+              }}
+            >
+              {titre && <S.Title>{titre}</S.Title>}
+              {children}
+            </Card>
+          </S.Modal>
+        </ClientOnlyPortal>
+      )}
+    </>
   );
 };
 export default index;

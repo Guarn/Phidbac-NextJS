@@ -51,8 +51,14 @@ export const Button = styled.button<any>`
   border-radius: 2px;
   background-color: ${props => props.theme.background};
   border: solid 1px ${props => props.theme.main};
-  transition: all 100ms;
   animation: Appear 500ms;
+
+  color: ${props => props.theme.main};
+
+  & svg {
+    fill: ${props => props.theme.main};
+  }
+
   cursor: pointer;
   @keyframes Appear {
     0% {
@@ -70,5 +76,9 @@ export const Button = styled.button<any>`
   &:hover {
     background-color: ${props => props.theme.main};
     color: ${props => props.theme.background};
+  }
+
+  &:hover svg {
+    fill: ${props => props.theme.background};
   }
 `;

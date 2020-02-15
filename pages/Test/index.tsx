@@ -7,6 +7,9 @@ import { useState } from "react";
 import Tooltip from "../../components/UI/Tooltip/";
 import Icon from "../../components/UI/Icons";
 import Drawer from "../../components/UI/Drawer";
+import Slider from "../../components/UI/Slider";
+import MenuSlide from "../../components/UI/MenuSlide";
+import RadioGroup from "../../components/UI/RadioGroup";
 
 const index = () => {
   const displayEvent = (event: any) => {
@@ -24,7 +27,7 @@ const index = () => {
           justifyContent: "flex-start",
           alignItems: "center",
           border: "1px solid white",
-          width: "400px",
+          width: "300px",
           marginLeft: "500px"
         }}
       >
@@ -55,13 +58,7 @@ const index = () => {
           listeEntrees={init}
           onChange={val => console.log(val)}
         />
-        <Divider align="center" text="Tooltip" />
 
-        <Tooltip content={<div>HAHA</div>}>Test tooltip</Tooltip>
-
-        <Tooltip content="fsdfds">
-          <Icon type="LeftArrow" />
-        </Tooltip>
         <Divider text="Drawer" align="center" />
         <Drawer
           position="right"
@@ -77,7 +74,28 @@ const index = () => {
           icon="Check"
           onClick={() => setShowDrawer(true)}
         ></Button>
+        <Divider text="Slider" align="center" />
+        <Slider
+          range={[1996, 2019]}
+          step={1}
+          onChange={(val: [number, number]) => console.log(val)}
+        />
         <Divider text="Tabs" align="center" />
+        <MenuSlide>
+          <MenuSlide.Tabs title="tab 1" icon="SimpleArrow" key="0">
+            <h2>1</h2>
+          </MenuSlide.Tabs>
+          <MenuSlide.Tabs title="tab 2" key="1">
+            <h2>2</h2>
+          </MenuSlide.Tabs>
+        </MenuSlide>
+        <Divider text="RadioGroup" align="center" />
+        <RadioGroup defaultValue="Toutes">
+          <RadioGroup.Radio value="Toutes">Toutes</RadioGroup.Radio>
+          <RadioGroup.Radio value="Normales">Norm.</RadioGroup.Radio>
+          <RadioGroup.Radio value="Remplacement">Rempl.</RadioGroup.Radio>
+          <RadioGroup.Radio value="Secours">Secours</RadioGroup.Radio>
+        </RadioGroup>
       </div>
     </Layout>
   );

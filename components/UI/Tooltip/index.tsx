@@ -1,35 +1,50 @@
 import * as S from "./Styled";
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect, useRef } from "react";
+import ClientOnlyPortal from "../../Fonctionnels/ClientOnlyPortal";
 
 export interface index {
   content: ReactNode | string;
+  visible: boolean;
+  setVisible: (val: boolean) => void;
 }
 
-const index: React.FC<index> = ({ children, content, ...rest }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+const index: React.FC<index> = ({
+  children,
+  visible,
+  setVisible,
+  content,
+  ...rest
+}) => {
   const [shouldClose, setShouldClose] = useState(false);
-  useEffect(() => {}, []);
+  const refTooltip = useRef<HTMLDivElement>(null);
 
   return (
     <S.Tooltip
+      ref={refTooltip}
       onMouseLeave={() => {
         setShouldClose(false);
         setTimeout(() => {
-          setShowTooltip(false);
+          setVisible(false);
         }, 200);
       }}
       onMouseEnter={() => {
         setShouldClose(true);
-        setShowTooltip(true);
+        setVisible(true);
       }}
     >
-      <S.Conteneur
-        {...rest}
-        className={shouldClose ? "shouldAppearTooltip" : "shouldCloseTooltip"}
-        showTooltip={showTooltip}
-      >
-        {content}
-      </S.Conteneur>
+      {visible && (
+        <ClientOnlyPortal selector="#tooltip">
+          <S.Conteneur
+            refTooltip={refTooltip}
+            {...rest}
+            className={
+              shouldClose ? "shouldAppearTooltip" : "shouldCloseTooltip"
+            }
+          >
+            {content}
+          </S.Conteneur>
+        </ClientOnlyPortal>
+      )}
       {children}
     </S.Tooltip>
   );

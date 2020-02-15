@@ -5,9 +5,9 @@ export const SelectMultiple = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  background-color: white;
+  background-color: transparent;
   min-height: 2rem;
-  border-radius: 5px;
+  border: 1px solid ${props => props.theme.main};
   width: 100%;
 `;
 

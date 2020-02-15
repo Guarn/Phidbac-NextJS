@@ -19,7 +19,7 @@ app.prepare().then(() => {
   createServer(options, (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
-
+    res.set("Cache-Control", "public, max-age=31557600");
     // handle GET request to /service-worker.js
     if (pathname === "/service-worker.js") {
       const filePath = join(__dirname, ".next", pathname);

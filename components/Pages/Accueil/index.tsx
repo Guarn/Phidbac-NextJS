@@ -1,7 +1,8 @@
 import * as S from "./Styled";
-import GrandPhi, { Arrow } from "./GrandPhi";
+import GrandPhi from "./GrandPhi";
 import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Icon from "../../UI/Icons";
 
 const index = () => {
   return (
@@ -107,7 +108,7 @@ const BlocPresentationDescription = () => {
                         setShowDescription(true);
                       }}
                     >
-                      <Arrow rotate="false" />
+                      <Icon type="SimpleArrow" mr="5" />
 
                       {contenuTexte[el].Titre}
                     </S.TitreCat>
@@ -124,7 +125,7 @@ const BlocPresentationDescription = () => {
                 }}
               >
                 <S.TitreCat style={{ fontWeight: "bold" }}>
-                  <Arrow rotate="true" />
+                  <Icon type="SimpleArrow" mirror mr="5" />
                   {contenuTexte[numDescription].Titre}
                 </S.TitreCat>
                 <S.DescriptionCat>

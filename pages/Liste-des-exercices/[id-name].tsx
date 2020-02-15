@@ -6,12 +6,22 @@ import EditeurCours, {
 } from "../../components/Fonctionnels/EditeurCours";
 import * as S from "../../components/Pages/Cours/AffichageCours.styled";
 import Link from "next/link";
+import Button from "../../components/UI/Button";
+import { useEffect, useState } from "react";
 
 export interface Props {
   cours: CoursI;
 }
 
 const AffichageExercice = ({ cours }: Props) => {
+  const [El, setEl] = useState();
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      setEl(
+        document.getElementById("element-0")?.getBoundingClientRect().left ?? 0
+      );
+    }
+  });
   return (
     <>
       <Head>
@@ -31,15 +41,15 @@ const AffichageExercice = ({ cours }: Props) => {
       </Head>
       <Layout>
         <S.Conteneur>
-          <S.ConteneurBouton>
+          <S.ConteneurBouton left={El}>
             <Link href="/Liste-des-exercices">
               <a>
-                <S.BoutonRetour>
+                <Button icon="LeftArrow" position="left" size="normal">
                   <S.NoDisplayTabletMobile>
                     {" "}
                     Revenir à la liste d'exercices
                   </S.NoDisplayTabletMobile>
-                </S.BoutonRetour>
+                </Button>
               </a>
             </Link>
           </S.ConteneurBouton>

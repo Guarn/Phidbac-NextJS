@@ -1,10 +1,11 @@
-import React, { useCallback, useMemo, useState, FC, useEffect } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Editable, withReact, Slate } from "slate-react";
 import { createEditor } from "slate";
-import { Popover, Modal } from "antd";
 import EditeurCours from "./EditeurCours";
 import * as S from "./Styled";
 import fetch from "isomorphic-unfetch";
+import Tooltip from "../UI/Tooltip";
+import Modal from "../UI/Modal";
 
 const SlateJs = ({ index, value, readOnly }) => {
   const renderElement = useCallback(props => <Element {...props} />, []);
@@ -24,6 +25,14 @@ const SlateJs = ({ index, value, readOnly }) => {
 };
 
 const Element = ({ attributes, children, element }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const onChangeVisible = val => {
+    setTimeout(() => {
+      setShowTooltip(val);
+    }, 100);
+  };
+
   switch (element.type) {
     case "citation":
       return (
@@ -69,8 +78,9 @@ const Element = ({ attributes, children, element }) => {
           switch (element.ouverture) {
             case "same":
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="WEB" value={element.value} />}
                 >
                   <a
@@ -81,12 +91,13 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
             default:
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="WEB" value={element.value} />}
                 >
                   <a
@@ -97,7 +108,7 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
           }
 
@@ -105,8 +116,9 @@ const Element = ({ attributes, children, element }) => {
           switch (element.ouverture) {
             case "same":
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="INDEX" value={element.nom} />}
                 >
                   <a
@@ -117,12 +129,13 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
             case "new":
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="INDEX" value={element.nom} />}
                 >
                   <a
@@ -133,7 +146,7 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
             default:
               return (
@@ -152,8 +165,9 @@ const Element = ({ attributes, children, element }) => {
           switch (element.ouverture) {
             case "same":
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="COURS" value={element.nom} />}
                 >
                   <a
@@ -164,12 +178,13 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
             case "new":
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="COURS" value={element.nom} />}
                 >
                   <a
@@ -180,7 +195,7 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
             default:
               return (
@@ -198,8 +213,9 @@ const Element = ({ attributes, children, element }) => {
           switch (element.ouverture) {
             case "same":
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="EXERCICES" value={element.nom} />}
                 >
                   <a
@@ -210,12 +226,13 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
             case "new":
               return (
-                <Popover
-                  overlayClassName="Pop-LienWeb"
+                <Tooltip
+                  visible={showTooltip}
+                  setVisible={onChangeVisible}
                   content={<BlocLien type="EXERCICES" value={element.nom} />}
                 >
                   <a
@@ -226,7 +243,7 @@ const Element = ({ attributes, children, element }) => {
                   >
                     {children}
                   </a>
-                </Popover>
+                </Tooltip>
               );
             default:
               return (
@@ -308,31 +325,29 @@ const OpenModal = ({ type, attributes, children, element }) => {
     await setCours({
       Contenu: type === "cours" ? JSON.parse(data.Contenu) : data.description
     });
+
     await setModalShow(true);
   };
 
   return (
-    <Popover
+    <Tooltip
       visible={showTooltip}
-      overlayClassName="Pop-LienWeb"
+      setVisible={val => setShowTooltip(val)}
       content={<BlocLien type={type.toUpperCase()} value={element.nom} />}
     >
       <a
         {...attributes}
         onMouseOver={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        onClick={() => fetchData(element)}
+        onClick={() => {
+          setShowTooltip(false);
+
+          fetchData(element);
+        }}
       >
         {children}
       </a>
-      <Modal
-        visible={modalShow}
-        onCancel={() => setModalShow(false)}
-        onOk={() => setModalShow(false)}
-        footer={null}
-        closable={false}
-        width={type === "cours" ? "1000px" : "600px"}
-      >
+      <Modal showModal={modalShow} closeModal={() => setModalShow(false)}>
         <div
           style={{
             overflow: "auto",
@@ -360,7 +375,7 @@ const OpenModal = ({ type, attributes, children, element }) => {
           )}
         </div>
       </Modal>
-    </Popover>
+    </Tooltip>
   );
 };
 

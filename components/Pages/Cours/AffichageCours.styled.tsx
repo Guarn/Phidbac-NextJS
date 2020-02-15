@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button } from "antd";
 
 export const Conteneur = styled.div`
   display: flex;
@@ -17,9 +16,15 @@ export const Conteneur = styled.div`
 `;
 Conteneur.displayName = `Conteneur`;
 
-export const ConteneurBouton = styled.div`
+export type ConteneurBoutonT = {
+  left: number;
+};
+
+export const ConteneurBouton = styled.div<ConteneurBoutonT>`
   display: flex;
-  width: 100%;
+  position: relative;
+  left: ${props => props.left + "px"};
+  padding-bottom: 10px;
   @media (max-width: 1023px) {
     position: absolute;
     padding-top: 10px;
@@ -32,19 +37,6 @@ export const ConteneurBouton = styled.div`
   }
 `;
 ConteneurBouton.displayName = `ConteneurBouton`;
-
-export const BoutonRetour = styled(Button)`
-  margin-left: calc(50vw - (690px / 2) - 10vw);
-  margin-bottom: 10px;
-  box-shadow: 0px 0px 3px 3px lightgrey;
-  @media (max-width: 1023px) {
-    margin-left: 5px;
-  }
-  @media (max-width: 767px) {
-    margin-left: 5px;
-  }
-`;
-BoutonRetour.displayName = `BoutonRetour`;
 
 export const NoDisplayTabletMobile = styled.div`
   display: inline;

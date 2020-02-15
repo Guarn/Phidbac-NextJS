@@ -24,6 +24,34 @@ const GlobalStyle = createGlobalStyle`
       overflow: initial;
     }
   }
+
+  .shouldCloseTooltip {
+    animation: closeTooltip 200ms forwards;
+  }
+  .shouldAppearTooltip {
+    animation: appearTooltip 200ms forwards;
+  }
+
+  @keyframes appearTooltip {
+    0% {
+      transform: scale(0.5) translateX(-50%);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) translateX(-50%);
+      opacity: 1;
+    }
+  }
+  @keyframes closeTooltip {
+    0% {
+      transform: scale(1) translateX(-50%);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.5) translateX(-50%);
+      opacity: 0;
+    }
+  }
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -38,19 +66,9 @@ const GlobalStyle = createGlobalStyle`
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   }
 
-  .Pop-LienWeb > .ant-popover-content > .ant-popover-inner {
-    background-color: #5e5e5e;
-    padding: 0px;
-  }
-
-  .Pop-LienWeb > .ant-popover-content > .ant-popover-arrow {
-    border-right-color: #5e5e5e;
-    border-bottom-color: #5e5e5e;
-  }
-
   @font-face {
     font-family: "century-gothic";
-    src: local("Century Gothic"), local("century-gothic"),
+    src: local("Century Gothic"), local("CenturyGothicPro"),
         url("https://use.typekit.net/af/471ad1/00000000000000003b9b1f20/27/l?subset_id=2&fvd=n7&v=3")
             format("woff2"),
         url("https://use.typekit.net/af/471ad1/00000000000000003b9b1f20/27/d?subset_id=2&fvd=n7&v=3")

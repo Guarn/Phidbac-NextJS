@@ -1,55 +1,38 @@
 import styled from "styled-components";
+import { RefObject } from "react";
 
 export const Tooltip = styled.div`
   position: relative;
   display: inline;
   z-index: 1;
   cursor: pointer;
-  .shouldCloseTooltip {
-    animation: closeTooltip 200ms forwards;
-  }
-  .shouldAppearTooltip {
-    animation: appearTooltip 200ms forwards;
-  }
-
-  @keyframes appearTooltip {
-    0% {
-      transform: scale(0.5) translateX(-50%);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1) translateX(-50%);
-      opacity: 1;
-    }
-  }
-  @keyframes closeTooltip {
-    0% {
-      transform: scale(1) translateX(-50%);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0.5) translateX(-50%);
-      opacity: 0;
-    }
-  }
 `;
 
 export interface ConteneurI {
-  showTooltip: boolean;
+  refTooltip: RefObject<HTMLDivElement>;
 }
 
 export const Conteneur = styled.div<ConteneurI>`
   position: absolute;
-  bottom: calc(100% + 6px);
+  top: ${props => {
+    return (
+      (props.refTooltip.current?.getBoundingClientRect().top ?? 0) - 50 + "px"
+    );
+  }};
   transform-origin: left;
-  left: 50%;
-  z-index: 1;
+  left: ${props => {
+    let left = props.refTooltip.current?.getBoundingClientRect().left ?? 0;
+    let width = props.refTooltip.current?.getBoundingClientRect().width ?? 0;
+
+    return left + width / 2 + "px";
+  }};
+  z-index: 110;
   text-align: center;
   padding: 0.5rem;
   border-radius: 3px;
   background-color: ${props => props.theme.main};
   color: white;
-  display: ${props => (props.showTooltip ? "inline-block" : "none")};
+  display: inline;
   white-space: nowrap;
   ::after {
     content: "";

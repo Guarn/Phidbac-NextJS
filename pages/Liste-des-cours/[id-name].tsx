@@ -1,17 +1,28 @@
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import fetch from "isomorphic-unfetch";
+import Button from "../../components/UI/Button";
+
 import EditeurCours, {
   CoursI
 } from "../../components/Fonctionnels/EditeurCours";
 import * as S from "../../components/Pages/Cours/AffichageCours.styled";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export interface Props {
   cours: CoursI;
 }
 
 const AffichageCours = ({ cours }: Props) => {
+  const [El, setEl] = useState();
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      setEl(
+        document.getElementById("element-0")?.getBoundingClientRect().left ?? 0
+      );
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -31,14 +42,14 @@ const AffichageCours = ({ cours }: Props) => {
       </Head>
       <Layout>
         <S.Conteneur>
-          <S.ConteneurBouton>
+          <S.ConteneurBouton left={El ?? 0}>
             <Link href="/Liste-des-cours">
               <a>
-                <S.BoutonRetour>
+                <Button icon="LeftArrow" position="left" size="normal">
                   <S.NoDisplayTabletMobile>
                     Revenir à la liste de cours
                   </S.NoDisplayTabletMobile>
-                </S.BoutonRetour>
+                </Button>
               </a>
             </Link>
           </S.ConteneurBouton>

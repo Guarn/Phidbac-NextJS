@@ -20,14 +20,19 @@ const Button: React.FC<ButtonT> = ({
   position = "left"
 }) => {
   const [anim, setAnim] = useState(false);
-
+  let timer1: any;
+  useEffect(() => {
+    return () => {
+      if (timer1) clearTimeout(timer1);
+    };
+  });
   return (
     <S.Button
       size={size}
       position={position}
       onClick={(event: SyntheticEvent) => {
         setAnim(true);
-        setTimeout(() => {
+        timer1 = setTimeout(() => {
           setAnim(false);
         }, 500);
 
@@ -36,7 +41,13 @@ const Button: React.FC<ButtonT> = ({
     >
       {children}
       {icon && (
-        <Icon type={icon} position={position} noText={!children} anim={anim} />
+        <Icon
+          mr="10"
+          type={icon}
+          position={position}
+          noText={!children}
+          anim={anim}
+        />
       )}
     </S.Button>
   );
