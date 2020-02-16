@@ -3,13 +3,13 @@ import { useState, useEffect, useRef } from "react";
 
 export type SliderValue = number | [number, number];
 
-export interface indexI {
+export interface indexI extends React.HTMLAttributes<HTMLDivElement> {
   range: number[];
   marks?: SliderValue;
   step?: number;
   initialValue?: [number, number];
   tooltip?: boolean;
-  onChange: (val: [number, number]) => void;
+  momo: (event: [number, number]) => void;
 }
 
 /**
@@ -27,8 +27,9 @@ const index: React.FC<indexI> = ({
   marks,
   tooltip,
   initialValue = range,
-  onChange,
-  step = 1
+  momo,
+  step = 1,
+  ...rest
 }) => {
   const refRail = useRef<HTMLDivElement>(null);
   const finalRange = range[1] - range[0];
@@ -96,7 +97,7 @@ const index: React.FC<indexI> = ({
         setDraggingDroite(true);
         setCurseurDroite(c => {
           if (c !== val)
-            onChange([
+            momo([
               Math.round(curseurGauche / stepValue) + range[0],
               Math.round(val / stepValue) + range[0]
             ]);
@@ -105,7 +106,7 @@ const index: React.FC<indexI> = ({
       } else {
         setCurseurGauche(c => {
           if (c !== val)
-            onChange([
+            momo([
               Math.round(val / stepValue) + range[0],
               Math.round(curseurDroite / stepValue) + range[0]
             ]);
@@ -126,7 +127,7 @@ const index: React.FC<indexI> = ({
         setDraggingGauche(true);
         setCurseurGauche(c => {
           if (c !== val)
-            onChange([
+            momo([
               Math.round(val / stepValue) + range[0],
               Math.round(curseurDroite / stepValue) + range[0]
             ]);
@@ -135,7 +136,7 @@ const index: React.FC<indexI> = ({
       } else {
         setCurseurDroite(c => {
           if (c !== val)
-            onChange([
+            momo([
               Math.round(curseurGauche / stepValue) + range[0],
               Math.round(val / stepValue) + range[0]
             ]);
@@ -145,7 +146,7 @@ const index: React.FC<indexI> = ({
     }
   };
   return (
-    <S.Slider>
+    <S.Slider {...rest}>
       <S.Rail ref={refRail} />
       <S.Track left={curseurGauche} width={curseurDroite - curseurGauche} />
       <S.Handler

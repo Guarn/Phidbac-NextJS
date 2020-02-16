@@ -25,7 +25,7 @@ const index: NextPage = ({ listeDesCours }: any) => {
 };
 
 index.getInitialProps = async () => {
-  const res = await fetch("https://www.phidbac.fr:4000/Cours");
+  const res = await fetch("https://www.phidbac.fr:4000/Cours/Liste");
   const data = await res.json();
 
   return {

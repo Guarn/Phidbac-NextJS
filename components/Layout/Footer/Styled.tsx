@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Conteneur = styled.div`
-  z-index: 1000;
+  z-index: 100;
   text-align: right;
   margin-right: 40px;
   @media (max-width: 767px) {

@@ -1,7 +1,6 @@
 import React from "react";
 import NextApp from "next/app";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import "antd/dist/antd.min.css";
 
 const GlobalStyle = createGlobalStyle`
   html,body, #__next {
@@ -11,8 +10,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     overflow: hidden;
     background-color: #e2e0d8;
-    font-family: "century-gothic";
-    font-size: 16px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -20,10 +17,35 @@ const GlobalStyle = createGlobalStyle`
     -ms-user-select: none;
     user-select: none;
     line-height:24px;
+  font: 400 16px century-gothic;
+
     @media (max-width:767px) {
       overflow: initial;
     }
+
   }
+  a, button,input {
+  font: 400 16px century-gothic;
+
+  }
+
+  a h2 {
+    color:initial;
+    font-weight:bold;
+
+  }
+
+  a {
+    color:#1890ff;
+    text-decoration:none;
+    background-color:transparent;
+    outline:none;
+    cursor:pointer;
+    transition: color 300ms;
+
+    line-height:24px;
+  }
+
 
   .shouldCloseTooltip {
     animation: closeTooltip 200ms forwards;
@@ -123,7 +145,8 @@ const GlobalStyle = createGlobalStyle`
 const theme = {
   main: "#5e5e5e",
   texteSecondaryColor: "#b82828",
-  background: "#e2e0d8"
+  background: "#e2e0d8",
+  border: "rgba(0, 0, 0, 0.2)"
 };
 
 export default class App extends NextApp {

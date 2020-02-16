@@ -1,7 +1,7 @@
 import * as S from "./Styled";
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Button from "../../UI/Button";
 
 export type sujetIdT = {
   id: number;
@@ -46,10 +46,15 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
             }`}
           >
             <a>
-              <S.BoutonLeft onClick={() => setSujetVisible(getPreviousId())}>
-                <ArrowLeftOutlined />
+              <Button
+                mobile
+                icon="LeftArrow"
+                size="normal"
+                position="left"
+                onClick={() => setSujetVisible(getPreviousId())}
+              >
                 <S.NoMobileDisplay> Sujet précédent</S.NoMobileDisplay>
-              </S.BoutonLeft>
+              </Button>
             </a>
           </Link>
           <S.NombreSujets>{`${sujetVisible + 1} / ${
@@ -62,25 +67,37 @@ const SuivPrec: React.FC<listeSujetI> = ({ listeSujet }) => {
             }`}
           >
             <a>
-              <S.BoutonRight onClick={() => setSujetVisible(getNextId())}>
+              <Button
+                mobile
+                icon="RightArrow"
+                position="right"
+                onClick={() => setSujetVisible(getNextId())}
+              >
                 <S.NoMobileDisplay>Sujet suivant </S.NoMobileDisplay>
-                <ArrowRightOutlined />
-              </S.BoutonRight>
+              </Button>
             </a>
           </Link>
         </>
       )}
       {listeSujet.count === 0 && (
         <>
-          <S.BoutonLeft disabled>
-            <ArrowLeftOutlined />
-            Sujet précédent
-          </S.BoutonLeft>
+          <Button
+            icon="LeftArrow"
+            size="normal"
+            style={{ width: "200px" }}
+            position="left"
+          >
+            <S.NoMobileDisplay> Sujet précédent</S.NoMobileDisplay>
+          </Button>
           <S.NombreSujets>{"0 / 0"}</S.NombreSujets>
-          <S.BoutonRight disabled>
-            Sujet suivant
-            <ArrowRightOutlined />
-          </S.BoutonRight>
+          <Button
+            disabled
+            style={{ width: "200px", paddingLeft: "70px" }}
+            icon="RightArrow"
+            position="right"
+          >
+            <S.NoMobileDisplay>Sujet suivant </S.NoMobileDisplay>
+          </Button>
         </>
       )}
     </S.ConteneurSuivPrec>

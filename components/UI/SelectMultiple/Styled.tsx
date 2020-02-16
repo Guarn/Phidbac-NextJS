@@ -7,8 +7,9 @@ export const SelectMultiple = styled.div`
   flex-wrap: wrap;
   background-color: transparent;
   min-height: 2rem;
-  border: 1px solid ${props => props.theme.main};
+  border: 1px solid ${props => props.theme.border};
   width: 100%;
+  cursor: text;
 `;
 
 export const Input = styled.input`
@@ -26,9 +27,11 @@ export const ConteneurListe = styled.div<ConteneurListeI>`
   position: absolute;
   top: 100%;
   background-color: white;
-  border: ${props => (props.showListe ? "1" : "0")}px solid black;
+  border: ${props => (props.showListe ? "1" : "0")}px solid
+    ${props => props.theme.border};
   overflow: auto;
   width: 100%;
+  box-sizing: content-box;
   z-index: 9000;
   height: ${props => (props.showListe ? "" : "0vh")};
   max-height: ${props => (props.showListe ? "25vh" : "0vh")};
@@ -89,13 +92,12 @@ export const ConteneurBadge = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
   margin: 2px;
   padding: 2px;
-  border-radius: 3px;
   transition: all 200ms;
   animation: appear 200ms;
-
+  cursor: default;
   @keyframes appear {
     0% {
       opacity: 0;
@@ -120,4 +122,6 @@ export const IconBadge = styled(Icon).attrs(() => ({
   mr: "5",
   type: "Close",
   cursor: "pointer"
-}))``;
+}))`
+  cursor: pointer;
+`;

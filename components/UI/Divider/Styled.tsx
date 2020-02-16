@@ -5,6 +5,8 @@ export const Divider = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-bottom: 5px;
+  margin-top: 10px;
 `;
 
 export type BarreHT = {
@@ -15,7 +17,7 @@ export const BarreH = styled.div<BarreHT>`
   height: 1px;
   margin-left: 10px;
   margin-right: 10px;
-  background-color: grey;
+  background-color: ${props => props.theme.border};
 `;
 
 export const BarreGauche = styled(BarreH)`

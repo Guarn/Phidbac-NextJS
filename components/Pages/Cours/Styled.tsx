@@ -40,8 +40,6 @@ export const IcoProgress = styled.div`
 
 export const ConteneurTimeline = styled.div`
   overflow: auto;
-  padding-right: 50px;
-  padding-left: 200px;
   display: flex;
   height: calc(100% - 48px);
   flex-direction: column;
@@ -108,6 +106,7 @@ export const Details = styled.div`
 export const TitreEtape = styled.div`
   font-weight: bold;
   font-size: 16px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 `;
 
 export const DescriptionEtape = styled.div`

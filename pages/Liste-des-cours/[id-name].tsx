@@ -46,9 +46,7 @@ const AffichageCours = ({ cours }: Props) => {
             <Link href="/Liste-des-cours">
               <a>
                 <Button icon="LeftArrow" position="left" size="normal">
-                  <S.NoDisplayTabletMobile>
-                    Revenir à la liste de cours
-                  </S.NoDisplayTabletMobile>
+                  Revenir à la liste de cours
                 </Button>
               </a>
             </Link>

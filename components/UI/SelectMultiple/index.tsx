@@ -17,8 +17,10 @@ const index: React.FC<indexI> = ({ listeEntrees, onChange }) => {
   const handleSelect = (val: string) => {
     if (!selected.includes(val)) {
       setSelected([...selected, val]);
+      onChange([...selected, val]);
     } else {
       setSelected(selected.filter(el => el !== val));
+      onChange(selected.filter(el => el !== val));
     }
   };
 

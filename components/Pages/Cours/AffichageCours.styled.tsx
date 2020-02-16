@@ -5,7 +5,6 @@ export const Conteneur = styled.div`
   flex-direction: column;
   @media (max-width: 1023px) {
     position: relative;
-    padding-top: 10px;
   }
 
   @media (max-width: 767px) {
@@ -26,25 +25,13 @@ export const ConteneurBouton = styled.div<ConteneurBoutonT>`
   left: ${props => props.left + "px"};
   padding-bottom: 10px;
   @media (max-width: 1023px) {
-    position: absolute;
     padding-top: 10px;
     margin-left: 0px;
-    width: initial;
-  }
-  @media (max-width: 767px) {
-    margin-left: 5px;
-    position: initial;
   }
 `;
 ConteneurBouton.displayName = `ConteneurBouton`;
 
 export const NoDisplayTabletMobile = styled.div`
   display: inline;
-  @media (max-width: 1023px) {
-    display: none;
-  }
-  @media (max-width: 767px) {
-    display: inline;
-  }
 `;
 NoDisplayTabletMobile.displayName = `NoDisplayTabletMobile`;

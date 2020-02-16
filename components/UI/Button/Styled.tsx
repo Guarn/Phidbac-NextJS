@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import { PositionT, SizeT } from ".";
 
-export type BoutonContainerT = {
-  position: PositionT;
-  size: SizeT;
-};
+export interface BoutonContainerT
+  extends React.HTMLAttributes<HTMLButtonElement> {
+  position?: PositionT;
+  size?: SizeT;
+  block?: boolean;
+  mobile: boolean;
+}
 
 export const Button = styled.button<any>`
   display: flex;
   align-items: center;
+  justify-content: center;
   height: ${props => {
     switch (props.size) {
       case "small":
@@ -50,10 +54,13 @@ export const Button = styled.button<any>`
   }};
   border-radius: 2px;
   background-color: ${props => props.theme.background};
-  border: solid 1px ${props => props.theme.main};
+  border: solid 1px ${props => props.theme.border};
   animation: Appear 500ms;
-
+  width: ${props => (props.block ? "100%" : "initial")};
   color: ${props => props.theme.main};
+  @media (max-width: 767px) {
+    width: ${props => (props.mobile ? "40px" : "initial")};
+  }
 
   & svg {
     fill: ${props => props.theme.main};

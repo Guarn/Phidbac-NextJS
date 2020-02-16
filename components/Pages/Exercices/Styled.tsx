@@ -107,6 +107,7 @@ export const Details = styled.div`
 
 export const TitreEtape = styled.div`
   font-weight: bold;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   font-size: 16px;
 `;
 

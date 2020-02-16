@@ -32,7 +32,7 @@ const index: IPanel<indexI> = ({ defaultTab, children }) => {
                 key={index}
                 actif={child.key === activeTab}
               >
-                {child.props.icon && <Icon type={child.props.icon} />}
+                {child.props.icon && <Icon mr="5" type={child.props.icon} />}
                 {child.props.title}
               </S.Titre>
             );

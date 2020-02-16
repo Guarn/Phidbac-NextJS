@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const Slider = styled.div`
   position: relative;
-  width: 100%;
   height: 40px;
+  width: calc(100% - 30px);
+  margin-left: 15px;
+  margin-right: 15px;
 `;
 
 export const Rail = styled.div`

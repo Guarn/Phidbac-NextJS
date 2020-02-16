@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button } from "antd";
 
 export const ConteneurGeneral = styled.div`
   display: flex;
@@ -16,68 +15,6 @@ export const Conteneur = styled.div`
   @media (max-width: 767px) {
     flex-direction: column;
     height: initial;
-  }
-
-  .ant-select-selection {
-    background-color: #e2e0d8;
-    border-color: #919191;
-  }
-
-  .ant-select-selection__placeholder {
-    color: #a2a2a2;
-  }
-
-  .ant-divider-horizontal.ant-divider-with-text-center::before,
-  .ant-divider-horizontal.ant-divider-with-text-center::after {
-    border-top: 1px solid #c4c4c4;
-  }
-
-  .ant-radio-button-wrapper {
-    background-color: #e2e0d8;
-    border-color: #919191;
-  }
-  .ant-radio-button-wrapper-checked {
-    background-color: #e2e0d8;
-    border-color: #919191;
-  }
-
-  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-    background-color: #f1f0eb;
-  }
-
-  .ql-editor {
-    font-family: century-gothic;
-    font-size: 16px;
-  }
-  .ant-btn:focus {
-    color: rgba(0, 0, 0, 0.65);
-  }
-
-  .ant-slider-mark-text {
-    color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
-  }
-  .ant-slider-rail {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  .ant-slider:hover .ant-slider-rail {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-
-  .ant-slider-track {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .ant-slider:hover .ant-slider-track {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  .ant-slider-handle {
-    border: solid 2px rgba(0, 0, 0, 0.3);
-  }
-
-  .ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
-    border: solid 2px rgba(0, 0, 0, 0.4);
   }
 `;
 export const PartieG = styled.div`
@@ -314,30 +251,9 @@ export const AucunSujet = styled.div`
   z-index: 3;
 `;
 
-export const BoutonLeft = styled(Button)`
-  width: 170px;
-  background-color: #e2e0d8;
-  border-color: #919191;
-  transform: translateX(-20px);
-  @media (max-width: 1023px) {
-    transform: translateX(0px);
-    width: auto;
-  }
-`;
-
-export const BoutonRight = styled(Button)`
-  width: 170px;
-  background-color: #e2e0d8;
-  border-color: #919191;
-  transform: translateX(20px);
-  @media (max-width: 1023px) {
-    transform: translateX(0px);
-    width: auto;
-  }
-`;
-
 export const NoMobileDisplay = styled.div`
   display: inline;
+  white-space: nowrap;
   @media (max-width: 767px) {
     display: none;
   }

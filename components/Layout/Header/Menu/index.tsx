@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
-import { MenuOutlined } from "@ant-design/icons";
 import Drawer from "../../../UI/Drawer";
+import Icon from "../../../UI/Icons";
 
 const BoutonMenu = styled.div`
   font-size: 20px;
@@ -27,7 +27,7 @@ const Phi = styled.span`
 `;
 
 const TexteTitre = styled.div`
-  font-size: 30px;
+  font-size: 24px;
   margin: 10px;
 `;
 
@@ -174,7 +174,7 @@ const Menu = () => {
         </Drawer>
         <BoutonMenu onClick={() => setMenu(true)}>
           MENU
-          <MenuOutlined style={{ marginLeft: "5px" }} />
+          <Icon type="Menu" style={{ marginLeft: "5px" }} />
         </BoutonMenu>
         <TexteTitre>
           <Phi>φ</Phi>d<Phi>'</Phi>

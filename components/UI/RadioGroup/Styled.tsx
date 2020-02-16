@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const RadioGroup = styled.div`
   display: flex;
   width: 100%;
-  border: 1px solid ${props => props.theme.main};
+  border: 1px solid ${props => props.theme.border};
 `;
 
 export type RadioLabelT = {
@@ -11,17 +11,15 @@ export type RadioLabelT = {
 };
 
 export const RadioLabel = styled.label<RadioLabelT>`
-  border: 1px solid ${props => (props.active ? "#096dd9" : "transparent")};
-  color: ${props => (props.active ? "#096dd9" : "currentColor")};
+  color: ${props => (props.active ? props.theme.background : props.theme.main)};
+  background-color: ${props =>
+    props.active ? props.theme.border : "transparent"};
   padding: 5px;
   text-align: center;
   flex: 1;
   cursor: pointer;
   box-shadow: ${props => (props.active ? "0 0 1px 1px" : "none")};
-  transition: all 500ms;
-  &:hover {
-    color: #096dd9;
-  }
+  transition: all 200ms;
 `;
 
 export const RadioInput = styled.input.attrs(() => ({

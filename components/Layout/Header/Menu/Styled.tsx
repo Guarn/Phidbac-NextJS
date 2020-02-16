@@ -7,8 +7,11 @@ export const ConteneurPartieDroite = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  user-select: none;
   font-weight: bold;
+  user-select: none;
+  a {
+    font-weight: bold;
+  }
   cursor: pointer;
   z-index: 1000;
 `;

@@ -1,16 +1,16 @@
-import { Tabs, Select, Divider, Radio, Slider, Button, Input } from "antd";
 import * as S from "./Styled";
-import {
-  FilterOutlined,
-  ReloadOutlined,
-  SearchOutlined,
-  QuestionCircleOutlined
-} from "@ant-design/icons";
+
 import Axios from "../../Fonctionnels/Axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
-const { Option } = Select;
+import Divider from "../../UI/Divider";
+import Button from "../../UI/Button";
+import SelectMultiple from "../../UI/SelectMultiple";
+import RadioGroup from "../../UI/RadioGroup";
+import Slider from "../../UI/Slider";
+import MenuSlide from "../../UI/MenuSlide";
+import CheckGroup from "../../UI/CheckGroup";
+import Input from "../../UI/Input";
 
 export type AnneeT = {
   Annee: number;
@@ -18,7 +18,7 @@ export type AnneeT = {
 };
 
 export type AuteurT = {
-  Auteur: number;
+  Auteur: string;
   Menu: boolean;
   NbSujets: number;
 };
@@ -79,7 +79,7 @@ const initialFiltresState = {
 
 const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
   const router = useRouter();
-  const [state, setState] = useState(initialFiltresState);
+  const [state, setState] = useState<ElementsCochesI>(initialFiltresState);
   const rechercheInstantanee = async (e: any[], cat: string) => {
     setState({
       ...state,
@@ -121,138 +121,67 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
       }}
     >
       <S.ConteneurFiltres>
-        <Tabs size="small" defaultActiveKey="1">
-          <Tabs.TabPane
-            tab={
-              <span>
-                <FilterOutlined />
-                FILTRES
-              </span>
-            }
-            key="1"
-          >
+        <MenuSlide defaultTab="0">
+          <MenuSlide.Tabs icon="Filter" title="FILTRES" key="0">
             <Divider
-              style={{
-                marginBottom: "5px",
-                marginTop: "0"
-              }}
-            >
-              Notions
-            </Divider>
-            <Select
-              mode="multiple"
-              value={state.notions}
-              style={{ width: "100%" }}
-              placeholder="Toutes les notions"
+              text="Notions"
+              align="center"
+              style={{ marginTop: "15px" }}
+            />
+            <SelectMultiple
+              listeEntrees={menu.notions.map(val => val.Notion)}
               onChange={e => {
                 rechercheInstantanee(e, "notions");
               }}
-            >
-              {menu.notions.map((el, index) => {
-                return (
-                  <Option key={el["Notion"]} value={el["Notion"]}>
-                    {el["Notion"]}
-                  </Option>
-                );
-              })}
-            </Select>
-            <Divider style={{ marginBottom: "5px" }}>Séries</Divider>
-
-            <Select
-              mode="multiple"
-              value={state.series}
-              style={{ width: "100%" }}
-              placeholder="Toutes les séries"
+            />
+            <Divider text="Séries" align="center" />
+            <SelectMultiple
+              listeEntrees={menu.series.map(val => val.Serie)}
               onChange={e => rechercheInstantanee(e, "series")}
-            >
-              {menu.series.map((el, index) => {
-                return (
-                  <Option key={el["Serie"]} value={el["Serie"]}>
-                    {el["Serie"]}
-                  </Option>
-                );
-              })}
-            </Select>
+            />
 
-            <Divider style={{ marginBottom: "5px" }}>Destinations</Divider>
-            <Select
-              mode="multiple"
-              value={state.destinations}
-              style={{ width: "100%" }}
-              placeholder="Toutes les destinations"
+            <Divider text="Destinations" align="center" />
+            <SelectMultiple
+              listeEntrees={menu.destinations.map(val => val.Destination)}
               onChange={e => rechercheInstantanee(e, "destinations")}
-            >
-              {menu.destinations.map((el, index) => {
-                return (
-                  <Option key={el["Destination"]} value={el["Destination"]}>
-                    {el["Destination"]}
-                  </Option>
-                );
-              })}
-            </Select>
-            <Divider style={{ marginBottom: "5px" }}>Auteurs</Divider>
-            <Select
-              mode="multiple"
-              value={state.auteurs}
-              style={{ width: "100%" }}
-              placeholder="Tous les auteurs"
+            />
+            <Divider text="Auteurs" align="center" />
+            <SelectMultiple
+              listeEntrees={menu.auteurs.map(val => val.Auteur)}
               onChange={e => rechercheInstantanee(e, "auteurs")}
-            >
-              {menu.auteurs.map(el => {
-                return (
-                  <Option key={el["Auteur"]} value={el["Auteur"]}>
-                    {el["Auteur"] + " (" + el["NbSujets"] + ")"}
-                  </Option>
-                );
-              })}
-            </Select>
-
-            <Divider style={{ marginBottom: "5px" }}>Sessions</Divider>
-            <Radio.Group
-              size="small"
-              value={state.sessions.length === 4 ? "TOUTES" : state.sessions}
+            />
+            <Divider text="Sessions" align="center" />
+            <RadioGroup
+              defaultValue={"TOUTES"}
               onChange={e => {
-                if (e.target.value === "TOUTES") {
+                if (e === "TOUTES") {
                   rechercheInstantanee(
                     ["NORMALE", "REMPLACEMENT", "SECOURS", "NONDEFINI"],
                     "sessions"
                   );
                 } else {
-                  rechercheInstantanee(e.target.value, "sessions");
+                  rechercheInstantanee(new Array(e), "sessions");
                 }
               }}
             >
-              <Radio.Button value="TOUTES">Toutes</Radio.Button>
-              <Radio.Button value="NORMALE">Norm.</Radio.Button>
-              <Radio.Button value="REMPLACEMENT">Rempl.</Radio.Button>
-              <Radio.Button value="SECOURS">Secours</Radio.Button>
-            </Radio.Group>
-
-            <Divider style={{ marginBottom: "5px" }}>Années</Divider>
+              <RadioGroup.Radio value="TOUTES">Toutes</RadioGroup.Radio>
+              <RadioGroup.Radio value="NORMALE">Norm.</RadioGroup.Radio>
+              <RadioGroup.Radio value="REMPLACEMENT">Rempl.</RadioGroup.Radio>
+              <RadioGroup.Radio value="SECOURS">Secours</RadioGroup.Radio>
+            </RadioGroup>
+            <Divider text="Années" align="center" />
             <Slider
-              range
-              style={{
-                marginLeft: "6%",
-                marginRight: "6%"
-              }}
-              max={2018}
-              min={1996}
-              value={[state.annees[0], state.annees[1]]}
-              marks={{
-                [state.annees[0].toString()]: state.annees[0].toString(),
-                [state.annees[1].toString()]: state.annees[1].toString()
-              }}
-              step={1}
-              tooltipVisible={false}
-              onChange={(e: any) => {
-                let valeurBasse = e[0];
-                let valeurHaute = e[1];
-
-                rechercheInstantanee([valeurBasse, valeurHaute], "annees");
+              range={[1996, 2019]}
+              momo={e => {
+                rechercheInstantanee(e, "annees");
               }}
             />
-
-            <Divider style={{ marginTop: "40px" }} />
+            <Divider
+              align="center"
+              style={{
+                marginBottom: "20px"
+              }}
+            />
             <Button
               onClick={() => {
                 Axios.get("/sujets/sujetscount").then(rep => {
@@ -264,80 +193,50 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                   );
                 });
               }}
-              size="small"
-              style={{
-                backgroundColor: "#e2e0d8",
-                borderColor: "#919191",
-                height: "30px"
-              }}
+              size="normal"
               block
             >
               Réinitialiser les filtres
-              <ReloadOutlined />
             </Button>
-          </Tabs.TabPane>
+          </MenuSlide.Tabs>
           {
             // NOTE FILTRES EXPRESSION
 
-            <Tabs.TabPane
-              tab={
-                <span>
-                  <SearchOutlined />
-                  EXPRESSION
-                </span>
-              }
-              key="2"
-            >
-              <div style={{ fontWeight: "bold" }}>Recherche :</div>
+            <MenuSlide.Tabs icon="Search" title="EXPRESSIONS" key="1">
+              <div style={{ fontWeight: "bold", marginTop: "15px" }}>
+                Recherche :
+              </div>
               <Input
-                value={state.recherche}
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  borderColor: "rgba(0,0,0,0.3)",
-                  marginTop: "10px",
-                  marginBottom: "10px"
-                }}
+                initialValue={state.recherche}
                 onChange={val => {
-                  setState({ ...state, recherche: val.target.value });
+                  setState({ ...state, recherche: val.currentTarget.value });
                 }}
                 placeholder="un ou plusieurs mots, expression"
-              ></Input>
-              <Radio.Group
+              />
+              <CheckGroup
+                style={{ marginTop: "10px" }}
                 onChange={val => {
-                  setState({ ...state, typeRecherche: val.target.value });
+                  setState({
+                    ...state,
+                    typeRecherche: val.target.value
+                  });
                 }}
-                value={state.typeRecherche}
+                defaultValue={state.typeRecherche}
               >
-                <Radio value="exacte">
+                <CheckGroup.Radio value="exacte">
                   Expression exacte
-                  <QuestionCircleOutlined
-                    style={{
-                      color: "grey",
-                      marginLeft: "5px"
-                    }}
-                  />
-                </Radio>
-                <Radio value="tousLesMots">
+                </CheckGroup.Radio>
+                <CheckGroup.Radio value="tousLesMots">
                   Tous les mots
-                  <QuestionCircleOutlined
-                    style={{
-                      color: "grey",
-                      marginLeft: "5px"
-                    }}
-                  />
-                </Radio>
-                <Radio value="unDesMots">
+                </CheckGroup.Radio>
+                <CheckGroup.Radio value="unDesMots">
                   Un des mots
-                  <QuestionCircleOutlined
-                    style={{
-                      color: "grey",
-                      marginLeft: "5px"
-                    }}
-                  />
-                </Radio>
-              </Radio.Group>
-              <Divider style={{ marginTop: "40px" }} />
+                </CheckGroup.Radio>
+              </CheckGroup>
+              <Divider align="center" />
               <Button
+                style={{ marginTop: "15px" }}
+                block
                 onClick={() => {
                   Axios.get("/sujets/sujetscount").then(rep => {
                     setListeSujet(rep.data);
@@ -351,33 +250,21 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                   });
                 }}
                 size="small"
-                style={{
-                  marginBottom: "10px",
-                  backgroundColor: "#e2e0d8",
-                  borderColor: "#919191"
-                }}
-                block
               >
                 Réinitialiser les filtres
-                <ReloadOutlined />
               </Button>
               <Button
+                style={{ marginTop: "5px" }}
+                block
                 onClick={() => {
                   rechercheExpression();
                 }}
-                size="large"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  borderColor: "rgba(0,0,0,0.3)"
-                }}
-                block
               >
-                <SearchOutlined />
                 Recherche
               </Button>
-            </Tabs.TabPane>
+            </MenuSlide.Tabs>
           }
-        </Tabs>
+        </MenuSlide>
       </S.ConteneurFiltres>
     </div>
   );
