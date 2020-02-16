@@ -29,8 +29,7 @@ app.prepare().then(() => {
   expressApp.get("/service-worker.js", (req, res) => {
     const filePath = join(__dirname, ".next", pathname);
 
-      app.serveStatic(req, res, filePath);
-    } 
+    app.serveStatic(req, res, filePath);
   });
 
   expressApp.all("*", (req, res) => {
