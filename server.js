@@ -4,7 +4,10 @@ const { createServer } = require("https");
 const { join } = require("path");
 const { parse } = require("url");
 const http = require("http");
+const express = require("express");
 const { createSecureServer } = require("http2");
+const expressApp = express();
+const spdy = require("spdy");
 
 const app = next({ dev: process.env.NODE_ENV !== "production" });
 const handle = app.getRequestHandler();
@@ -16,6 +19,21 @@ const options = {
 };
 
 app.prepare().then(() => {
+  expressApp.use(compression());
+
+  expressApp.all("*", (req, res) => {
+    return handle(req, res);
+  });
+  spdy.createServer(options, expressApp).listen(443, error => {
+    if (error) {
+      console.error(error);
+      return process.exit(1);
+    } else {
+      console.log(`HTTP/2 server listening on port: ${port}`);
+    }
+  });
+
+  /* A relancer
   createServer(options, (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
@@ -29,7 +47,7 @@ app.prepare().then(() => {
       handle(req, res, parsedUrl);
     }
   }).listen(443, () => {});
-
+*/
   http
     .createServer(function(req, res) {
       res.writeHead(301, {
