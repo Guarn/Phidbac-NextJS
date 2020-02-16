@@ -1,7 +1,7 @@
 const next = require("next");
 const fs = require("fs");
 const { createServer } = require("https");
-const { join } = require("path");
+const path = require("path");
 const { parse } = require("url");
 const http = require("http");
 const express = require("express");
