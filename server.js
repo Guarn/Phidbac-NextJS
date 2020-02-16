@@ -30,7 +30,7 @@ app.prepare().then(() => {
       console.error(error);
       return process.exit(1);
     } else {
-      console.log(`HTTP/2 server listening on port: ${port}`);
+      console.log(`HTTP/2 server listening on port: 443`);
     }
   });
 
