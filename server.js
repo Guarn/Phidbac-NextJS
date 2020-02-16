@@ -25,8 +25,11 @@ app.prepare().then(() => {
   expressApp.all("*", (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
+    res.setHeader("Cache-Control", "public, max-age=31557600");
     // handle GET request to /service-worker.js
     if (pathname === "/service-worker.js") {
+      console.log("hum");
+
       const filePath = join(__dirname, ".next", pathname);
 
       app.serveStatic(req, res, filePath);
@@ -38,6 +41,7 @@ app.prepare().then(() => {
   spdy.createServer(options, expressApp).listen(443, error => {
     if (error) {
       console.error(error);
+      return process.exit(1);
     } else {
       console.log(`HTTP/2 server listening on port: 443`);
     }
