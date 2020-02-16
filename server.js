@@ -26,22 +26,19 @@ app.prepare().then(() => {
     return app.render(req, res, "/", req.query);
   });
 
+  expressApp.get("/service-worker.js", (req, res) => {
+    const filePath = join(__dirname, ".next", pathname);
+
+      app.serveStatic(req, res, filePath);
+    } 
+  });
+
   expressApp.all("*", (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
-    console.log(pathname);
 
     res.setHeader("Cache-Control", "public, max-age=31557600");
-    // handle GET request to /service-worker.js
-    if (pathname === "/service-worker.js") {
-      console.log("hum");
 
-      const filePath = join(__dirname, ".next", pathname);
-
-      app.serveStatic(req, res, filePath);
-    } else {
-      handle(req, res, parsedUrl);
-    }
     return handle(req, res);
   });
   spdy.createServer(options, expressApp).listen(443, error => {
