@@ -8,6 +8,7 @@ const express = require("express");
 const { createSecureServer } = require("http2");
 const expressApp = express();
 const spdy = require("spdy");
+const compression = require("compression");
 
 const app = next({ dev: process.env.NODE_ENV !== "production" });
 const handle = app.getRequestHandler();
