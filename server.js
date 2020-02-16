@@ -38,7 +38,6 @@ app.prepare().then(() => {
   spdy.createServer(options, expressApp).listen(443, error => {
     if (error) {
       console.error(error);
-      return process.exit(1);
     } else {
       console.log(`HTTP/2 server listening on port: 443`);
     }
