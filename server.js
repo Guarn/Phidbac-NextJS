@@ -23,6 +23,17 @@ app.prepare().then(() => {
   expressApp.use(compression());
 
   expressApp.all("*", (req, res) => {
+    const parsedUrl = parse(req.url, true);
+    const { pathname } = parsedUrl;
+    res.setHeader("Cache-Control", "public, max-age=31557600");
+    // handle GET request to /service-worker.js
+    if (pathname === "/service-worker.js") {
+      const filePath = join(__dirname, ".next", pathname);
+
+      app.serveStatic(req, res, filePath);
+    } else {
+      handle(req, res, parsedUrl);
+    }
     return handle(req, res);
   });
   spdy.createServer(options, expressApp).listen(443, error => {
