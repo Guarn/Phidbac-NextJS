@@ -22,14 +22,13 @@ const options = {
 app.prepare().then(() => {
   expressApp.use(compression());
 
-  expressApp.get("/", (req, res) => {
-    return app.render(req, res, "/", req.query);
-  });
-
   expressApp.get("/service-worker.js", (req, res) => {
-    const filePath = join(__dirname, ".next", pathname);
-
-    app.serveStatic(req, res, filePath);
+    res.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate"
+    );
+    res.set("Content-Type", "application/javascript");
+    app.serveStatic(req, res, path.resolve("./.next/service-worker.js"));
   });
 
   expressApp.all("*", (req, res) => {
