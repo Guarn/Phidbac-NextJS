@@ -2,15 +2,32 @@ import * as S from "./Styled";
 import alphabet from "../alphabet";
 import Link from "next/link";
 import * as Scroll from "react-scroll";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const ListeIndex = ({ listeIndex, id }: any) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showListe, setShowListe] = useState(false);
+  const [url, setUrl] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.asPath !== url) {
+      setShowListe(false);
+    }
+  });
+
   return (
     <S.ConteneurListe id="scrollContainer">
+      <S.FloatButton
+        icon="DocList"
+        onClick={() => {
+          setShowListe(!showListe);
+          setUrl(router.asPath);
+        }}
+      />
       {alphabet.map(item => {
         return (
-          <div key={`Bloclettre-${item}`}>
+          <S.Bloc key={`Bloclettre-${item}`} show={showListe}>
             <Scroll.Element name={`lettre-${item}`} className="element">
               <S.LettreTitre>{item}</S.LettreTitre>
             </Scroll.Element>
@@ -38,7 +55,7 @@ const ListeIndex = ({ listeIndex, id }: any) => {
                   );
                 })}
             </S.BlocLettre>
-          </div>
+          </S.Bloc>
         );
       })}
     </S.ConteneurListe>

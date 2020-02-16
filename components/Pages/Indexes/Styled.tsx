@@ -10,8 +10,8 @@ export const Conteneur = styled.div`
   margin-top: 5%;
   @media (max-width: 767px) {
     flex-direction: column;
-    height: calc(100vh - 65px);
-    margin-top: 65px;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
 `;
 
