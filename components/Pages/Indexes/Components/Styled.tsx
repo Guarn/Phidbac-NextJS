@@ -97,7 +97,11 @@ export interface BlocI {
 }
 
 export const Bloc = styled.div<BlocI>`
-  display: ${props => (props.show ? "block" : "none")};
+  display: block;
+
+  @media (max-width: 767px) {
+    display: ${props => (props.show ? "block" : "none")};
+  }
 `;
 
 interface elementProps {

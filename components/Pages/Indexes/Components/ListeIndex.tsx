@@ -4,6 +4,7 @@ import Link from "next/link";
 import * as Scroll from "react-scroll";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { scrollToTop } from "react-scroll/modules/mixins/animate-scroll";
 
 const ListeIndex = ({ listeIndex, id }: any) => {
   const [showListe, setShowListe] = useState(false);
@@ -22,6 +23,7 @@ const ListeIndex = ({ listeIndex, id }: any) => {
         icon="DocList"
         onClick={() => {
           setShowListe(!showListe);
+          window.scroll(0, 0);
           setUrl(router.asPath);
         }}
       />
