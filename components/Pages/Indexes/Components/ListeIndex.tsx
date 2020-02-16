@@ -17,7 +17,7 @@ const ListeIndex = ({ listeIndex, id }: any) => {
   });
 
   return (
-    <S.ConteneurListe id="scrollContainer">
+    <S.ConteneurListe id="scrollContainer" show={showListe}>
       <S.FloatButton
         icon="DocList"
         onClick={() => {
