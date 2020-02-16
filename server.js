@@ -22,6 +22,10 @@ const options = {
 app.prepare().then(() => {
   expressApp.use(compression());
 
+  expressApp.get("/", (req, res) => {
+    return app.render(req, res, "/", req.query);
+  });
+
   expressApp.all("*", (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
