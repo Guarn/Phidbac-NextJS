@@ -25,6 +25,8 @@ app.prepare().then(() => {
   expressApp.all("*", (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
+    console.log(pathname);
+
     res.setHeader("Cache-Control", "public, max-age=31557600");
     // handle GET request to /service-worker.js
     if (pathname === "/service-worker.js") {
