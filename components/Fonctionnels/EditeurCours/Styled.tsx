@@ -21,7 +21,7 @@ export type WidthProps = {
   affichage: string;
 };
 export const ConteneurCours = styled.div<WidthProps>`
-  width: ${props => props.affichage !== "Index" && "847px"};
+  width: ${props => props.affichage !== "Index" && "731px"};
 
   overflow: auto;
   padding-right: 10px;
@@ -31,7 +31,7 @@ export const ConteneurCours = styled.div<WidthProps>`
     props.affichage === "Cours" ? "calc(100% - 42px)" : "100%"};
   @media (max-width: 1023px) {
     width: 90%;
-    max-width: 847px;
+    max-width: 731px;
     padding-right: 5px;
     padding-left: 5px;
   }
