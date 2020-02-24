@@ -234,10 +234,11 @@ export const DescriptionCat = styled.div`
 DescriptionCat.displayName = `DescriptionCat`;
 
 export const GrandPhi = styled.div`
-  width: 85%;
-
+  display: flex;
+  height: 100%;
+  width: 100%;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 
   .DEVOIR {
     fill: #bfbfbf;

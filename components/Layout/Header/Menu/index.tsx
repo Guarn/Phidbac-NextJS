@@ -1,13 +1,15 @@
 import * as S from "./Styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Drawer from "../../../UI/Drawer";
 import Icon from "../../../UI/Icons";
 import Modal from "../../../UI/Modal";
-import { Formik } from "formik";
 import FormBasic from "./FormBasic";
+import cookie from "js-cookie";
+import Axios from "../../../Fonctionnels/Axios";
+import { userInfo } from "os";
 
 const BoutonMenu = styled.div`
   font-size: 20px;
@@ -33,11 +35,33 @@ const TexteTitre = styled.div`
   font-size: 24px;
   margin: 10px;
 `;
+interface UserI {
+  connecte: boolean;
+  prenom?: string;
+  nom?: string;
+  email?: string;
+  grade?: "Administrateur" | "Visiteur" | "Eleve";
+}
 
 const Menu = () => {
   const router = useRouter();
   const [menu, setMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState<UserI>({ connecte: false });
+
+  useEffect(() => {
+    if (cookie.get("token")) {
+      if (!user.connecte) {
+        Axios.get("/p")
+          .then(rep => {
+            setUser({ ...rep.data, connecte: true });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    }
+  });
 
   return (
     <S.Menu>
@@ -110,19 +134,27 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <S.BoutonLien selected={false} onClick={() => setShowModal(true)}>
-            Se connecter
-            <Modal
-              style={{
-                padding: "20px",
-                minWidth: "300px"
-              }}
-              showModal={showModal}
-              closeModal={() => setShowModal(false)}
-            >
-              <FormBasic />
-            </Modal>
-          </S.BoutonLien>
+
+          {!user.connecte && (
+            <S.BoutonLien selected={false} onClick={() => setShowModal(true)}>
+              Se connecter
+              <Modal
+                style={{
+                  padding: "20px",
+                  minWidth: "300px"
+                }}
+                showModal={showModal}
+                closeModal={() => setShowModal(false)}
+              >
+                <FormBasic onCompleted={() => setShowModal(false)} />
+              </Modal>
+            </S.BoutonLien>
+          )}
+          {user.connecte && (
+            <S.BoutonLien selected={true} onClick={() => setShowModal(true)}>
+              {user.prenom + " " + user.nom}
+            </S.BoutonLien>
+          )}
         </S.ConteneurPartieDroite>
       </S.AffichageDesktop>
 
