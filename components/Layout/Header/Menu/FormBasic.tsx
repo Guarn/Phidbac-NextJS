@@ -42,6 +42,7 @@ const FormBasic = ({ onCompleted }: FormBasicI) => {
 
               cookie.set("token", "Bearer " + rep.data.token, {
                 path: "/",
+                domain: ".phidbac.fr",
                 expires: dateExp
               });
               router.reload();
