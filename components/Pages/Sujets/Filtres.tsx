@@ -69,7 +69,7 @@ export interface ElementsCochesI {
 const initialFiltresState = {
   notions: [],
   series: [],
-  annees: [1996, 2018],
+  annees: [1996, 2019],
   destinations: [],
   auteurs: [],
   sessions: ["NORMALE", "REMPLACEMENT", "SECOURS", "NONDEFINI"],
@@ -130,29 +130,35 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             />
             <SelectMultiple
               listeEntrees={menu.notions.map(val => val.Notion)}
+              selected={state.notions}
               onChange={e => {
                 rechercheInstantanee(e, "notions");
               }}
             />
             <Divider text="Séries" align="center" />
             <SelectMultiple
+              selected={state.series}
               listeEntrees={menu.series.map(val => val.Serie)}
               onChange={e => rechercheInstantanee(e, "series")}
             />
 
             <Divider text="Destinations" align="center" />
             <SelectMultiple
+              selected={state.destinations}
               listeEntrees={menu.destinations.map(val => val.Destination)}
               onChange={e => rechercheInstantanee(e, "destinations")}
             />
             <Divider text="Auteurs" align="center" />
             <SelectMultiple
+              selected={state.auteurs}
               listeEntrees={menu.auteurs.map(val => val.Auteur)}
               onChange={e => rechercheInstantanee(e, "auteurs")}
             />
             <Divider text="Sessions" align="center" />
             <RadioGroup
-              defaultValue={"TOUTES"}
+              selected={
+                state.sessions.length === 4 ? "TOUTES" : state.sessions[0]
+              }
               onChange={e => {
                 if (e === "TOUTES") {
                   rechercheInstantanee(
@@ -172,7 +178,8 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             <Divider text="Années" align="center" />
             <Slider
               range={[1996, 2019]}
-              momo={e => {
+              initialValue={state.annees}
+              onChange={e => {
                 rechercheInstantanee(e, "annees");
               }}
             />
@@ -221,7 +228,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                     typeRecherche: val.target.value
                   });
                 }}
-                defaultValue={state.typeRecherche}
+                selected={state.typeRecherche}
               >
                 <CheckGroup.Radio value="exacte">
                   Expression exacte

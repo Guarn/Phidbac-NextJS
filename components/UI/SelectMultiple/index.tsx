@@ -5,10 +5,10 @@ import Icon from "../Icons";
 export interface indexI {
   listeEntrees: string[];
   onChange: (val: string[]) => void;
+  selected: string[];
 }
 
-const index: React.FC<indexI> = ({ listeEntrees, onChange }) => {
-  const [selected, setSelected] = useState<string[]>([]);
+const index: React.FC<indexI> = ({ listeEntrees, onChange, selected }) => {
   const [valChamp, setValChamp] = useState<string>("");
   const [showListe, setShowListe] = useState(false);
   const refInput = useRef<HTMLInputElement>(null);
@@ -16,10 +16,8 @@ const index: React.FC<indexI> = ({ listeEntrees, onChange }) => {
 
   const handleSelect = (val: string) => {
     if (!selected.includes(val)) {
-      setSelected([...selected, val]);
       onChange([...selected, val]);
     } else {
-      setSelected(selected.filter(el => el !== val));
       onChange(selected.filter(el => el !== val));
     }
   };

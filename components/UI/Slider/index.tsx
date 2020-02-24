@@ -7,9 +7,9 @@ export interface indexI extends React.HTMLAttributes<HTMLDivElement> {
   range: number[];
   marks?: SliderValue;
   step?: number;
-  initialValue?: [number, number];
+  initialValue?: [number, number] | number[];
   tooltip?: boolean;
-  momo: (event: [number, number]) => void;
+  onChange: (event: any) => void;
 }
 
 /**
@@ -27,7 +27,7 @@ const index: React.FC<indexI> = ({
   marks,
   tooltip,
   initialValue = range,
-  momo,
+  onChange,
   step = 1,
   ...rest
 }) => {
@@ -97,7 +97,7 @@ const index: React.FC<indexI> = ({
         setDraggingDroite(true);
         setCurseurDroite(c => {
           if (c !== val)
-            momo([
+            onChange([
               Math.round(curseurGauche / stepValue) + range[0],
               Math.round(val / stepValue) + range[0]
             ]);
@@ -106,7 +106,7 @@ const index: React.FC<indexI> = ({
       } else {
         setCurseurGauche(c => {
           if (c !== val)
-            momo([
+            onChange([
               Math.round(val / stepValue) + range[0],
               Math.round(curseurDroite / stepValue) + range[0]
             ]);
@@ -127,7 +127,7 @@ const index: React.FC<indexI> = ({
         setDraggingGauche(true);
         setCurseurGauche(c => {
           if (c !== val)
-            momo([
+            onChange([
               Math.round(val / stepValue) + range[0],
               Math.round(curseurDroite / stepValue) + range[0]
             ]);
@@ -136,7 +136,7 @@ const index: React.FC<indexI> = ({
       } else {
         setCurseurDroite(c => {
           if (c !== val)
-            momo([
+            onChange([
               Math.round(curseurGauche / stepValue) + range[0],
               Math.round(val / stepValue) + range[0]
             ]);

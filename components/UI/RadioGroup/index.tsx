@@ -6,32 +6,23 @@ export type indexI<P> = React.FC<P> & {
 };
 
 export interface Props {
-  defaultValue: string;
+  selected: string;
   onChange: (val: string) => void;
 }
 
-const index: indexI<Props> = ({ children, onChange, defaultValue }) => {
-  const [activeCheck, setActiveCheck] = useState<string>(
-    defaultValue || "NoDefault"
-  );
-
+const index: indexI<Props> = ({ children, onChange, selected }) => {
   return (
     <S.RadioGroup>
       {Children.map(children, (child, index) => {
         if (isValidElement(child)) {
-          if (activeCheck === "NoDefault" && index === 0) {
-            setActiveCheck(child.props.value as string);
-          }
-
           return (
-            <S.RadioLabel active={child.props.value === activeCheck}>
+            <S.RadioLabel active={child.props.value === selected}>
               <S.RadioInput
                 onChange={val => {
                   onChange(val.target.value);
-                  setActiveCheck(val.target.value);
                 }}
                 value={child.props.value}
-                checked={child.props.value === activeCheck}
+                checked={child.props.value === selected}
               />
               <S.RadioTitre>{child.props.children}</S.RadioTitre>
             </S.RadioLabel>
