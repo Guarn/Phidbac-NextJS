@@ -5,6 +5,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import Drawer from "../../../UI/Drawer";
 import Icon from "../../../UI/Icons";
+import Modal from "../../../UI/Modal";
+import { Formik } from "formik";
+import FormBasic from "./FormBasic";
 
 const BoutonMenu = styled.div`
   font-size: 20px;
@@ -34,6 +37,7 @@ const TexteTitre = styled.div`
 const Menu = () => {
   const router = useRouter();
   const [menu, setMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <S.Menu>
@@ -106,7 +110,19 @@ const Menu = () => {
               </S.BoutonLien>
             </a>
           </Link>
-          <S.BoutonLien selected={false}>Se connecter</S.BoutonLien>
+          <S.BoutonLien selected={false} onClick={() => setShowModal(true)}>
+            Se connecter
+            <Modal
+              style={{
+                padding: "20px",
+                minWidth: "300px"
+              }}
+              showModal={showModal}
+              closeModal={() => setShowModal(false)}
+            >
+              <FormBasic />
+            </Modal>
+          </S.BoutonLien>
         </S.ConteneurPartieDroite>
       </S.AffichageDesktop>
 

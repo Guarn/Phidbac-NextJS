@@ -91,3 +91,40 @@ export const AffichageDesktop = styled.div`
   }
 `;
 AffichageDesktop.displayName = `AffichageDesktop`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+`;
+
+export const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
+export const Input = styled.input`
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  padding: 10px;
+`;
+
+export const Entete = styled.div`
+  display: flex;
+`;
+
+export const TitreModal = styled.h2`
+  margin-block-start: 12px;
+  margin-block-end: 0px;
+  margin-left: 12px;
+`;
+
+export const TitreLabel = styled.div`
+  margin-bottom: 5px;
+`;
+
+export const ChampErreur = styled.span`
+  font-size: 14px;
+  color: salmon;
+`;

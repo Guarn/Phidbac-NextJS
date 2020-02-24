@@ -32,7 +32,6 @@ const index: React.FC<indexI> = ({
                 setShouldClose(false);
               }, 200);
             }}
-            {...rest}
           >
             <Card
               modal
@@ -40,6 +39,7 @@ const index: React.FC<indexI> = ({
               onClick={e => {
                 e.stopPropagation();
               }}
+              {...rest}
             >
               {titre && <S.Title>{titre}</S.Title>}
               {children}

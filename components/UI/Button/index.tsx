@@ -13,6 +13,7 @@ export interface ButtonT extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   block?: boolean;
   mobile?: boolean;
+  type?: string;
 }
 
 const Button: React.FC<ButtonT> = ({
@@ -24,6 +25,7 @@ const Button: React.FC<ButtonT> = ({
   disabled = false,
   position = "left",
   mobile = false,
+  type,
   ...rest
 }) => {
   const [anim, setAnim] = useState(false);
@@ -39,6 +41,7 @@ const Button: React.FC<ButtonT> = ({
       mobile={mobile}
       block={block}
       size={size}
+      type={type}
       position={position}
       onClick={(event: SyntheticEvent) => {
         setAnim(true);
