@@ -9,7 +9,7 @@ import Modal from "../../../UI/Modal";
 import FormBasic from "./FormBasic";
 import cookie from "js-cookie";
 import Axios from "../../../Fonctionnels/Axios";
-import { userInfo } from "os";
+import MenuConnecte from "./MenuConnecte";
 
 const BoutonMenu = styled.div`
   font-size: 20px;
@@ -35,7 +35,7 @@ const TexteTitre = styled.div`
   font-size: 24px;
   margin: 10px;
 `;
-interface UserI {
+export interface UserI {
   connecte: boolean;
   prenom?: string;
   nom?: string;
@@ -47,6 +47,7 @@ const Menu = () => {
   const router = useRouter();
   const [menu, setMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [user, setUser] = useState<UserI>({ connecte: false });
 
   useEffect(() => {
@@ -151,9 +152,23 @@ const Menu = () => {
             </S.BoutonLien>
           )}
           {user.connecte && (
-            <S.BoutonLien selected={true} onClick={() => setShowModal(true)}>
+            <S.CtnMenuConnecte
+              onMouseMove={() => setShowMenu(true)}
+              onMouseLeave={() => setShowMenu(false)}
+            >
               {user.prenom + " " + user.nom}
-            </S.BoutonLien>
+              <Icon
+                type="SimpleArrow"
+                style={{ transform: "rotate(90deg)", marginRight: "10px" }}
+              />
+
+              {showMenu && (
+                <MenuConnecte
+                  user={user}
+                  userDispatch={(val: UserI) => setUser(val)}
+                />
+              )}
+            </S.CtnMenuConnecte>
           )}
         </S.ConteneurPartieDroite>
       </S.AffichageDesktop>
