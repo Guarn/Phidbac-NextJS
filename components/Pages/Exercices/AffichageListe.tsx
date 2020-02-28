@@ -14,8 +14,8 @@ const AffichageListe: React.FC<Props> = ({ listeCours }) => {
           <div key={`Cours-${index}`} style={{ marginBottom: "30px" }}>
             <Link
               prefetch={false}
-              href={`/Liste-des-cours/${element.id}`}
-              as={`/Liste-des-cours/${element.id}-${element.Titre.trim()
+              href={`/Liste-des-exercices/${element.id}`}
+              as={`/Liste-des-exercices/${element.id}-${element.Titre.trim()
                 .replace(/\u202f/g, "-")
                 .replace(/ /gi, "-")
                 .replace(/\//g, "-")}`}
