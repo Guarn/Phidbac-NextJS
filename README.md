@@ -3,5 +3,11 @@
 <p align="center">
 Version NextJS + Typescript</p>
 
-<p><img align="center" width="75%" src="./docs/Accueil.png"></p>
+<p align="center" ><img width="75%" src="./docs/Accueil.png"></p>
 <br/>
+
+## Phidbac.fr
+
+## Technos
+
+Nextjs + Typescript + ServiceWorkers + Antd + Express
