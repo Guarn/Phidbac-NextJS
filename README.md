@@ -3,5 +3,5 @@
 <p align="center">
 Version NextJS + Typescript</p>
 
-<p><img width="50%" src="./docs/Accueil.png"></p>
+<p><img align="center" width="75%" src="./docs/Accueil.png"></p>
 <br/>
