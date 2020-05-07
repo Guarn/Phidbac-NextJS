@@ -3,7 +3,7 @@
 <p align="center">
 Version NextJS + Typescript</p>
 
-<p align="center" ><img width="20%" src="./docs/Accueil.png"><img width="20%" src="./docs/Cours.png"><img width="20%" src="./docs/Index.png"><img width="20%" src="./docs/Sujets.png"></p>
+<p align="center" ><img width="40%" src="./docs/Accueil.png"><img width="40%" src="./docs/Cours.png"><img width="40%" src="./docs/Index.png"><img width="40%" src="./docs/Sujets.png"></p>
 <br/>
 
 ## Phidbac.fr
