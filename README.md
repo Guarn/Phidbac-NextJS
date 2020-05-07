@@ -15,4 +15,4 @@ Ce CRM intègre notamment un éditeur de texte avancé pour la rédaction et la 
 
 ## Technos
 
-Nextjs + Typescript + ServiceWorkers + Antd + Express
+Nextjs + Typescript + ServiceWorkers + StyledComponents + Antd + Express
