@@ -2,7 +2,7 @@ import Head from "next/head";
 import Programme from "../components/Pages/Programme";
 import { NextPage } from "next";
 import Layout from "../components/Layout";
-import fetch from "isomorphic-unfetch";
+import Axios from "../components/Fonctionnels/Axios";
 
 const ProgrammeEpreuve: NextPage = (props: any) => {
   return (
@@ -28,16 +28,15 @@ const ProgrammeEpreuve: NextPage = (props: any) => {
 };
 
 ProgrammeEpreuve.getInitialProps = async () => {
-  const res = await fetch("https://www.phidbac.fr:4000/Cours/1");
-  const data = await res.json();
+  const res = await Axios("/cours/1");
 
   return {
     cours: {
-      Titre: data.Titre,
-      Description: data.Description,
-      Contenu: JSON.parse(data.Contenu),
-      type: data.type
-    }
+      titre: res.data[0].titre,
+      description: res.data[0].description,
+      contenu: JSON.parse(res.data[0].contenu),
+      type: res.data[0].type,
+    },
   };
 };
 

@@ -1,7 +1,7 @@
 import * as S from "./Styled";
 
 import Axios from "../../Fonctionnels/Axios";
-import { useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Divider from "../../UI/Divider";
 import Button from "../../UI/Button";
@@ -13,34 +13,35 @@ import CheckGroup from "../../UI/CheckGroup";
 import Input from "../../UI/Input";
 
 export type AnneeT = {
-  Annee: number;
-  Menu: boolean;
+  annee: number;
+  menu: boolean;
 };
 
 export type AuteurT = {
-  Auteur: string;
-  Menu: boolean;
-  NbSujets: number;
+  auteur: string;
+  menu: boolean;
+
+  nb_sujets: number;
 };
 
 export type DestinationT = {
-  Destination: string;
-  Menu: boolean;
+  destination: string;
+  menu: boolean;
 };
 
 export type NotionT = {
-  Notion: string;
-  Menu: boolean;
+  notion: string;
+  menu: boolean;
 };
 
 export type SerieT = {
-  Serie: string;
-  Menu: boolean;
+  serie: string;
+  menu: boolean;
 };
 
 export type SessionT = {
-  Session: string;
-  Menu: boolean;
+  session: string;
+  menu: boolean;
 };
 
 export interface MenuI {
@@ -74,23 +75,24 @@ const initialFiltresState = {
   auteurs: [],
   sessions: ["NORMALE", "REMPLACEMENT", "SECOURS", "NONDEFINI"],
   recherche: "",
-  typeRecherche: "exacte"
+  typeRecherche: "exacte",
 };
 
 const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
   const router = useRouter();
   const [state, setState] = useState<ElementsCochesI>(initialFiltresState);
+  useEffect(() => {}, [state]);
   const rechercheInstantanee = async (e: any[], cat: string) => {
     setState({
       ...state,
-      [cat]: e
+      [cat]: e,
     });
     Axios.post("/resultatsAdmin", {
       elementsCoches: {
         ...state,
-        [cat]: e
-      }
-    }).then(rep => {
+        [cat]: e,
+      },
+    }).then((rep) => {
       setListeSujet(rep.data);
 
       if (rep.data.count > 0) {
@@ -101,10 +103,11 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
       }
     });
   };
+
   const rechercheExpression = () => {
     Axios.post("/resultatsAdmin", {
-      elementsCoches: state
-    }).then(rep => {
+      elementsCoches: state,
+    }).then((rep) => {
       setListeSujet(rep.data);
       if (rep.data.count > 0) {
         router.push(
@@ -117,7 +120,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
   return (
     <div
       style={{
-        position: "relative"
+        position: "relative",
       }}
     >
       <S.ConteneurFiltres>
@@ -129,37 +132,37 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               style={{ marginTop: "15px" }}
             />
             <SelectMultiple
-              listeEntrees={menu.notions.map(val => val.Notion)}
+              listeEntrees={menu.notions.map((val) => val.notion)}
               selected={state.notions}
-              onChange={e => {
+              onChange={(e) => {
                 rechercheInstantanee(e, "notions");
               }}
             />
             <Divider text="Séries" align="center" />
             <SelectMultiple
               selected={state.series}
-              listeEntrees={menu.series.map(val => val.Serie)}
-              onChange={e => rechercheInstantanee(e, "series")}
+              listeEntrees={menu.series.map((val) => val.serie)}
+              onChange={(e) => rechercheInstantanee(e, "series")}
             />
 
             <Divider text="Destinations" align="center" />
             <SelectMultiple
               selected={state.destinations}
-              listeEntrees={menu.destinations.map(val => val.Destination)}
-              onChange={e => rechercheInstantanee(e, "destinations")}
+              listeEntrees={menu.destinations.map((val) => val.destination)}
+              onChange={(e) => rechercheInstantanee(e, "destinations")}
             />
             <Divider text="Auteurs" align="center" />
             <SelectMultiple
               selected={state.auteurs}
-              listeEntrees={menu.auteurs.map(val => val.Auteur)}
-              onChange={e => rechercheInstantanee(e, "auteurs")}
+              listeEntrees={menu.auteurs.map((val) => val.auteur)}
+              onChange={(e) => rechercheInstantanee(e, "auteurs")}
             />
             <Divider text="Sessions" align="center" />
             <RadioGroup
               selected={
                 state.sessions.length === 4 ? "TOUTES" : state.sessions[0]
               }
-              onChange={e => {
+              onChange={(e) => {
                 if (e === "TOUTES") {
                   rechercheInstantanee(
                     ["NORMALE", "REMPLACEMENT", "SECOURS", "NONDEFINI"],
@@ -179,19 +182,19 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
             <Slider
               range={[1996, 2019]}
               initialValue={state.annees}
-              onChange={e => {
+              onChange={(e) => {
                 rechercheInstantanee(e, "annees");
               }}
             />
             <Divider
               align="center"
               style={{
-                marginBottom: "20px"
+                marginBottom: "20px",
               }}
             />
             <Button
               onClick={() => {
-                Axios.get("/sujets/sujetscount").then(rep => {
+                Axios.get("/sujets/sujetscount").then((rep) => {
                   setListeSujet(rep.data);
                   setState(initialFiltresState);
                   router.push(
@@ -215,17 +218,17 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
               </div>
               <Input
                 initialValue={state.recherche}
-                onChange={val => {
+                onChange={(val) => {
                   setState({ ...state, recherche: val.currentTarget.value });
                 }}
                 placeholder="un ou plusieurs mots, expression"
               />
               <CheckGroup
                 style={{ marginTop: "10px" }}
-                onChange={val => {
+                onChange={(val) => {
                   setState({
                     ...state,
-                    typeRecherche: val.target.value
+                    typeRecherche: val.target.value,
                   });
                 }}
                 selected={state.typeRecherche}
@@ -245,7 +248,7 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
                 style={{ marginTop: "15px" }}
                 block
                 onClick={() => {
-                  Axios.get("/sujets/sujetscount").then(rep => {
+                  Axios.get("/sujets/sujetscount").then((rep) => {
                     setListeSujet(rep.data);
                     setState(initialFiltresState);
                     if (rep.data.count > 0) {
@@ -277,4 +280,4 @@ const PartieFiltres: React.FC<MenuI> = ({ menu, setListeSujet }) => {
   );
 };
 
-export default PartieFiltres;
+export default memo(PartieFiltres);

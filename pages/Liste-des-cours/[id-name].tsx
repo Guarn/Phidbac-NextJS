@@ -4,18 +4,20 @@ import fetch from "isomorphic-unfetch";
 import Button from "../../components/UI/Button";
 
 import EditeurCours, {
-  CoursI
+  CoursI,
 } from "../../components/Fonctionnels/EditeurCours";
 import * as S from "../../components/Pages/Cours/AffichageCours.styled";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Axios from "../../components/Fonctionnels/Axios";
 
 export interface Props {
   cours: CoursI;
 }
 
 const AffichageCours = ({ cours }: Props) => {
-  const [El, setEl] = useState();
+  const [El, setEl] = useState<number>();
+
   useEffect(() => {
     if (typeof document !== "undefined") {
       setEl(
@@ -26,14 +28,15 @@ const AffichageCours = ({ cours }: Props) => {
   return (
     <>
       <Head>
-        <title>{`${cours.type?.toUpperCase()} : ${cours.Titre}`}</title>
+        <title>{`${cours.type?.toUpperCase()} : ${cours.titre}`}</title>
         <meta charSet="utf-8" />
-        <meta name="description" content={cours.Description} />
+        <meta name="description" content={cours.description} />
         <link
           rel="canonical"
           href={`https://www.phidbac.fr/Liste-des-cours/${
             cours.id
-          }-${cours.Titre?.trim()
+          }-${cours.titre
+            ?.trim()
             .replace(/\u202f/g, "-")
             .replace(/ /gi, "-")
             .replace(/\//g, "-")}`}
@@ -66,10 +69,9 @@ export default AffichageCours;
 
 AffichageCours.getInitialProps = async ({ query }: any) => {
   const id = query["id-name"].split("-")[0];
-  const res = await fetch(`https://www.phidbac.fr:4000/cours/${id}`);
-  const data1 = await res.json();
+  const res: any = await Axios(`/cours/${id}`);
 
   return {
-    cours: { ...data1, Contenu: JSON.parse(data1.Contenu) }
+    cours: { ...res.data[0], contenu: JSON.parse(res.data[0].contenu) },
   };
 };

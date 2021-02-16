@@ -3,22 +3,22 @@ import { NextPage } from "next";
 
 export interface SujetI {
   id: number;
-  Serie: string;
-  Destination: string[];
-  Session: string;
-  Code: string;
-  Sujet1: string;
-  Notions1: string[];
-  Sujet2: string;
-  Notions2: string[];
-  Sujet3: string;
-  Notions3: string[];
-  Problemes: boolean;
-  Auteur: string;
-  Annee: number;
-  Sujet1Naked: string;
-  Sujet2Naked: string;
-  Sujet3Naked: string;
+  serie: string;
+  destination: string[];
+  session: string;
+  code: string;
+  sujet1: string;
+  notions1: string[];
+  sujet2: string;
+  notions2: string[];
+  sujet3: string;
+  notions3: string[];
+  problemes: boolean;
+  auteur: string;
+  annee: number;
+  sujet1_naked: string;
+  sujet2_naked: string;
+  sujet3_naked: string;
 }
 export interface RespSujetI {
   noResult: boolean;
@@ -26,7 +26,7 @@ export interface RespSujetI {
 }
 
 const AffichageSujet: NextPage<RespSujetI> = ({ sujet, noResult }) => {
-  const { id, Annee, Serie, Destination, Session, Code } = sujet;
+  const { id, annee, serie, destination, session, code } = sujet;
 
   switch (noResult) {
     case false:
@@ -38,11 +38,11 @@ const AffichageSujet: NextPage<RespSujetI> = ({ sujet, noResult }) => {
           <S.Details>
             <S.PartieGauche>
               <S.Etiquette>{id}</S.Etiquette>
-              <S.Etiquette>{Annee}</S.Etiquette>
-              <S.Etiquette>{Serie}</S.Etiquette>
-              <S.Etiquette>{Destination}</S.Etiquette>
-              <S.Etiquette>{Session}</S.Etiquette>
-              <S.Etiquette>{Code}</S.Etiquette>
+              <S.Etiquette>{annee}</S.Etiquette>
+              <S.Etiquette>{serie}</S.Etiquette>
+              <S.Etiquette>{destination}</S.Etiquette>
+              <S.Etiquette>{session}</S.Etiquette>
+              <S.Etiquette>{code}</S.Etiquette>
             </S.PartieGauche>
           </S.Details>
         </S.ConteneurSujet>
@@ -66,16 +66,16 @@ const Enonce: React.FC<EnonceT> = ({ numSujet, sujet }) => {
   let notions, texte;
   switch (numSujet) {
     case 1:
-      notions = sujet.Notions1;
-      texte = sujet.Sujet1;
+      notions = sujet.notions1;
+      texte = sujet.sujet1;
       break;
     case 2:
-      notions = sujet.Notions2;
-      texte = sujet.Sujet2;
+      notions = sujet.notions2;
+      texte = sujet.sujet2;
       break;
     case 3:
-      notions = sujet.Notions3;
-      texte = sujet.Sujet3;
+      notions = sujet.notions3;
+      texte = sujet.sujet3;
       break;
   }
 

@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Layout from "../components/Layout";
 import fetch from "isomorphic-unfetch";
 import ListeExercice from "../components/Pages/Exercices";
+import Axios from "../components/Fonctionnels/Axios";
 
 const index: NextPage = ({ listeDesExercices }: any) => {
   return (
@@ -28,11 +29,10 @@ const index: NextPage = ({ listeDesExercices }: any) => {
 };
 
 index.getInitialProps = async () => {
-  const res = await fetch("https://www.phidbac.fr:4000/exercices/Liste");
-  const data = await res.json();
+  const res = await Axios("/exercices/Liste");
 
   return {
-    listeDesExercices: data
+    listeDesExercices: res.data,
   };
 };
 

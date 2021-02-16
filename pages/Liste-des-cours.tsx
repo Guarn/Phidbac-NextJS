@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { NextPage } from "next";
 import Layout from "../components/Layout";
-import fetch from "isomorphic-unfetch";
 import ListeCours from "../components/Pages/Cours";
+import Axios from "../components/Fonctionnels/Axios";
 
 const index: NextPage = ({ listeDesCours }: any) => {
   return (
@@ -25,11 +25,10 @@ const index: NextPage = ({ listeDesCours }: any) => {
 };
 
 index.getInitialProps = async () => {
-  const res = await fetch("https://www.phidbac.fr:4000/Cours/Liste");
-  const data = await res.json();
+  const res = await Axios("/Cours/Liste");
 
   return {
-    listeDesCours: data
+    listeDesCours: res.data,
   };
 };
 

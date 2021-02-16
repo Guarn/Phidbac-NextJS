@@ -25,7 +25,7 @@ export const ConteneurIcoProgress = styled.div`
 `;
 
 export const IcoProgress = styled.div`
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   height: 24px;
   width: 24px;
   border: 1px solid #707070;
@@ -45,9 +45,10 @@ export const ConteneurTimeline = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
+  padding-right: 10px;
   @media (max-width: 767px) {
     overflow: initial;
-    padding-right: 0px;
+    padding-right: 10px;
     padding-left: 0px;
     height: initial;
     margin-top: 20px;
@@ -59,7 +60,7 @@ export const ConteneurTimeline = styled.div`
   }
 
   a {
-    color: ${props => props.theme.main};
+    color: ${(props) => props.theme.main};
   }
 `;
 
@@ -69,7 +70,7 @@ export const ConteneurCours = styled.div`
   cursor: pointer;
   transition: color 0.2s;
   &:hover {
-    color: ${props => props.theme.texteSecondaryColor};
+    color: ${(props) => props.theme.texteSecondaryColor};
   }
 `;
 
@@ -123,7 +124,7 @@ export const Dot = styled.div<DotProps>`
   width: 16px;
   border: 2px solid #707070;
   border-radius: 50%;
-  background-color: ${props => (props.color ? props.color : "salmon")};
+  background-color: ${(props) => (props.color ? props.color : "salmon")};
   box-sizing: border-box;
   margin-top: 8px;
 

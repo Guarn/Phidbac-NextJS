@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import PageIndex from "../../components/Pages/Indexes";
 import fetch from "isomorphic-unfetch";
 import { ContenuCoursI } from "../../components/Fonctionnels/EditeurCours";
+import Axios from "../../components/Fonctionnels/Axios";
 
 export interface IndexI {
   nom: string;
@@ -30,7 +31,7 @@ const Indexes = ({ listeIndex, cours, id }: Props) => {
         />
         <link
           rel="canonical"
-          href={`https://www.phidbac.fr/Liste-des-index/${cours.id}-${cours.nom
+          href={`/Liste-des-index/${cours.id}-${cours.nom
             ?.trim()
             .replace(/\u202f/g, "-")
             .replace(/ /gi, "-")
@@ -49,15 +50,13 @@ export default Indexes;
 
 Indexes.getInitialProps = async ({ query }: any) => {
   const id = query["id-name"].split("-")[0];
-  const res = await fetch("https://www.phidbac.fr:4000/Indexes");
-  const data = await res.json();
-  const res1 = await fetch(`https://www.phidbac.fr:4000/Indexes/${id}`);
-  const data1 = await res1.json();
+  const res = await Axios("/Indexes");
+  const res1: any = await Axios(`/Indexes/${id}`);
 
   return {
-    listeIndex: data,
-    cours: { ...data1, Contenu: data1.description ?? indexVide },
-    id: id
+    listeIndex: res.data,
+    cours: { ...res1.data[0], contenu: res1.data[0].description ?? indexVide },
+    id: id,
   };
 };
 
@@ -68,15 +67,15 @@ const indexVide = [
         type: "h3",
         id: 1,
         align: "center",
-        children: [{ text: "Cet index n'a pas encore été complété." }]
-      }
+        children: [{ text: "Cet index n'a pas encore été complété." }],
+      },
     ],
     type: "h1",
     TableMatiere: {
       actif: false,
       value: "TITRE",
       type: "titre",
-      position: 0
+      position: 0,
     },
     options: {
       marginTop: 0,
@@ -87,7 +86,7 @@ const indexVide = [
       paddingTop: 0,
       paddingLeft: 0,
       paddingRight: 0,
-      paddingBottom: 0
+      paddingBottom: 0,
     },
     image: false,
     imageOptions: {
@@ -101,7 +100,7 @@ const indexVide = [
       lienActif: false,
       lien: "",
       src:
-        "https://www.mydiscprofile.com/fr-fr/_images/homepage-free-personality-test.png"
-    }
-  }
+        "https://www.mydiscprofile.com/fr-fr/_images/homepage-free-personality-test.png",
+    },
+  },
 ];

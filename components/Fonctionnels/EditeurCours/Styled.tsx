@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Conteneur = styled.div`
   width: 100%;
@@ -21,13 +21,13 @@ export type WidthProps = {
   affichage: string;
 };
 export const ConteneurCours = styled.div<WidthProps>`
-  width: ${props => props.affichage !== "Index" && "731px"};
+  width: ${(props) => props.affichage !== "Index" && "731px"};
 
   overflow: auto;
   padding-right: 10px;
   position: relative;
-  padding-left: ${props => props.affichage !== "Index" && "10%"};
-  height: ${props =>
+  padding-left: ${(props) => props.affichage !== "Index" && "10%"};
+  height: ${(props) =>
     props.affichage === "Cours" ? "calc(100% - 42px)" : "100%"};
   @media (max-width: 1023px) {
     width: 90%;
@@ -80,18 +80,18 @@ export const ConteneurSlate = styled.div<ConteneurSlateI>`
   transition: all 0.2s;
   transition: filter 0.5s;
 
-  background-color: ${props => props.options?.backgroundColor ?? ""};
-  margin-top: ${props => (props.options?.marginTop ?? 0) + "px"};
-  margin-left: ${props => (props.options?.marginLeft ?? 0) + "px"};
-  margin-bottom: ${props => (props.options?.marginBottom ?? 0) + "px"};
-  margin-right: ${props => (props.options?.marginRight ?? 0) + "px"};
-  padding-top: ${props => (props.options?.paddingTop ?? 0) + "px"};
-  padding-left: ${props => (props.options?.paddingLeft ?? 0) + "px"};
-  padding-bottom: ${props => (props.options?.paddingBottom ?? 0) + "px"};
-  padding-right: ${props => (props.options?.paddingRight ?? 0) + "px"};
-  min-height: ${props =>
+  background-color: ${(props) => props.options?.backgroundColor ?? ""};
+  margin-top: ${(props) => (props.options?.marginTop ?? 0) + "px"};
+  margin-left: ${(props) => (props.options?.marginLeft ?? 0) + "px"};
+  margin-bottom: ${(props) => (props.options?.marginBottom ?? 0) + "px"};
+  margin-right: ${(props) => (props.options?.marginRight ?? 0) + "px"};
+  padding-top: ${(props) => (props.options?.paddingTop ?? 0) + "px"};
+  padding-left: ${(props) => (props.options?.paddingLeft ?? 0) + "px"};
+  padding-bottom: ${(props) => (props.options?.paddingBottom ?? 0) + "px"};
+  padding-right: ${(props) => (props.options?.paddingRight ?? 0) + "px"};
+  min-height: ${(props) =>
     props.image ? (props.imageOptions?.height ?? 0) + "px" : "0px"};
-  filter: ${props => (props.options?.hidden ? "blur(5px)" : "blur(0px)")};
+  filter: ${(props) => (props.options?.hidden ? "blur(5px)" : "blur(0px)")};
 
   &:hover {
     filter: none;
@@ -100,7 +100,7 @@ export const ConteneurSlate = styled.div<ConteneurSlateI>`
 Conteneur.displayName = `ConteneurSlate`;
 
 export const ConteneurImage = styled.div<ConteneurSlateI>`
-  float: ${props =>
+  float: ${(props) =>
     props.imageOptions?.align === "center"
       ? "none"
       : props.imageOptions?.align};
@@ -111,8 +111,8 @@ export const ConteneurImage = styled.div<ConteneurSlateI>`
 Conteneur.displayName = `ConteneurImage`;
 
 export const TailleImage = styled.div<ConteneurSlateI>`
-  height: ${props => (props.imageOptions?.height ?? 0) + "px"};
-  width: ${props => (props.imageOptions?.width ?? 0) + "px"};
+  height: ${(props) => (props.imageOptions?.height ?? 0) + "px"};
+  width: ${(props) => (props.imageOptions?.width ?? 0) + "px"};
 `;
 Conteneur.displayName = `TailleImage`;
 
@@ -122,7 +122,7 @@ export const BlocImage = styled.img<ConteneurSlateI>`
   padding-bottom: 10px;
   padding-right: ${(props: ConteneurSlateI) =>
     props.imageOptions?.align === "left" ? "10px" : "0px"};
-  padding-left: ${props =>
+  padding-left: ${(props) =>
     props.imageOptions?.align === "right" ? "10px" : "0px"};
 `;
 Conteneur.displayName = `BlocImage`;
@@ -160,33 +160,38 @@ export const Titre = styled.h2`
 `;
 Titre.displayName = `Titre`;
 
-export const ElBase = styled.div`
+export const ElBase = css`
   &:hover {
     font-weight: bold;
   }
 `;
 
-export const El0 = styled(ElBase)`
+export const El0 = styled.div`
+  ${ElBase};
   margin-left: 0px;
 `;
 El0.displayName = `El0`;
 
-export const El1 = styled(ElBase)`
+export const El1 = styled.div`
+  ${ElBase};
   margin-left: 15px;
 `;
 El1.displayName = `El1`;
 
-export const El2 = styled(ElBase)`
+export const El2 = styled.div`
+  ${ElBase};
   margin-left: 30px;
 `;
 El2.displayName = `El2`;
 
-export const El3 = styled(ElBase)`
+export const El3 = styled.div`
+  ${ElBase};
   margin-left: 45px;
 `;
 El3.displayName = `El3`;
 
-export const El4 = styled(ElBase)`
+export const El4 = styled.div`
+  ${ElBase};
   margin-left: 60px;
 `;
 El4.displayName = `El4`;

@@ -1,6 +1,6 @@
 import * as S from "./Styled";
 
-export default () => {
+const GrandPhi = () => {
   return (
     <S.GrandPhi>
       <svg
@@ -774,6 +774,8 @@ export default () => {
     </S.GrandPhi>
   );
 };
+
+export default GrandPhi;
 
 type ArrowT = {
   rotate: string;

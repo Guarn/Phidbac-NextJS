@@ -1,6 +1,14 @@
-const withOffline = require("next-offline");
-const withBundleAnalyzer = require("@next/bundle-analyzer");
-module.exports = withOffline({});
+// const withOffline = require("next-offline");
+module.exports = {
+  serverRuntimeConfig: {
+    // Will only be available on the server side
+    URI: 'http://api:4000'
+  },
+  publicRuntimeConfig: {
+    // Will be available on both server and client
+    URI: '/api/'
+  }
+};
 //module.exports = withBundleAnalyzer(withOffline({}));
 
 /*module.exports = withCss(

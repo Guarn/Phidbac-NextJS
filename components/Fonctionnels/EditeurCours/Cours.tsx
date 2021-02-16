@@ -12,7 +12,7 @@ export interface Props {
 const Cours: FC<Props> = ({ paragraphe = 0, cours, affichage }) => {
   return (
     <S.ConteneurCours id="scrollContainer2" affichage={affichage}>
-      {cours.Contenu.map((element: any, index: number) => {
+      {cours.contenu.map((element: any, index: number) => {
         return (
           <Scroll.Element
             id={paragraphe ? `element1-${index}` : `element-${index}`}
@@ -27,18 +27,20 @@ const Cours: FC<Props> = ({ paragraphe = 0, cours, affichage }) => {
               image={element.image}
               key={`Conteneur-${index}`}
             >
-              {// Gestion de l'affichage d'une image dans un  bloc Slate
-              element.image && (
-                <S.ConteneurImage imageOptions={element.imageOptions}>
-                  <S.TailleImage imageOptions={element.imageOptions}>
-                    <S.BlocImage
-                      imageOptions={element.imageOptions}
-                      src={element.imageOptions.src}
-                      alt={element.imageOptions.legende}
-                    />
-                  </S.TailleImage>
-                </S.ConteneurImage>
-              )}
+              {
+                // Gestion de l'affichage d'une image dans un  bloc Slate
+                element.image && (
+                  <S.ConteneurImage imageOptions={element.imageOptions}>
+                    <S.TailleImage imageOptions={element.imageOptions}>
+                      <S.BlocImage
+                        imageOptions={element.imageOptions}
+                        src={element.imageOptions.src}
+                        alt={element.imageOptions.legende}
+                      />
+                    </S.TailleImage>
+                  </S.ConteneurImage>
+                )
+              }
               {element.type === "citation" && (
                 <S.BlocCitation>
                   <S.BarreCitation />

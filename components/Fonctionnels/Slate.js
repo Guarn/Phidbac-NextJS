@@ -6,6 +6,7 @@ import * as S from "./Styled";
 import fetch from "isomorphic-unfetch";
 import Tooltip from "../UI/Tooltip";
 import Modal from "../UI/Modal";
+import Axios from "./Axios";
 
 const SlateJs = ({ index, value, readOnly }) => {
   const renderElement = useCallback(props => <Element {...props} />, []);
@@ -13,7 +14,7 @@ const SlateJs = ({ index, value, readOnly }) => {
   const editor = useMemo(() => withReact(createEditor()), []);
 
   return (
-    <Slate editor={editor} value={value} selection={null} onChange={() => {}}>
+    <Slate editor={editor} value={value} selection={null} onChange={() => { }}>
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
@@ -124,7 +125,7 @@ const Element = ({ attributes, children, element }) => {
                   <a
                     target="_self"
                     rel="noopener noreferrer"
-                    href={`https://www.phidbac.fr/Liste-des-index/${element.value}`}
+                    href={`/Liste-des-index/${element.value}`}
                     {...attributes}
                   >
                     {children}
@@ -316,14 +317,12 @@ const OpenModal = ({ type, attributes, children, element }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [cours, setCours] = useState();
   const fetchData = async element => {
-    const res = await fetch(
-      `https://www.phidbac.fr:4000/${type === "cours" ? type : "indexes"}/${
-        element.value
+    const res = await Axios(
+      `/${type === "cours" ? type : "indexes"}/${element.value
       }`
     );
-    const data = await res.json();
     await setCours({
-      Contenu: type === "cours" ? JSON.parse(data.Contenu) : data.description
+      contenu: type === "cours" ? JSON.parse(res.data['0'].contenu) : res.data['0'].description
     });
 
     await setModalShow(true);

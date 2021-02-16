@@ -1,11 +1,8 @@
 const next = require("next");
 const fs = require("fs");
-const { createServer } = require("https");
 const path = require("path");
-const { parse } = require("url");
 const http = require("http");
 const express = require("express");
-const { createSecureServer } = require("http2");
 const expressApp = express();
 const spdy = require("spdy");
 const compression = require("compression");
@@ -32,8 +29,6 @@ app.prepare().then(() => {
   });
 
   expressApp.all("*", (req, res) => {
-    const parsedUrl = parse(req.url, true);
-    const { pathname } = parsedUrl;
 
     res.setHeader("Cache-Control", "public, max-age=31557600");
 

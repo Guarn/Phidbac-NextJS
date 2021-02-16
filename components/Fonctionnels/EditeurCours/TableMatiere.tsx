@@ -10,7 +10,7 @@ export interface TableMatiere {
 const TableMatiere: FC<TableMatiere> = ({ cours }) => {
   return (
     <S.ConteneurTableMatiere>
-      {cours.Contenu.map((element: any, index: Number) => {
+      {cours.contenu.map((element: any, index: Number) => {
         if (element.TableMatiere.actif) {
           switch (element.TableMatiere.type) {
             case "titre":

@@ -18,7 +18,7 @@ const index: React.FC<indexI> = ({ listeEntrees, onChange, selected }) => {
     if (!selected.includes(val)) {
       onChange([...selected, val]);
     } else {
-      onChange(selected.filter(el => el !== val));
+      onChange(selected.filter((el) => el !== val));
     }
   };
 
@@ -28,7 +28,7 @@ const index: React.FC<indexI> = ({ listeEntrees, onChange, selected }) => {
       onClick={() => {
         refInput?.current?.focus();
       }}
-      onBlur={e => {
+      onBlur={(e) => {
         e.stopPropagation();
         e.preventDefault();
         setValChamp("");
@@ -42,14 +42,14 @@ const index: React.FC<indexI> = ({ listeEntrees, onChange, selected }) => {
         style={{
           width: (valChamp.length + 1) * 10 + "px",
           position: "relative",
-          display: "inline"
+          display: "inline",
         }}
       >
         <S.Input
           ref={refInput}
           value={valChamp}
           onFocus={() => setShowListe(true)}
-          onChange={e => setValChamp(e.target.value)}
+          onChange={(e) => setValChamp(e.target.value)}
         />
       </span>
       <Liste
@@ -77,12 +77,12 @@ const Liste: React.FC<ListeI> = ({
   listeEntrees,
   recherche,
   setSelected,
-  selected
+  selected,
 }) => {
   return (
     <S.ConteneurListe showListe={showListe}>
       {listeEntrees
-        .filter(element => {
+        .filter((element) => {
           if (!recherche) return true;
           let value = new RegExp(recherche, "gi");
           return element.search(value) !== -1;
@@ -92,7 +92,7 @@ const Liste: React.FC<ListeI> = ({
           return (
             <S.ElementListe
               actif={isActif}
-              onMouseDown={e => {
+              onMouseDown={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
 

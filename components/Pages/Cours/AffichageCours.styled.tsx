@@ -16,13 +16,13 @@ export const Conteneur = styled.div`
 Conteneur.displayName = `Conteneur`;
 
 export type ConteneurBoutonT = {
-  left: number;
+  left?: number;
 };
 
 export const ConteneurBouton = styled.div<ConteneurBoutonT>`
   display: flex;
   position: relative;
-  left: ${props => props.left + "px"};
+  left: ${(props) => props.left ?? 0 + "px"};
   padding-bottom: 10px;
   @media (max-width: 1023px) {
     padding-top: 10px;

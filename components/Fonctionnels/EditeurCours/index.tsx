@@ -46,26 +46,26 @@ export interface ContenuCoursI {
 }
 
 export interface CoursI {
-  Contenu: ContenuCoursI[];
-  Titre: string;
-  Description: string;
+  contenu: ContenuCoursI[];
+  titre: string;
+  description: string;
   type: "Cours" | "Exercice" | "PageUnique";
   id?: number;
   position?: number;
 }
 
 export const initialValueCours: CoursI = {
-  Contenu: [{ value: [], type: "" }],
-  Titre: "",
-  Description: "",
-  type: "Cours"
+  contenu: [{ value: [], type: "" }],
+  titre: "",
+  description: "",
+  type: "Cours",
 };
 
 const index: FC<Props> = ({
   paragraphe = 0,
   tableMatiereShow,
   affichage,
-  cours
+  cours,
 }) => {
   return (
     <S.Conteneur>

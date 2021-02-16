@@ -7,6 +7,7 @@ import SuivPrec from "../../components/Pages/Sujets/SuivPrec";
 import Filtres from "../../components/Pages/Sujets/Filtres";
 import { useState } from "react";
 import Head from "next/head";
+import Axios from "../../components/Fonctionnels/Axios";
 
 export interface SujetCountI {
   sujet: any;
@@ -28,7 +29,7 @@ const A: NextPage<any> = ({ sujet, count, menu }) => {
         />
         <link
           rel="canonical"
-          href={`https://www.phidbac.fr/Annales-Bac-Sujets-Philosophie/${sujet.id}`}
+          href={`/Annales-Bac-Sujets-Philosophie/${sujet.id}`}
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
@@ -38,7 +39,10 @@ const A: NextPage<any> = ({ sujet, count, menu }) => {
             <S.Carre />
             <S.Cercle />
             <S.PartieD>
-              <Filtres menu={menu} setListeSujet={val => setListeSujet(val)} />
+              <Filtres
+                menu={menu}
+                setListeSujet={(val) => setListeSujet(val)}
+              />
               <SuivPrec listeSujet={listeSujet} />
               <AffichageSujet sujet={sujet} noResult={listeSujet.count === 0} />
             </S.PartieD>
@@ -51,17 +55,14 @@ const A: NextPage<any> = ({ sujet, count, menu }) => {
 
 A.getInitialProps = async ({ query }: any) => {
   const id = query["id-name"].split("-")[0];
-  const res2 = await fetch(`https://www.phidbac.fr:4000/sujets/t/${id}`);
-  const data = await res2.json();
-  const res1 = await fetch(`https://www.phidbac.fr:4000/menu`);
-  const data1 = await res1.json();
-  const res3 = await fetch(`https://www.phidbac.fr:4000/sujets/sujetscount`);
-  const data3 = await res3.json();
+  const res2: any = await Axios(`/sujets/t/${id}`);
+  const res1 = await Axios(`/menu`);
+  const res3 = await Axios(`/sujets/sujetscount`);
 
   return {
-    sujet: data.rows,
-    count: data3,
-    menu: data1
+    sujet: res2.data.rows,
+    count: res3.data,
+    menu: res1.data,
   };
 };
 
