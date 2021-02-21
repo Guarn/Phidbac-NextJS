@@ -3,7 +3,6 @@ import { Editable, withReact, Slate } from "slate-react";
 import { createEditor } from "slate";
 import EditeurCours from "./EditeurCours";
 import * as S from "./Styled";
-import fetch from "isomorphic-unfetch";
 import Tooltip from "../UI/Tooltip";
 import Modal from "../UI/Modal";
 import Axios from "./Axios";

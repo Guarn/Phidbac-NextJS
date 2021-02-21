@@ -21,7 +21,7 @@ const FormBasic = ({ onCompleted }: FormBasicI) => {
 
       <Formik
         initialValues={{ email: "", password: "" }}
-        validate={values => {
+        validate={(values) => {
           const errors: any = {};
           if (!values.email) {
             errors.email = "Ce champ est requis.";
@@ -33,21 +33,20 @@ const FormBasic = ({ onCompleted }: FormBasicI) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           Axios.post("/login", {
-            email: values.email,
-            password: values.password
+            login: values.email,
+            pass: values.password,
           })
-            .then(rep => {
+            .then((rep) => {
               let dateExp = new Date(Date.now());
               dateExp.setDate(365);
 
               cookie.set("token", "Bearer " + rep.data.token, {
                 path: "/",
                 domain: ".phidbac.fr",
-                expires: dateExp
               });
               router.reload();
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
         }}
       >
         {({
@@ -57,7 +56,7 @@ const FormBasic = ({ onCompleted }: FormBasicI) => {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
+          isSubmitting,
         }) => (
           <S.Form onSubmit={handleSubmit}>
             <S.Label title="Votre adresse email :">

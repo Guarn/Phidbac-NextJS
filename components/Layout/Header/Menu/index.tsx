@@ -22,12 +22,12 @@ const BoutonMenu = styled.div`
   margin-top: 16px;
   font-family: "century-gothic";
   &:hover {
-    color: ${props => props.theme.texteSecondaryColor};
+    color: ${(props) => props.theme.texteSecondaryColor};
   }
 `;
 
 const Phi = styled.span`
-  color: ${props => props.theme.texteSecondaryColor};
+  color: ${(props) => props.theme.texteSecondaryColor};
   font-family: "Century Gothic";
 `;
 
@@ -53,11 +53,11 @@ const Menu = () => {
   useEffect(() => {
     if (cookie.get("token")) {
       if (!user.connecte) {
-        Axios.get("/p")
-          .then(rep => {
+        Axios.get("/authentication")
+          .then((rep) => {
             setUser({ ...rep.data, connecte: true });
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       }
@@ -142,7 +142,7 @@ const Menu = () => {
               <Modal
                 style={{
                   padding: "20px",
-                  minWidth: "300px"
+                  minWidth: "300px",
                 }}
                 showModal={showModal}
                 closeModal={() => setShowModal(false)}

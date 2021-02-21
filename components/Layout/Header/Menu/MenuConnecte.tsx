@@ -26,7 +26,7 @@ const MenuConnecte: React.FC<MenuConnecteI> = ({ user, userDispatch }) => {
         </S.IconeSimple>
         <S.IconeSimple
           onMouseDown={() => {
-            window.open("https://phidbac.fr:3001", "_blank");
+            window.open("/admin", "_blank");
           }}
         >
           <Icon type="Close" />
@@ -43,7 +43,7 @@ const MenuConnecte: React.FC<MenuConnecteI> = ({ user, userDispatch }) => {
       <S.BlocDeco
         data-testid="a"
         onMouseDown={() => {
-          cookie.remove("token", { domain: ".phidbac.fr" });
+          cookie.remove("token", { domain: ".phidbac.fr", path: "/" });
           userDispatch({ connecte: false });
         }}
       >
