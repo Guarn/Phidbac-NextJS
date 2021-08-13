@@ -25,7 +25,7 @@
     "formik": "^2.1.4",
     "isomorphic-unfetch": "^3.0.0",
     "js-cookie": "^2.2.1",
-    "next": "^10.0.6",
+    "next": "^11.1.0",
     "next-offline": "^5.0.2",
     "next-routes": "^1.4.2",
     "null-loader": "^3.0.0",
